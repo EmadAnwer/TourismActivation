@@ -20,13 +20,13 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.hbb20.CountryCodePicker;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class RegistrationActivity extends AppCompatActivity implements TextWatcher, View.OnFocusChangeListener, AsyncCallback<BackendlessUser> {
 
-
     TextInputLayout nameTextField, emailTextField, passwordInputLayout, confirmPasswordTextField, phoneTextField;
-    TextInputEditText selectedTextInputField, confirmPasswordTextInputField, passwordTextInputField, phoneTextInputField, emailTextInputField, nameTextInputField;
+    TextInputEditText selectedTextInputField ;
     CountryCodePicker countryCodePicker;
     ConstraintLayout root;
     Button create;
@@ -39,11 +39,6 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
         getSupportActionBar().hide();
         setContentView(R.layout.activity_registration);
         //setting ids for views
-        nameTextInputField = findViewById(R.id.nameTextInputField);
-        emailTextInputField = findViewById(R.id.emailTextInputField);
-        passwordTextInputField = findViewById(R.id.passwordTextInputField);
-        confirmPasswordTextInputField = findViewById(R.id.confirmPasswordTextInputField);
-        phoneTextInputField = findViewById(R.id.phoneTextInputField);
         countryCodePicker = findViewById(R.id.countryCodePicker);
         root = findViewById(R.id.root);
         nameTextField = findViewById(R.id.loginEmailTextField);
@@ -54,45 +49,44 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
 
 
         //set OnFocusChangeListener
-        nameTextInputField.setOnFocusChangeListener(this);
-        emailTextInputField.setOnFocusChangeListener(this);
-        passwordTextInputField.setOnFocusChangeListener(this);
-        confirmPasswordTextInputField.setOnFocusChangeListener(this);
-        phoneTextInputField.setOnFocusChangeListener(this);
+        Objects.requireNonNull(nameTextField.getEditText()).setOnFocusChangeListener(this);
+        Objects.requireNonNull(emailTextField.getEditText()).setOnFocusChangeListener(this);
+        Objects.requireNonNull(passwordInputLayout.getEditText()).setOnFocusChangeListener(this);
+        Objects.requireNonNull(confirmPasswordTextField.getEditText()).setOnFocusChangeListener(this);
+        Objects.requireNonNull(phoneTextField.getEditText()).setOnFocusChangeListener(this);
 
 
         //set TextChangedListener
-        nameTextInputField.addTextChangedListener(this);
-        emailTextInputField.addTextChangedListener(this);
-        passwordTextInputField.addTextChangedListener(this);
-        confirmPasswordTextInputField.addTextChangedListener(this);
-        phoneTextInputField.addTextChangedListener(this);
+        nameTextField.getEditText().addTextChangedListener(this);
+        emailTextField.getEditText().addTextChangedListener(this);
+        passwordInputLayout.getEditText().addTextChangedListener(this);
+        confirmPasswordTextField.getEditText().addTextChangedListener(this);
+        phoneTextField.getEditText().addTextChangedListener(this);
 
 
         // setting CountryCodePicker
-        countryCodePicker.registerCarrierNumberEditText(phoneTextInputField);
+        countryCodePicker.registerCarrierNumberEditText(phoneTextField.getEditText());
 
     }
 
-
+    // back to Home
     public void back(View view) {
         super.onBackPressed();
     }
 
 
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-    }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
+
         if (selectedTextInputField == null)
             return;
 
-        if (selectedTextInputField.getId() == passwordTextInputField.getId()) {
-            if (!confirmPasswordTextInputField.getText().toString().isEmpty()) {
-                if (confirmPasswordTextInputField.getText().toString().equals(s.toString())) {
+        //to checking password and confirmPassword TextField at the same time
+        if (selectedTextInputField.getId() == passwordInputLayout.getEditText().getId()) {
+            if (!confirmPasswordTextField.getEditText().getText().toString().isEmpty()) {
+                if (confirmPasswordTextField.getEditText().getText().toString().equals(s.toString())) {
                     confirmPasswordTextField.setErrorEnabled(false);
                     confirmPasswordTextField.setErrorEnabled(true);
                 } else
@@ -110,8 +104,15 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
         if (selectedTextInputField == null)
             return;
 
+        /*
+        name TextField validation
+        -------------------------
+            name is valid if
+                - more than 3 char
+                - in alphabet
+         */
 
-        if (selectedTextInputField.getId() == nameTextInputField.getId()) {
+        if (selectedTextInputField.getId() == nameTextField.getEditText().getId()) {
             if (s.length() == 0) {
                 nameTextField.setErrorEnabled(false);
                 nameTextField.setErrorEnabled(true);
@@ -129,7 +130,16 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
             nameTextField.setErrorEnabled(true);
 
 
-        } else if (selectedTextInputField.getId() == emailTextInputField.getId()) {
+        }
+
+
+        /*
+        email TextField validation
+        -------------------------
+            email is valid if
+                - follows Patterns.EMAIL_ADDRESS
+         */
+        else if (selectedTextInputField.getId() == emailTextField.getEditText().getId()) {
             if (s.length() == 0) {
                 emailTextField.setErrorEnabled(false);
                 emailTextField.setErrorEnabled(true);
@@ -148,7 +158,19 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
 
             emailTextField.setErrorEnabled(false);
             emailTextField.setErrorEnabled(true);
-        } else if (selectedTextInputField.getId() == passwordTextInputField.getId()) {
+        }
+
+
+        /*
+        password TextField validation
+        -------------------------
+            password is valid if
+                - more than 8 char
+
+         */
+
+
+        else if (selectedTextInputField.getId() == passwordInputLayout.getEditText().getId()) {
             if (s.length() == 0) {
                 passwordInputLayout.setErrorEnabled(false);
                 passwordInputLayout.setErrorEnabled(true);
@@ -166,7 +188,17 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
 
             passwordInputLayout.setErrorEnabled(false);
             passwordInputLayout.setErrorEnabled(true);
-        } else if (selectedTextInputField.getId() == confirmPasswordTextInputField.getId()) {
+        }
+
+
+        /*
+        confirmPassword TextField validation
+        -------------------------
+            confirmPassword is valid if
+                - confirmPassword == password
+
+         */
+        else if (selectedTextInputField.getId() == confirmPasswordTextField.getEditText().getId()) {
             if (s.length() == 0) {
                 confirmPasswordTextField.setErrorEnabled(false);
                 confirmPasswordTextField.setErrorEnabled(true);
@@ -175,7 +207,7 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
             }
 
 
-            if (!passwordTextInputField.getText().toString().equals(s.toString())) {
+            if (!passwordInputLayout.getEditText().getText().toString().equals(s.toString())) {
 
                 confirmPasswordTextField.setError("Passwords is not the same");
                 return;
@@ -184,7 +216,17 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
 
             confirmPasswordTextField.setErrorEnabled(false);
             confirmPasswordTextField.setErrorEnabled(true);
-        } else if (selectedTextInputField.getId() == phoneTextInputField.getId()) {
+        }
+
+
+        /*
+        phone TextField validation
+        -------------------------
+            phone is valid if
+                - isValidFullNumber() = true
+
+         */
+        else if (selectedTextInputField.getId() == phoneTextField.getEditText().getId()) {
             if (s.length() == 0) {
                 phoneTextField.setErrorEnabled(false);
                 phoneTextField.setErrorEnabled(true);
@@ -206,15 +248,19 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
 
     }
 
-
+    /*
+      check if all Fields are valid or not
+      return true if all are valid
+      return false if any field is invalid
+     */
     boolean checkingAllFieldsValidation() {
-        if (nameTextInputField.getText().length() < 3)
+        if (nameTextField.getEditText().getText().length() < 3)
             return false;
-        if (!(Patterns.EMAIL_ADDRESS.matcher(emailTextInputField.getText().toString()).matches()))
+        if (!(Patterns.EMAIL_ADDRESS.matcher(emailTextField.getEditText().getText().toString()).matches()))
             return false;
-        if (passwordTextInputField.getText().length() < 8)
+        if (passwordInputLayout.getEditText().getText().length() < 8)
             return false;
-        if (!passwordTextInputField.getText().toString().equals(confirmPasswordTextInputField.getText().toString()))
+        if (!passwordInputLayout.getEditText().getText().toString().equals(confirmPasswordTextField.getEditText().getText().toString()))
             return false;
         if (!countryCodePicker.isValidFullNumber())
             return false;
@@ -222,8 +268,10 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
         return true;
     }
 
+
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
+        //getting selected InputField reference to use it in checking validation
         if (hasFocus) {
             selectedTextInputField = (TextInputEditText) v;
         }
@@ -233,7 +281,7 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
     public void createAccount(View view) {
         if (checkingAllFieldsValidation()) {
 
-            if (mails.contains(emailTextInputField.getText().toString())) {
+            if (mails.contains(emailTextField.getEditText().getText().toString())) {
                 emailAlreadyExists();
                 return;
             }
@@ -241,9 +289,9 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
             create.setClickable(false);
 
             BackendlessUser user = new BackendlessUser();
-            user.setProperty("name", nameTextInputField.getText().toString());
-            user.setEmail(emailTextInputField.getText().toString());
-            user.setPassword(passwordTextInputField.getText().toString());
+            user.setProperty("name", nameTextField.getEditText().getText().toString());
+            user.setEmail(emailTextField.getEditText().getText().toString());
+            user.setPassword(passwordInputLayout.getEditText().getText().toString());
             user.setProperty("phone", countryCodePicker.getFullNumber());
             Backendless.UserService.register(user, this);
         }
@@ -265,7 +313,7 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
         if (fault.getCode().equals("3033"))
         {
             emailAlreadyExists();
-            mails.add(emailTextInputField.getText().toString());
+            mails.add(emailTextField.getEditText().getText().toString());
         }
 
 
@@ -280,5 +328,8 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
     {
         emailTextField.setError("this Email Already exists");
     }
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+    }
 }

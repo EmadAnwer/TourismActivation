@@ -8,22 +8,6 @@
     android:background="@color/primaryColor"
     tools:context=".RegistrationActivity">
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:enabled="true"
-        android:onClick="createAccount"
-        android:padding="15sp"
-        android:text="@string/create_an_account"
-        android:textAllCaps="false"
-        android:textSize="16sp"
-        app:cornerRadius="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline16"
-        app:layout_constraintStart_toStartOf="@+id/guideline15"
-        app:layout_constraintTop_toBottomOf="@+id/phoneTextField" />
-
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="0dp"
@@ -301,5 +285,21 @@
 
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:enabled="true"
+        android:onClick="createAccount"
+        android:padding="15sp"
+        android:text="@string/create_an_account"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        app:cornerRadius="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline16"
+        app:layout_constraintStart_toStartOf="@+id/guideline15"
+        app:layout_constraintTop_toBottomOf="@+id/phoneTextField" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
