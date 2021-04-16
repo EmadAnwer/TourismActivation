@@ -34,10 +34,11 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_registration);
+
+
         //setting ids for views
         countryCodePicker = findViewById(R.id.countryCodePicker);
         root = findViewById(R.id.root);
