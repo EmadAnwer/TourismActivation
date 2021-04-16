@@ -23,17 +23,6 @@ import com.example.tourismactivation.ui.main.HomeFragmentPageAdapter;
 import com.example.tourismactivation.ui.main.SectionsPagerAdapter;
 import com.gigamole.navigationtabstrip.NavigationTabStrip;
 
-import net.lucode.hackware.magicindicator.FragmentContainerHelper;
-import net.lucode.hackware.magicindicator.MagicIndicator;
-import net.lucode.hackware.magicindicator.ViewPagerHelper;
-import net.lucode.hackware.magicindicator.buildins.UIUtil;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -53,7 +42,6 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Toast.makeText(getActivity(), "ttt", Toast.LENGTH_SHORT).show();
     }
 
     HomeFragmentPageAdapter homeFragmentPageAdapter;
