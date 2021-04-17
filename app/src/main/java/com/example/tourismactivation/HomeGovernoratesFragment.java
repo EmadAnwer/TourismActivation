@@ -33,6 +33,8 @@ public class HomeGovernoratesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //setting test Governorates
         governorates.add(new Governorate("Alexandria","https://images.unsplash.com/photo-1601816500593-8f1276479ea6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"));
         governorates.add(new Governorate("Aswan","https://s27363.pcdn.co/wp-content/uploads/2020/05/Things-to-do-in-Aswan.jpg.optimal.jpg"));
         governorates.add(new Governorate("Beni Suef","https://sceneeats.com/Content/Admin/Uploads/Articles/ArticlesMainPhoto/3492/08a3b54f-faf9-420a-9f46-c4c85c05b13c.jpg"));
@@ -48,10 +50,9 @@ public class HomeGovernoratesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
 
-        Toast.makeText(getActivity(), ""+governorates.size(), Toast.LENGTH_SHORT).show();
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home_governorates, container, false);
+        //setting RecyclerView
         governorateRecyclerView = view.findViewById(R.id.governorateRecyclerView);
         governorateRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);

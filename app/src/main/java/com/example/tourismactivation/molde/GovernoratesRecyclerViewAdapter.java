@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +17,7 @@ import com.example.tourismactivation.R;
 
 import java.util.ArrayList;
 
-public class GovernoratesRecyclerViewAdapter extends RecyclerView.Adapter<GovernoratesRecyclerViewAdapter.ViewHolder> {
+public class GovernoratesRecyclerViewAdapter extends RecyclerView.Adapter<GovernoratesRecyclerViewAdapter.ViewHolder> implements View.OnClickListener {
     private static final String TAG = "GovernoratesRecyclerVie";
 
     //var
@@ -41,14 +42,14 @@ public class GovernoratesRecyclerViewAdapter extends RecyclerView.Adapter<Govern
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG, "onCreateViewHolder: called.");
-        Log.d(TAG, "onCreateViewHolder: called." +governorateArrayList.size() );
         Glide.with(context)
                 .asBitmap()
                 .load(governorateArrayList.get(position).getImg())
                 .into(holder.governorateImageView);
 
         holder.governorateTextView.setText(governorateArrayList.get(position).getName());
-
+        holder.governorateImageView.setOnClickListener(this);
+        holder.governorateImageView.setTag(governorateArrayList.get(position));
     }
 
     @Override
@@ -56,7 +57,14 @@ public class GovernoratesRecyclerViewAdapter extends RecyclerView.Adapter<Govern
         return governorateArrayList.size();
     }
 
-    public class ViewHolder  extends RecyclerView.ViewHolder{
+    @Override
+    public void onClick(View v) {
+        Governorate g = (Governorate) v.getTag();
+        Toast.makeText(context, g.getName(), Toast.LENGTH_SHORT).show();
+
+    }
+
+    public static class ViewHolder  extends RecyclerView.ViewHolder{
         ImageView governorateImageView;
         TextView governorateTextView;
         public ViewHolder(@NonNull View itemView) {
