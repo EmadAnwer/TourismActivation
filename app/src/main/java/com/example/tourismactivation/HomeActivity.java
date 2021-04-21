@@ -3,15 +3,11 @@ package com.example.tourismactivation;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
-import com.backendless.UserService;
-import com.example.tourismactivation.ui.main.SectionsPagerAdapter;
-import com.google.android.material.tabs.TabLayout;
+import com.example.tourismactivation.ui.pageAdapter.SectionsPagerAdapter;
 
 import nl.joery.animatedbottombar.AnimatedBottomBar;
 
@@ -20,9 +16,9 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_home);
-        Backendless.initApp(this,"936A3E76-2AE2-B9CF-FF53-BADBF82A7500","31DAB2C3-A6AA-4476-8A08-1DB2F1444759");
+        Backendless.initApp(this,"30A3F936-C7E6-49FF-8FF6-E4ADF602134B","1C3A9234-2AAF-436B-93B0-B988B72F942C");
 
         /*
         user = Backendless.UserService.CurrentUser();

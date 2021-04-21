@@ -1,4 +1,4 @@
-package com.example.tourismactivation.ui.main;
+package com.example.tourismactivation.ui.pageAdapter;
 
 import android.content.Context;
 

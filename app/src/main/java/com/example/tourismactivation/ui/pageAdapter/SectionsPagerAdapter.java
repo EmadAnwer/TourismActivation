@@ -1,16 +1,13 @@
-package com.example.tourismactivation.ui.main;
+package com.example.tourismactivation.ui.pageAdapter;
 
 import android.content.Context;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.tourismactivation.HomeFragment;
 import com.example.tourismactivation.QrFragment;
-import com.example.tourismactivation.R;
 import com.example.tourismactivation.SearchFragment;
 
 /**

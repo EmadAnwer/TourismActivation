@@ -1,31 +1,16 @@
 package com.example.tourismactivation;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.OvershootInterpolator;
-import android.widget.Adapter;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.example.tourismactivation.ui.main.HomeFragmentPageAdapter;
-import com.example.tourismactivation.ui.main.SectionsPagerAdapter;
+import com.example.tourismactivation.ui.pageAdapter.HomeFragmentPageAdapter;
 import com.gigamole.navigationtabstrip.NavigationTabStrip;
-
-
-import java.util.Arrays;
-import java.util.List;
 
 
 public class HomeFragment extends Fragment {

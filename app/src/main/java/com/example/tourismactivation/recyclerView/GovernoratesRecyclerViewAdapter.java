@@ -1,6 +1,10 @@
-package com.example.tourismactivation.molde;
+package com.example.tourismactivation.recyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,19 +17,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.tourismactivation.PlacesActivity;
 import com.example.tourismactivation.R;
+import com.example.tourismactivation.molde.Governorates;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class GovernoratesRecyclerViewAdapter extends RecyclerView.Adapter<GovernoratesRecyclerViewAdapter.ViewHolder> implements View.OnClickListener {
     private static final String TAG = "GovernoratesRecyclerVie";
-
+    SharedPreferences pref;
     //var
-    private ArrayList<Governorate> governorateArrayList = new ArrayList<>();
+    private final List<Governorates> governoratesArrayList;
      Context context;
 
-    public GovernoratesRecyclerViewAdapter(ArrayList<Governorate> governorateArrayList, Context context) {
-        this.governorateArrayList = governorateArrayList;
+    public GovernoratesRecyclerViewAdapter(List<Governorates> governorateArrayList, Context context) {
+        this.governoratesArrayList = governorateArrayList;
         this.context = context;
     }
 
@@ -44,23 +52,35 @@ public class GovernoratesRecyclerViewAdapter extends RecyclerView.Adapter<Govern
         Log.d(TAG, "onCreateViewHolder: called.");
         Glide.with(context)
                 .asBitmap()
-                .load(governorateArrayList.get(position).getImg())
+                .load(governoratesArrayList.get(position).getCoverImage())
                 .into(holder.governorateImageView);
 
-        holder.governorateTextView.setText(governorateArrayList.get(position).getName());
+        holder.governorateTextView.setText(governoratesArrayList.get(position).getName());
         holder.governorateImageView.setOnClickListener(this);
-        holder.governorateImageView.setTag(governorateArrayList.get(position));
+        holder.governorateImageView.setTag(governoratesArrayList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return governorateArrayList.size();
+        return governoratesArrayList.size();
     }
 
     @Override
     public void onClick(View v) {
-        Governorate g = (Governorate) v.getTag();
+        Governorates g = (Governorates) v.getTag();
         Toast.makeText(context, g.getName(), Toast.LENGTH_SHORT).show();
+        pref = context.getSharedPreferences("governoratePref", MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = pref.edit();
+
+        editor.putString("coverImage", g.getCoverImage());
+        editor.putString("governorate", g.getName());
+        editor.apply();
+
+
+        Intent intent = new Intent(context, PlacesActivity.class);
+        context.startActivity(intent);
+        intent = null;
+
 
     }
 

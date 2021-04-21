@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.TourismActivation" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.TourismActivation" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/secondaryColor</item>
         <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
@@ -11,13 +11,11 @@
         <item name="colorOnSecondary">@color/secondaryDarkColor</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.TourismActivation.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
+
 
     <style name="Theme.TourismActivation.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

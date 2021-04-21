@@ -3,25 +3,34 @@ package com.example.tourismactivation;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.tourismactivation.molde.Governorate;
-import com.example.tourismactivation.molde.GovernoratesRecyclerViewAdapter;
+import com.backendless.Backendless;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.DataQueryBuilder;
+import com.example.tourismactivation.molde.Governorates;
+import com.example.tourismactivation.recyclerView.GovernoratesRecyclerViewAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 public class HomeGovernoratesFragment extends Fragment {
 
 
-    ArrayList<Governorate> governorates= new ArrayList<>();
+    List<Governorates> governorates= new ArrayList<>();
     RecyclerView governorateRecyclerView;
+    GovernoratesRecyclerViewAdapter adapter;
 
 
     public HomeGovernoratesFragment() {
@@ -34,16 +43,7 @@ public class HomeGovernoratesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //setting test Governorates
-        governorates.add(new Governorate("Alexandria","https://images.unsplash.com/photo-1601816500593-8f1276479ea6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"));
-        governorates.add(new Governorate("Aswan","https://s27363.pcdn.co/wp-content/uploads/2020/05/Things-to-do-in-Aswan.jpg.optimal.jpg"));
-        governorates.add(new Governorate("Beni Suef","https://sceneeats.com/Content/Admin/Uploads/Articles/ArticlesMainPhoto/3492/08a3b54f-faf9-420a-9f46-c4c85c05b13c.jpg"));
-        governorates.add(new Governorate("Dakahlia","https://globallytoday.com/wp-content/uploads/2020/03/cc-696x533.jpg"));
-        governorates.add(new Governorate("Giza","https://lp-cms-production.imgix.net/2019-06/82e213048af4e026b6ba31e8f24cc923-pyramids-of-giza.jpg"));
-        governorates.add(new Governorate("Cairo","https://d3rr2gvhjw0wwy.cloudfront.net/uploads/mandators/49581/file-manager/cairo-city-egypt-2020.jpg"));
-        governorates.add(new Governorate("Suez","https://dneegypt.nyc3.digitaloceanspaces.com/2021/02/Suez-e1546642227546-1.jpg"));
-        governorates.add(new Governorate("Matruh","https://i.pinimg.com/originals/31/b7/e2/31b7e27265bb011d85b2055da0955e1e.jpg"));
-        governorates.add(new Governorate("New Valley","https://upload.wikimedia.org/wikipedia/commons/b/b0/Al_Farafrah%2C_New_Valley_Governorate%2C_Egypt_-_panoramio_%2852%29.jpg"));
+        getGovernorates();
     }
 
     @Override
@@ -54,12 +54,43 @@ public class HomeGovernoratesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_governorates, container, false);
         //setting RecyclerView
         governorateRecyclerView = view.findViewById(R.id.governorateRecyclerView);
-        governorateRecyclerView.setHasFixedSize(true);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
         governorateRecyclerView.setLayoutManager(layoutManager);
-        GovernoratesRecyclerViewAdapter adapter = new GovernoratesRecyclerViewAdapter(governorates,view.getContext());
+        adapter = new GovernoratesRecyclerViewAdapter(governorates,view.getContext());
         governorateRecyclerView.setAdapter(adapter);
+
+
         return view;
     }
 
+
+    void getGovernorates()
+    {
+        Toast.makeText(getContext(), "get Governorates", Toast.LENGTH_SHORT).show();
+        DataQueryBuilder queryBuilder = DataQueryBuilder.create();
+        queryBuilder.excludeProperties( "id","governoratePlaces", "created", "updated","objectId","ownerId","___class" );
+        Backendless.Data.of(Governorates.class).find( queryBuilder,
+                new AsyncCallback<List<Governorates>>()
+                {
+                    @Override
+                    public void handleResponse( List<Governorates> response )
+                    {
+
+                        governorates.addAll(response) ;
+                        adapter.notifyDataSetChanged();
+
+                        // the "response" object is a collection of java.util.Map objects.
+                        // each item in the collection represents an object from the "Person" table
+                    }
+
+                    @Override
+                    public void handleFault( BackendlessFault fault )
+                    {
+                        Toast.makeText(getContext(), "error while getting Governorates", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+    }
 }
