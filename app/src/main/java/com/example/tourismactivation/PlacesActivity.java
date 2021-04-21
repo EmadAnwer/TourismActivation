@@ -36,6 +36,7 @@ import java.util.List;
         List<Places> places= new ArrayList<>();
         String coverImage,governorate,filter = "";
         SharedPreferences pref;
+        int selectedId;
 
         // Views
         Toolbar placesToolbar;
@@ -68,14 +69,15 @@ import java.util.List;
                 .into(governorateCoverImageView);
         collapsingToolbar.setTitle(governorate);
 
-
         addPlaces();
 
 
 
         //setting Categories Group Checked Listener
         placesCategoriesChipGroup.setOnCheckedChangeListener(this);
-        //setting toolbar -> back
+        selectedId = placesCategoriesChipGroup.getCheckedChipId();
+
+                //setting toolbar -> back
         placesToolbar.setNavigationOnClickListener(this);
         //setting RecyclerView
         placesRecyclerView.setHasFixedSize(true);
@@ -129,10 +131,28 @@ import java.util.List;
 
         @Override
         public void onCheckedChanged(ChipGroup group, int checkedId) {
+            /*if the same item chip unchecked
+             recheck it again
+             return
+             */
+            if(checkedId == -1)
+            {
+                Toast.makeText(this, ""+checkedId, Toast.LENGTH_SHORT).show();
+                Chip c = findViewById(selectedId);
+                c.setChecked(true);
+                c = null;
+                return;
+            }
 
+            //if the same item chip checked do nothing
+            if(selectedId == checkedId)
+                return;
 
+        selectedId = checkedId;
         if(checkedId == R.id.allCategoriesChip)
             {
+
+
                 filter = "";
 
                 Toast.makeText(this, "allCategoriesChip", Toast.LENGTH_SHORT).show();
