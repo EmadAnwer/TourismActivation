@@ -15,4 +15,9 @@
     <style name="buttonCornered">
         <item name="android:buttonCornerRadius">30sp</item>
     </style>
+
+    <style name="buttonCorneredImage">
+        <item name="cornerSizeBottomRight">70sp</item>
+
+    </style>
 </resources>

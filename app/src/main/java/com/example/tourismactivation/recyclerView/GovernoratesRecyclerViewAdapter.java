@@ -69,14 +69,16 @@ public class GovernoratesRecyclerViewAdapter extends RecyclerView.Adapter<Govern
     public void onClick(View v) {
         Governorates g = (Governorates) v.getTag();
         Toast.makeText(context, g.getName(), Toast.LENGTH_SHORT).show();
+
+        // pass governorate name and governorate cover within SharedPreferences
         pref = context.getSharedPreferences("governoratePref", MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = pref.edit();
-
         editor.putString("coverImage", g.getCoverImage());
         editor.putString("governorate", g.getName());
         editor.apply();
 
 
+        // intent to PlacesActivity
         Intent intent = new Intent(context, PlacesActivity.class);
         context.startActivity(intent);
         intent = null;

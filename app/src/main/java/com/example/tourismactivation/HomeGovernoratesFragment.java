@@ -52,9 +52,9 @@ public class HomeGovernoratesFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home_governorates, container, false);
-        //setting RecyclerView
-        governorateRecyclerView = view.findViewById(R.id.governorateRecyclerView);
 
+        //setting governorateRecyclerView
+        governorateRecyclerView = view.findViewById(R.id.governorateRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
         governorateRecyclerView.setLayoutManager(layoutManager);
         adapter = new GovernoratesRecyclerViewAdapter(governorates,view.getContext());
@@ -67,6 +67,7 @@ public class HomeGovernoratesFragment extends Fragment {
 
     void getGovernorates()
     {
+
         Toast.makeText(getContext(), "get Governorates", Toast.LENGTH_SHORT).show();
         DataQueryBuilder queryBuilder = DataQueryBuilder.create();
         queryBuilder.excludeProperties( "id","governoratePlaces", "created", "updated","objectId","ownerId","___class" );
@@ -80,8 +81,6 @@ public class HomeGovernoratesFragment extends Fragment {
                         governorates.addAll(response) ;
                         adapter.notifyDataSetChanged();
 
-                        // the "response" object is a collection of java.util.Map objects.
-                        // each item in the collection represents an object from the "Person" table
                     }
 
                     @Override

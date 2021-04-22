@@ -43,6 +43,7 @@ import java.util.List;
         CollapsingToolbarLayout collapsingToolbar;
         ChipGroup placesCategoriesChipGroup;
         ImageView governorateCoverImageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +55,9 @@ import java.util.List;
         governorateCoverImageView = findViewById(R.id.governorateCoverImageView);
         collapsingToolbar = findViewById(R.id.collapsingToolbar);
 
-        pref = getSharedPreferences("governoratePref", Context.MODE_PRIVATE);
 
         //getting extras
+        pref = getSharedPreferences("governoratePref", Context.MODE_PRIVATE);
         coverImage = pref.getString("coverImage","error");
         governorate = pref.getString("governorate","error");
 
@@ -108,8 +109,6 @@ import java.util.List;
                         places.addAll(response);
                         adapter.notifyDataSetChanged();
 
-                        // the "response" object is a collection of java.util.Map objects.
-                        // each item in the collection represents an object from the "Person" table
                     }
 
                     @Override
@@ -123,7 +122,13 @@ import java.util.List;
 
         @Override
         public void onClick(View v) {
+            //clear and nullify
             places.clear();
+            places = null;
+            coverImage = null ;
+            governorate = null;
+            filter = null;
+
             finish();
             onBackPressed();
         }

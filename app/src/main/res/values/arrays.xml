@@ -9,4 +9,14 @@
         <item
             >Recommended</item>
     </string-array>
+
+    <string-array
+        name="placeTitles">
+        <item
+            >Overview</item>
+        <item
+            >Reviews</item>
+        <item
+            >Gallery</item>
+    </string-array>
 </resources>
