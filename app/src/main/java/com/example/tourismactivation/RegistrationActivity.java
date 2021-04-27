@@ -3,6 +3,7 @@ package com.example.tourismactivation;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,7 +25,7 @@ import java.util.Objects;
 
 
 public class RegistrationActivity extends AppCompatActivity implements TextWatcher, View.OnFocusChangeListener, AsyncCallback<BackendlessUser> {
-
+    SharedPreferences pref;
     TextInputLayout nameTextField, emailTextField, passwordInputLayout, confirmPasswordTextField, phoneTextField;
     TextInputEditText selectedTextInputField ;
     CountryCodePicker countryCodePicker;
@@ -35,9 +36,7 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_registration);
-
 
         //setting ids for views
         countryCodePicker = findViewById(R.id.countryCodePicker);
@@ -302,11 +301,13 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
 
     @Override
     public void handleResponse(BackendlessUser response) {
-        onBackPressed();
+
         Toast.makeText(this, "You have successfully registered", Toast.LENGTH_SHORT).show();
+        finish();
 
 
     }
+
 
     @Override
     public void handleFault(BackendlessFault fault) {

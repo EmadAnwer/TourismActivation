@@ -11,7 +11,7 @@
 
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/profilePictureImageView"
         android:layout_width="70sp"
         android:layout_height="70sp"
         android:src="@drawable/me"
@@ -76,12 +76,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
-        app:layout_constraintStart_toEndOf="@+id/imageView10"
-        app:layout_constraintTop_toTopOf="@+id/imageView10">
+        app:layout_constraintBottom_toBottomOf="@+id/profilePictureImageView"
+        app:layout_constraintStart_toEndOf="@+id/profilePictureImageView"
+        app:layout_constraintTop_toTopOf="@+id/profilePictureImageView">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/welcomeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
@@ -90,15 +90,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/userNameFragmentTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semibold"
             android:text="Emad Anwer"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintStart_toStartOf="@+id/welcomeTextView"
+            app:layout_constraintTop_toBottomOf="@+id/welcomeTextView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView

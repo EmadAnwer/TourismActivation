@@ -1,5 +1,6 @@
 package com.example.tourismactivation;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -80,15 +81,38 @@ public class HomeGovernoratesFragment extends Fragment {
 
                         governorates.addAll(response) ;
                         adapter.notifyDataSetChanged();
+                        
 
                     }
 
                     @Override
                     public void handleFault( BackendlessFault fault )
                     {
-                        Toast.makeText(getContext(), "error while getting Governorates", Toast.LENGTH_SHORT).show();
+                        if(fault.getCode().equals("3064") )
+                        {
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                            getActivity().finish();
+                        }
+                        else if(fault.getCode().equals("3064") )
+                        {
+                            Toast.makeText(getContext(), "error while getting Governorates", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        else {
+                            Log.i("error", "handleFault: "+fault);
+                            Toast.makeText(getContext(), "error while getting Governorates", Toast.LENGTH_SHORT).show();
+                        }
+
+                        Log.i("govFrag Error", "handleFault: "+fault.getCode());
+
                     }
                 });
+
+
+
+
 
 
     }

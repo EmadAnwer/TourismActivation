@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,10 +18,8 @@ import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.DataQueryBuilder;
 import com.bumptech.glide.Glide;
-import com.example.tourismactivation.molde.Governorates;
 import com.example.tourismactivation.molde.Places;
 import com.example.tourismactivation.recyclerView.PlacesRecyclerViewAdapter;
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -51,7 +48,7 @@ import java.util.List;
         //setting views id's
         placesRecyclerView = findViewById(R.id.placesRecyclerView);
         placesToolbar = findViewById(R.id.placesToolbar);
-        placesCategoriesChipGroup = findViewById(R.id.placesCategoriesChipGroup);
+        placesCategoriesChipGroup = findViewById(R.id.placeTagsChipGroup);
         governorateCoverImageView = findViewById(R.id.governorateCoverImageView);
         collapsingToolbar = findViewById(R.id.collapsingToolbar);
 
@@ -114,7 +111,15 @@ import java.util.List;
                     @Override
                     public void handleFault( BackendlessFault fault )
                     {
-                        Toast.makeText(PlacesActivity.this, "fault", Toast.LENGTH_SHORT).show();
+                        Log.i("places Error", "handleFault: "+fault.getCode());
+                        if(fault.getCode().equals("Internal client exception"))
+                            Toast.makeText(PlacesActivity.this, "internet error", Toast.LENGTH_SHORT).show();
+                        else if(fault.getCode().equals("3064"))
+                        {
+                            Toast.makeText(PlacesActivity.this, "user error", Toast.LENGTH_SHORT).show();
+
+                        }
+
                     }
                 });
 

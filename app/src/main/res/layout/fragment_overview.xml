@@ -7,30 +7,30 @@
     tools:context=".placeFragments.OverviewFragment">
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/averageRatingBar"
         style="@style/Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:rating="4"
-        app:layout_constraintEnd_toStartOf="@+id/guideline31"
+        app:layout_constraintEnd_toStartOf="@+id/guideline24"
         app:layout_constraintTop_toTopOf="@+id/guideline28" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/rateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:text="4.5"
-        app:layout_constraintBottom_toTopOf="@+id/ratingBar"
-        app:layout_constraintEnd_toEndOf="@+id/ratingBar"
-        app:layout_constraintStart_toStartOf="@+id/ratingBar" />
+        app:layout_constraintBottom_toTopOf="@+id/averageRatingBar"
+        app:layout_constraintEnd_toEndOf="@+id/averageRatingBar"
+        app:layout_constraintStart_toStartOf="@+id/averageRatingBar" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".07" />
+        app:layout_constraintGuide_percent=".02" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline32"
@@ -40,25 +40,32 @@
         app:layout_constraintGuide_percent=".05" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".95" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline31"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".90" />
+        app:layout_constraintGuide_percent=".98" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".11" />
+        app:layout_constraintGuide_percent=".05" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".15" />
+        app:layout_constraintGuide_percent=".07" />
 
     <TextView
         android:id="@+id/textView17"
@@ -67,15 +74,18 @@
         android:fontFamily="@font/poppins_semibold"
         android:text="Description"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/guideline27"
+        app:layout_constraintStart_toStartOf="@+id/guideline32"
         app:layout_constraintTop_toTopOf="@+id/guideline30" />
 
     <androidx.core.widget.NestedScrollView
+
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
+
         android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline31"
         app:layout_constraintStart_toStartOf="@+id/guideline27"
         app:layout_constraintTop_toBottomOf="@+id/textView17">
@@ -86,7 +96,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/descriptionTextView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
@@ -112,14 +122,14 @@
 
                 <HorizontalScrollView
 
-                    android:id="@+id/categoriesHorizontalScrollView"
+                    android:id="@+id/TagsHorizontalScrollView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10sp"
                     android:scrollbars="none">
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/placesCategoriesChipGroup"
+                        android:id="@+id/placeTagsChipGroup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:singleSelection="true">
@@ -179,7 +189,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/reviewsCountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
@@ -187,7 +197,7 @@
         android:text="(123)"
         android:textSize="10sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
-        app:layout_constraintEnd_toStartOf="@+id/ratingBar"
-        app:layout_constraintTop_toTopOf="@+id/ratingBar" />
+        app:layout_constraintBottom_toBottomOf="@+id/averageRatingBar"
+        app:layout_constraintEnd_toStartOf="@+id/averageRatingBar"
+        app:layout_constraintTop_toTopOf="@+id/averageRatingBar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

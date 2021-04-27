@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
 
@@ -24,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void login(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
-
         startActivity(intent);
 
 
@@ -35,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     public void create(View view) {
 
         Intent intent = new Intent(this, RegistrationActivity.class);
-
         startActivity(intent);
 
         // nullify
