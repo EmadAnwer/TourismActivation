@@ -14,7 +14,6 @@
         android:id="@+id/profilePictureImageView"
         android:layout_width="70sp"
         android:layout_height="70sp"
-        android:src="@drawable/me"
         app:layout_constraintStart_toStartOf="@+id/guideline20"
         app:layout_constraintTop_toTopOf="@+id/guideline14"
         app:shapeAppearanceOverlay="@style/Circular"

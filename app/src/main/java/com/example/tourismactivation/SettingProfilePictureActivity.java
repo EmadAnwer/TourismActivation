@@ -5,13 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
@@ -28,15 +31,24 @@ import java.io.IOException;
 public class SettingProfilePictureActivity extends AppCompatActivity {
     ShapeableImageView imgProfile;
     BackendlessUser user;
-    String oldUrl = "";
+    String oldUrl = "",name = "";
     Uri imageUri;
-
+    SharedPreferences pref;
+    TextView userNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_profile_picture);
+        pref = getSharedPreferences("userData", Context.MODE_PRIVATE);
+        name = pref.getString("userName", "");
+
+        userNameTextView = findViewById(R.id.userNameTextView);
         imgProfile =findViewById(R.id.imgProfile);
+        userNameTextView.setText(name);
+
+
+
         user = Backendless.UserService.CurrentUser();
     }
 
@@ -69,8 +81,6 @@ public class SettingProfilePictureActivity extends AppCompatActivity {
 
     public void settingProfileImg(View view) {
         File imgFile = new File(imageUri.getPath());
-
-
         Backendless.Files.upload(imgFile, "users-Images",true, new AsyncCallback<BackendlessFile>() {
             @Override
             public void handleResponse(BackendlessFile response) {
@@ -116,6 +126,10 @@ public class SettingProfilePictureActivity extends AppCompatActivity {
         {
             public void handleResponse( BackendlessUser user )
             {
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("userProfilePicture",user.getProperty("profilePicture").toString());
+                editor.apply();
+
 
 
                 init();
@@ -131,6 +145,9 @@ public class SettingProfilePictureActivity extends AppCompatActivity {
         });
     }
     void init() {
+
+
+
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
 

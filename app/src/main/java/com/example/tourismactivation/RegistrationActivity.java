@@ -293,7 +293,8 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
             user.setEmail(emailTextField.getEditText().getText().toString());
             user.setPassword(passwordInputLayout.getEditText().getText().toString());
             user.setProperty("phone", phoneTextField.getEditText().getText().toString());
-            user.setProperty("countryCode", countryCodePicker.getSelectedCountryCode());
+            user.setProperty("countryCode", countryCodePicker.getSelectedCountryCodeAsInt());
+
             Backendless.UserService.register(user, this);
         }
 
@@ -320,7 +321,7 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
 
 
        else
-            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error"+fault.getCode(), Toast.LENGTH_SHORT).show();
 
         create.setClickable(true);
 
