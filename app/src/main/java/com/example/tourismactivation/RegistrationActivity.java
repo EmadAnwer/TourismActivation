@@ -292,7 +292,8 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
             user.setProperty("name", nameTextField.getEditText().getText().toString());
             user.setEmail(emailTextField.getEditText().getText().toString());
             user.setPassword(passwordInputLayout.getEditText().getText().toString());
-            user.setProperty("phone", countryCodePicker.getFullNumber());
+            user.setProperty("phone", phoneTextField.getEditText().getText().toString());
+            user.setProperty("countryCode", countryCodePicker.getSelectedCountryCode());
             Backendless.UserService.register(user, this);
         }
 
@@ -307,7 +308,6 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
 
 
     }
-
 
     @Override
     public void handleFault(BackendlessFault fault) {

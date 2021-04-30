@@ -78,7 +78,6 @@ public class HomeGovernoratesFragment extends Fragment {
                     @Override
                     public void handleResponse( List<Governorates> response )
                     {
-
                         governorates.addAll(response) ;
                         adapter.notifyDataSetChanged();
                         

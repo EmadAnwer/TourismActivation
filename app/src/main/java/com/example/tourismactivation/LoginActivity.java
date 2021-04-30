@@ -72,7 +72,9 @@ public class LoginActivity extends AppCompatActivity implements AsyncCallback<Ba
         SharedPreferences.Editor editor = pref.edit();
 
         editor.putString("userName", user.getProperty("name").toString());
-
+        editor.putString("userEmail", user.getProperty("email").toString());
+        editor.putString("userPhone", user.getProperty("phone").toString());
+        editor.putInt("userCountryCode", (Integer) user.getProperty("countryCode"));
 
         Log.i("user Local Data Saved", user.toString());
 

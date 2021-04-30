@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutSettings"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline35">
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add_photo"
+            style="@style/FabStyle"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:contentDescription="TODO"
+            android:onClick="pickProfileImage" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgProfileSettings"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:padding="3dp"
+            android:src="@drawable/ic_person"
+            app:shapeAppearanceOverlay="@style/Circular"
+            app:strokeColor="@color/secondaryColor"
+            app:strokeWidth="1sp" />
+    </RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nameSettingsTextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+
+        app:boxBackgroundColor="@android:color/transparent"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="15sp"
+        app:boxCornerRadiusBottomStart="15sp"
+        app:boxCornerRadiusTopEnd="15sp"
+        app:boxCornerRadiusTopStart="15sp"
+        app:boxStrokeColor="@color/secondaryColor"
+        app:boxStrokeWidth="2sp"
+        app:boxStrokeWidthFocused="2sp"
+        app:counterEnabled="false"
+        app:counterTextColor="@color/secondaryColor"
+        app:endIconMode="clear_text"
+        app:endIconTintMode="multiply"
+        app:errorEnabled="true"
+        app:endIconDrawable="@drawable/ic_clear"
+        app:helperText=' type your name like "Emad"'
+        app:layout_constraintEnd_toStartOf="@+id/guideline38"
+        app:layout_constraintStart_toStartOf="@+id/guideline37"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayoutSettings"
+        app:passwordToggleEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+
+            android:id="@+id/nameSettingsTextInputField"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:digits=" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:inputType="textPersonName"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:requiresFadingEdge="horizontal|vertical"
+            android:textSize="18sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailSettingsTextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="15sp"
+        app:boxCornerRadiusBottomStart="15sp"
+        app:boxCornerRadiusTopEnd="15sp"
+        app:boxCornerRadiusTopStart="15sp"
+        app:boxStrokeColor="@color/secondaryColor"
+        app:boxStrokeWidth="2sp"
+        app:boxStrokeWidthFocused="2sp"
+        app:counterTextColor="@color/secondaryColor"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:helperText='type you email "emad@test.co"*'
+        app:helperTextEnabled="true"
+        app:layout_constraintEnd_toStartOf="@+id/guideline38"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline37"
+        app:layout_constraintTop_toBottomOf="@+id/nameSettingsTextField"
+        app:passwordToggleEnabled="false"
+        app:endIconDrawable="@drawable/ic_clear">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailSettingsTextInputField"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="text|textEmailAddress"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:requiresFadingEdge="horizontal|vertical"
+            android:textSize="18sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/loginPasswordSettingsTextField"
+        app:endIconDrawable="@drawable/ic_clear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="your password"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="15sp"
+        app:boxCornerRadiusBottomStart="15sp"
+        app:boxCornerRadiusTopEnd="15sp"
+        app:boxCornerRadiusTopStart="15sp"
+        app:boxStrokeColor="@color/secondaryColor"
+        app:boxStrokeWidth="2sp"
+        app:boxStrokeWidthFocused="2sp"
+        app:counterEnabled="true"
+        app:counterTextColor="@color/secondaryColor"
+        app:errorEnabled="true"
+        app:helperText="required  be more the 8 letters- numbers"
+        app:layout_constraintEnd_toStartOf="@+id/guideline38"
+        app:layout_constraintStart_toStartOf="@+id/guideline37"
+        app:layout_constraintTop_toBottomOf="@+id/emailSettingsTextField"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordSettingsTextInputField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:requiresFadingEdge="horizontal|vertical"
+            android:textSize="18sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phoneSettingsTextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:endIconDrawable="@drawable/ic_clear"
+        android:hint="Phone"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="15sp"
+        app:boxCornerRadiusBottomStart="15sp"
+        app:boxCornerRadiusTopEnd="15sp"
+        app:boxCornerRadiusTopStart="15sp"
+        app:boxStrokeColor="@color/secondaryColor"
+        app:boxStrokeWidth="2sp"
+        app:boxStrokeWidthFocused="2sp"
+        app:counterTextColor="@color/secondaryColor"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toStartOf="@+id/guideline38"
+        app:layout_constraintStart_toEndOf="@+id/countrySettingsCodePicker"
+        app:layout_constraintTop_toBottomOf="@+id/loginPasswordSettingsTextField"
+        app:passwordToggleEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phoneSettingsTextInputField"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="phone"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:requiresFadingEdge="horizontal|vertical"
+            android:textSize="18sp" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/countrySettingsCodePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:ccp_autoDetectCountry="true"
+        app:ccp_autoFormatNumber="true"
+        app:ccp_hintExampleNumberType="MOBILE"
+        app:ccp_textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/phoneSettingsTextField"
+        app:layout_constraintStart_toStartOf="@+id/guideline37"
+        app:layout_constraintTop_toTopOf="@+id/phoneSettingsTextField" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:onClick="userUpdate"
+        android:padding="15sp"
+        android:text="Save"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        app:cornerRadius="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline35"
+        app:layout_constraintEnd_toStartOf="@+id/guideline38"
+        app:layout_constraintTop_toTopOf="@+id/userNameSettingsTextView" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.14" />
+
+    <TextView
+        android:id="@+id/userNameSettingsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="profile Settings"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline35"
+        app:layout_constraintStart_toStartOf="@+id/guideline37" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline37"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".90" />
+</androidx.constraintlayout.widget.ConstraintLayout>

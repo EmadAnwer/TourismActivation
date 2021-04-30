@@ -28,6 +28,10 @@ import java.io.IOException;
 public class SettingProfilePictureActivity extends AppCompatActivity {
     ShapeableImageView imgProfile;
     BackendlessUser user;
+    String oldUrl = "";
+    Uri imageUri;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,22 +50,15 @@ public class SettingProfilePictureActivity extends AppCompatActivity {
     }
 
 
-    Uri imageUri;
-    Bitmap bitmap;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             //Image Uri will not be null for RESULT_OK
+            assert data != null;
             imageUri = data.getData();
-            try {
-                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),imageUri);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
             imgProfile.setImageURI(imageUri);
-
 
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show();
@@ -70,27 +67,6 @@ public class SettingProfilePictureActivity extends AppCompatActivity {
         }
     }
 
-    public void settingProfileImage(View view) {
-        Backendless.Files.Android.upload(bitmap, Bitmap.CompressFormat.PNG, 30, user.getUserId()+".png", "users-Images", new AsyncCallback<BackendlessFile>() {
-            @Override
-            public void handleResponse(BackendlessFile response) {
-                Toast.makeText(SettingProfilePictureActivity.this, "upladed", Toast.LENGTH_SHORT).show();
-                setUserProfileImage(response.getFileURL());
-
-            }
-
-
-            @Override
-            public void handleFault(BackendlessFault fault) {
-                Toast.makeText(SettingProfilePictureActivity.this, "not done", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-
-
-    }
-    String oldUrl = "";
     public void settingProfileImg(View view) {
         File imgFile = new File(imageUri.getPath());
 
@@ -116,8 +92,7 @@ public class SettingProfilePictureActivity extends AppCompatActivity {
 
 
     }
-    void imageRename(String oldName)
-    {
+    void imageRename(String oldName) {
         String currentUserId = Backendless.UserService.loggedInUser();
 
         Toast.makeText(this, "im here", Toast.LENGTH_SHORT).show();
@@ -135,9 +110,7 @@ public class SettingProfilePictureActivity extends AppCompatActivity {
         });
 
     }
-
-    void setUserProfileImage(String url)
-    {
+    void setUserProfileImage(String url) {
         user.setProperty( "profilePicture", url);
         Backendless.UserService.update( user, new AsyncCallback<BackendlessUser>()
         {
@@ -157,8 +130,7 @@ public class SettingProfilePictureActivity extends AppCompatActivity {
 
         });
     }
-    void init()
-    {
+    void init() {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
 
