@@ -30,8 +30,9 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
     TextInputEditText selectedTextInputField ;
     CountryCodePicker countryCodePicker;
     ConstraintLayout root;
-    Button create;
+    Button createAnAccountButton;
     ArrayList<String> mails = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
         passwordInputLayout = findViewById(R.id.loginPasswordTextField);
         confirmPasswordTextField = findViewById(R.id.confirmPasswordTextField);
         phoneTextField = findViewById(R.id.phoneTextField);
-
+        createAnAccountButton = findViewById(R.id.createAnAccountButton);
 
         //set OnFocusChangeListener
         Objects.requireNonNull(nameTextField.getEditText()).setOnFocusChangeListener(this);
@@ -279,15 +280,12 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
     }
 
     public void createAccount(View view) {
+        createAnAccountButton.setEnabled(!checkingAllFieldsValidation());
         if (checkingAllFieldsValidation()) {
-
             if (mails.contains(emailTextField.getEditText().getText().toString())) {
                 emailAlreadyExists();
                 return;
             }
-            create = (Button) view;
-            create.setClickable(false);
-
             BackendlessUser user = new BackendlessUser();
             user.setProperty("name", nameTextField.getEditText().getText().toString());
             user.setEmail(emailTextField.getEditText().getText().toString());
@@ -312,18 +310,15 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
 
     @Override
     public void handleFault(BackendlessFault fault) {
-
+        createAnAccountButton.setEnabled(false);
         if (fault.getCode().equals("3033"))
         {
             emailAlreadyExists();
             mails.add(emailTextField.getEditText().getText().toString());
         }
-
-
        else
-            Toast.makeText(this, "Error"+fault.getCode(), Toast.LENGTH_SHORT).show();
+           Toast.makeText(this, "Error"+fault.getCode(), Toast.LENGTH_SHORT).show();
 
-        create.setClickable(true);
 
     }
 

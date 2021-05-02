@@ -50,6 +50,7 @@
             android:paddingBottom="16dp"
             android:requiresFadingEdge="horizontal|vertical"
             android:text="e@g.c"
+            android:textColorHighlight="@color/primaryDarkColor"
             android:textSize="18sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -83,6 +84,7 @@
             android:paddingBottom="16dp"
             android:requiresFadingEdge="horizontal|vertical"
             android:text="12345678"
+            android:textColorHighlight="@color/primaryDarkColor"
             android:textSize="18sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -102,7 +104,7 @@
         app:layout_constraintGuide_percent="0.9" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/loginButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:onClick="login"

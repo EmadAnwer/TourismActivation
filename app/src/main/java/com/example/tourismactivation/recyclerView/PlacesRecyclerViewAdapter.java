@@ -1,6 +1,9 @@
 package com.example.tourismactivation.recyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,16 +17,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.tourismactivation.PlaceActivity;
+import com.example.tourismactivation.PlacesActivity;
 import com.example.tourismactivation.R;
 import com.example.tourismactivation.molde.Places;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecyclerViewAdapter.ViewHolder> implements View.OnClickListener {
     private static final String TAG = "PlacesRecyclerVie";
-
+    SharedPreferences pref;
     //var
     private List<Places> placesArrayList = new ArrayList<>();
     Context context;
@@ -66,6 +73,20 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
     public void onClick(View v) {
         Places p = (Places) v.getTag();
         Toast.makeText(context, p.getName(), Toast.LENGTH_SHORT).show();
+
+        // pass governorate name and governorate cover within SharedPreferences
+        pref = context.getSharedPreferences("placesPref", MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = pref.edit();
+        editor.putString("coverImage", p.getCover_image());
+        editor.putString("governorate", p.getName());
+        editor.apply();
+
+
+        // intent to PlacesActivity
+        Intent intent = new Intent(context, PlaceActivity.class);
+        context.startActivity(intent);
+        intent = null;
+
 
     }
 

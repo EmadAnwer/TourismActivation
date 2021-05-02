@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
@@ -23,6 +24,7 @@ import com.google.android.material.textfield.TextInputLayout;
 public class LoginActivity extends AppCompatActivity implements AsyncCallback<BackendlessUser> {
     TextInputLayout loginEmailTextField,loginPasswordTextField;
     SharedPreferences pref;
+    Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncCallback<Ba
         pref = getSharedPreferences("userData", Context.MODE_PRIVATE);
         loginEmailTextField = findViewById(R.id.loginEmailTextField);
         loginPasswordTextField = findViewById(R.id.loginPasswordTextField);
+        loginButton = findViewById(R.id.loginButton);
 
     }
 
@@ -40,10 +43,13 @@ public class LoginActivity extends AppCompatActivity implements AsyncCallback<Ba
 
     public void login(View view) {
 
+        loginButton.setEnabled(false);
         //checking email validation
         if (!(Patterns.EMAIL_ADDRESS.matcher(loginEmailTextField.getEditText().getText().toString()).matches())) {
             loginEmailTextField.setErrorEnabled(true);
             loginEmailTextField.setError("wrong Email Address");
+            loginButton.setEnabled(true);
+
             return;
 
         }
@@ -52,6 +58,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncCallback<Ba
         if (loginPasswordTextField.getEditText().getText().length() < 8) {
             loginPasswordTextField.setErrorEnabled(true);
             loginPasswordTextField.setError("wrong password");
+            loginButton.setEnabled(true);
             return;
 
         }
@@ -107,12 +114,12 @@ public class LoginActivity extends AppCompatActivity implements AsyncCallback<Ba
     public void handleFault(BackendlessFault fault) {
         if(fault.getCode().equals("3003"))
         {
+            loginButton.setEnabled(true);
             Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
 
         }
-            Log.i("faild", fault.toString());
-
-        Toast.makeText(this, "faild", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show();
 
     }
 

@@ -115,6 +115,17 @@ public class HomeActivity extends AppCompatActivity {
 
          */
         String currentUserId = Backendless.UserService.loggedInUser();
+        if(currentUserId == null)
+        {
+
+            Toast.makeText(HomeActivity.this, "level 2 check no user", Toast.LENGTH_SHORT).show();
+            // clearing token
+            userLogout();
+            intentToMainActivity();
+            return;
+        }
+
+
         Backendless.UserService.findById(currentUserId, new AsyncCallback<BackendlessUser>() {
             @Override
             public void handleResponse(BackendlessUser response) {

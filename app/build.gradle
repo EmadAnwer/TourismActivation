@@ -44,6 +44,9 @@ dependencies {
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
     implementation 'com.github.dhaval2404:imagepicker:1.8'
     implementation 'pub.hanks:smallbang:1.2.2'
+    implementation 'com.pnikosis:materialish-progress:1.7'
+
+
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

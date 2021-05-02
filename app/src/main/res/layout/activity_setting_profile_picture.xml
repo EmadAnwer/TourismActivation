@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primaryColor"
@@ -46,6 +47,18 @@
             app:strokeWidth="1sp" />
     </RelativeLayout>
 
+    <com.pnikosis.materialishprogress.ProgressWheel
+        android:id="@+id/setupProfileProgressWheel"
+        wheel:matProg_barColor="@color/secondaryColor"
+        wheel:matProg_progressIndeterminate="true"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userNameTextView" />
     <TextView
         android:id="@+id/userNameTextView"
         android:layout_width="wrap_content"
@@ -113,5 +126,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.625"
         app:srcCompat="@drawable/cairo" />
+
+    <TextView
+        android:id="@+id/setupProfileProgressTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppins"
+        app:layout_constraintEnd_toEndOf="@+id/setupProfileProgressWheel"
+        app:layout_constraintStart_toStartOf="@+id/setupProfileProgressWheel"
+        app:layout_constraintTop_toBottomOf="@+id/setupProfileProgressWheel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

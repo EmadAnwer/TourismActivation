@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
@@ -32,6 +33,7 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.hbb20.CountryCodePicker;
+import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,6 +46,8 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
     int countryCode;
     boolean profileImageChanged;
     String path = "";
+    TextView setupProfileSettingsProgressTextView;
+    ProgressWheel setupProfileSettingsProgressWheel;
 
 
 
@@ -67,6 +71,9 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
         imgProfileSettings = findViewById(R.id.imgProfileSettings);
         saveButton = findViewById(R.id.saveButton);
         countrySettingsCodePicker.registerCarrierNumberEditText(phoneSettingsTextField.getEditText());
+        setupProfileSettingsProgressWheel = findViewById(R.id.setupProfileSettingsProgressWheel);
+        setupProfileSettingsProgressWheel.stopSpinning();
+        setupProfileSettingsProgressTextView = findViewById(R.id.setupProfileSettingsProgressTextView);
 
         //getting  user data from SharedPreference
         name = pref.getString("userName", "");
@@ -304,11 +311,15 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
             inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
         saveButton.setEnabled(false);
+        setupProfileSettingsProgressWheel.spin();
+        setupProfileSettingsProgressTextView.append("updating User Data");
+
         String password =  loginPasswordSettingsTextField.getEditText().getText().toString();
 
         Backendless.UserService.login(email, password, new AsyncCallback<BackendlessUser>() {
             @Override
             public void handleResponse(BackendlessUser user) {
+                setupProfileSettingsProgressTextView.append("password is True");
 
                 if(profileImageChanged)
                 {
@@ -338,6 +349,8 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
 
             @Override
             public void handleFault(BackendlessFault fault) {
+                setupProfileSettingsProgressWheel.stopSpinning();
+                setupProfileSettingsProgressTextView.setText("");
                 loginPasswordSettingsTextField.setError("wrong password");
                 saveButton.setEnabled(true);
             }
@@ -350,11 +363,16 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
 
     void settingProfileImg() {
         imgFile = new File(imageUri.getPath());
+        setupProfileSettingsProgressTextView.setText("");
+        setupProfileSettingsProgressTextView.append("uploading image");
 
         Backendless.Files.upload(imgFile, "users-Images",true, new AsyncCallback<BackendlessFile>() {
             @Override
             public void handleResponse(BackendlessFile response) {
                 Log.i("unlaced done", "handleResponse: "+response.getFileURL());
+
+                setupProfileSettingsProgressTextView.setText("");
+                setupProfileSettingsProgressTextView.append("profile picture has been uploaded");
 
                 imageRename(response.getFileURL().substring(response.getFileURL().indexOf("/users-Images/")));
 
@@ -374,11 +392,14 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
 
     void imageRename(String oldName) {
         String currentUserId = Backendless.UserService.loggedInUser();
-
+        setupProfileSettingsProgressTextView.setText("");
+        setupProfileSettingsProgressTextView.append("setting your Image");
         Toast.makeText(this, "im here", Toast.LENGTH_SHORT).show();
         Backendless.Files.renameFile(oldName, currentUserId+System.currentTimeMillis()+".jpg", new AsyncCallback<String>() {
             @Override
             public void handleResponse(String response) {
+
+
                 setUserProfileImage(response);
             }
 
@@ -390,6 +411,10 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
 
     }
     void deleteOldImage() {
+        if(profilePic.equals("https://backendlessappcontent.com/30A3F936-C7E6-49FF-8FF6-E4ADF602134B/console/xpklzwwrtkdrxzhxuacjhsmqvgojihawbevk/files/view/users-Images/user.png"))
+        {
+            return;
+        }
         Backendless.Files.remove(path, new AsyncCallback<Integer>() {
             @Override
             public void handleResponse(Integer response) {
@@ -414,7 +439,6 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
         {
             public void handleResponse( BackendlessUser user )
             {
-
                 Toast.makeText(ProfileActivity.this, "image u", Toast.LENGTH_SHORT).show();
                 updateHomeSharedPreference(user);
             }
@@ -430,6 +454,9 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
 
 
     void updateHomeSharedPreference(BackendlessUser user) {
+        setupProfileSettingsProgressTextView.setText("");
+        setupProfileSettingsProgressTextView.append("User info has been updated successfully");
+
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("updated", user.getProperty("updated").toString());
         editor.putString("userName", user.getProperty("name").toString());
