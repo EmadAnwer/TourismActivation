@@ -2,7 +2,6 @@ package com.example.tourismactivation;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,13 +9,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
@@ -36,8 +33,6 @@ import com.hbb20.CountryCodePicker;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Objects;
 
 public class ProfileActivity extends AppCompatActivity implements TextWatcher, View.OnFocusChangeListener {
     SharedPreferences pref;
@@ -66,7 +61,7 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
         nameSettingsTextField = findViewById(R.id.nameSettingsTextField);
         emailSettingsTextField = findViewById(R.id.emailSettingsTextField);
         loginPasswordSettingsTextField = findViewById(R.id.loginPasswordSettingsTextField);
-        phoneSettingsTextField = findViewById(R.id.phoneSettingsTextField);
+        phoneSettingsTextField = findViewById(R.id.phoneSettingsTextField5);
         countrySettingsCodePicker = findViewById(R.id.countrySettingsCodePicker);
         imgProfileSettings = findViewById(R.id.imgProfileSettings);
         saveButton = findViewById(R.id.saveButton);

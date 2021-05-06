@@ -32,7 +32,7 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
     private static final String TAG = "PlacesRecyclerVie";
     SharedPreferences pref;
     //var
-    private List<Places> placesArrayList = new ArrayList<>();
+    private final List<Places> placesArrayList;
     Context context;
 
     public PlacesRecyclerViewAdapter(List<Places>placesArrayList, Context context) {
@@ -73,12 +73,13 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
     public void onClick(View v) {
         Places p = (Places) v.getTag();
         Toast.makeText(context, p.getName(), Toast.LENGTH_SHORT).show();
-
         // pass governorate name and governorate cover within SharedPreferences
         pref = context.getSharedPreferences("placesPref", MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = pref.edit();
         editor.putString("coverImage", p.getCover_image());
-        editor.putString("governorate", p.getName());
+        editor.putString("placeName", p.getName());
+        editor.putString("placeID", p.getObjectId());
+        Log.i(TAG, "onClick: "+p.getObjectId());
         editor.apply();
 
 

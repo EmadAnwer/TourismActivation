@@ -47,10 +47,10 @@ import java.util.List;
         setContentView(R.layout.activity_places);
         //setting views id's
         placesRecyclerView = findViewById(R.id.placesRecyclerView);
-        placesToolbar = findViewById(R.id.placesToolbar);
+        placesToolbar = findViewById(R.id.placeToolbar);
         placesCategoriesChipGroup = findViewById(R.id.placeTagsChipGroup);
         governorateCoverImageView = findViewById(R.id.governorateCoverImageView);
-        collapsingToolbar = findViewById(R.id.collapsingToolbar);
+        collapsingToolbar = findViewById(R.id.placeCollapsingToolbar);
 
 
         //getting extras
@@ -91,7 +91,7 @@ import java.util.List;
     {
         Toast.makeText(this, "get Governorates", Toast.LENGTH_SHORT).show();
         DataQueryBuilder queryBuilder = DataQueryBuilder.create();
-        queryBuilder.excludeProperties( "id","category", "description","governorate","placeImage","created", "updated","objectId","ownerId","user_id","placeTags","placeReviews","placePrice","placeImage");
+        queryBuilder.excludeProperties( "id","category", "description","governorate","placeImage","created", "updated","ownerId","user_id","placeTags","placeReviews","placePrice","placeImage");
 
         String whereClause = "governorate='"+governorate+"'"+filter;
 

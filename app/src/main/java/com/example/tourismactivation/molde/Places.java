@@ -16,15 +16,34 @@ public class Places
     private String cover_image;
     private Date updated;
     private Date created;
-    private float rating_average;
+    private Float rating_average;
     private String name;
     private String category;
     private String ownerId;
+    private Integer reviewsCount;
     private String objectId;
     private List<Tags> placeTags;
     private List<Prices> placePrice;
     private List<Images> placeImage;
     private List<Reviews> placeReviews;
+    private List<Tickets> placeTickets;
+
+
+
+
+    public Places() {
+    }
+
+    public List<Tickets> getPlaceTickets()
+    {
+        return placeTickets;
+    }
+
+    public void setPlaceTickets( List<Tickets> placeTickets )
+    {
+        this.placeTickets = placeTickets;
+    }
+
     public String getGovernorate()
     {
         return governorate;
@@ -85,12 +104,12 @@ public class Places
         return created;
     }
 
-    public float getRating_average()
+    public Float getRating_average()
     {
         return rating_average;
     }
 
-    public void setRating_average( float rating_average )
+    public void setRating_average( Float rating_average )
     {
         this.rating_average = rating_average;
     }
@@ -118,6 +137,16 @@ public class Places
     public String getOwnerId()
     {
         return ownerId;
+    }
+
+    public Integer getReviewsCount()
+    {
+        return reviewsCount;
+    }
+
+    public void setReviewsCount( Integer reviewsCount )
+    {
+        this.reviewsCount = reviewsCount;
     }
 
     public String getObjectId()

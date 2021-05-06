@@ -26,5 +26,4 @@
         <item name="tint">@color/white</item>
         <item name="useCompatPadding">true</item>
     </style>
-
 </resources>

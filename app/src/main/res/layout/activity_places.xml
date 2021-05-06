@@ -142,7 +142,7 @@
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbar"
+            android:id="@+id/placeCollapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -161,7 +161,7 @@
 
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/placesToolbar"
+                android:id="@+id/placeToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="100sp"
                 app:layout_collapseMode="pin"

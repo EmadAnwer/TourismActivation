@@ -17,16 +17,16 @@
         android:theme="@style/actionBarTheme">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbar"
+            android:id="@+id/placeCollapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
 
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            app:title="Giza Pyramids">
+            app:title="Giza Pyramids asfasfasf asfasf">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/placeImageView2"
+                android:id="@+id/place_ImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -35,7 +35,7 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/placesToolbar"
+                android:id="@+id/placeToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="100sp"
                 app:layout_collapseMode="pin"
@@ -47,7 +47,7 @@
                 android:id="@+id/imageViewAnimation"
                 android:layout_width="60sp"
                 android:layout_height="60sp"
-                android:layout_gravity="bottom|end"
+                android:layout_gravity="bottom|top|end"
                 android:layout_marginRight="15sp"
                 android:layout_marginBottom="15sp"
                 android:onClick="addToFavorite"

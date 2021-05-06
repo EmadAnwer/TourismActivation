@@ -18,7 +18,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneSettingsTextField" />
+        app:layout_constraintTop_toBottomOf="@+id/phoneSettingsTextField5" />
 
     <TextView
         android:id="@+id/setupProfileSettingsProgressTextView"
@@ -182,7 +182,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phoneSettingsTextField"
+        android:id="@+id/phoneSettingsTextField5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:endIconDrawable="@drawable/ic_clear"
@@ -204,7 +204,7 @@
         app:passwordToggleEnabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phoneSettingsTextInputField"
+            android:id="@+id/phoneSettingsTextInputField5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="phone"
@@ -224,9 +224,9 @@
         app:ccp_autoFormatNumber="true"
         app:ccp_hintExampleNumberType="MOBILE"
         app:ccp_textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/phoneSettingsTextField"
+        app:layout_constraintBottom_toBottomOf="@+id/phoneSettingsTextField5"
         app:layout_constraintStart_toStartOf="@+id/guideline37"
-        app:layout_constraintTop_toTopOf="@+id/phoneSettingsTextField" />
+        app:layout_constraintTop_toTopOf="@+id/phoneSettingsTextField5" />
 
     <Button
         android:id="@+id/saveButton"
