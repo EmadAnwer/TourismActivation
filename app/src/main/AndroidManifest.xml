@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.tourismactivation">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,10 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TourismActivation"
         android:usesCleartextTraffic="true">
+        <activity android:name=".TicketBookingActivity"/>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".SettingProfilePictureActivity" />
         <activity android:name=".PlaceActivity" />
-        <activity android:name=".HomeActivity">
+        <activity android:name=".HomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
