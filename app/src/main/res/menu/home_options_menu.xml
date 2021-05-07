@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/favoritesItem"
+        android:icon="@drawable/ic_favorite"
+        android:title="Favorites" />
+    <item
+        android:id="@+id/ticketsItem"
+        android:icon="@drawable/ic_ticket"
+        android:title="Tickets" />
+
+    <item
+        android:id="@+id/languagesItem"
+        android:icon="@drawable/ic_languages"
+        android:title="Languages">
+        <menu>
+            <item
+                android:id="@+id/languagesItemEN"
+                android:title="English" />
+            <item
+                android:id="@+id/languagesItemAR"
+                android:title="Arabic" />
+        </menu>
+    </item>
+
+
+
+    <item
+        android:id="@+id/logoutItem"
+        android:icon="@drawable/ic_logout"
+        android:title="Logout" />
+
+
+
+    
+</menu>

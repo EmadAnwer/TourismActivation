@@ -3,16 +3,20 @@ package com.example.tourismactivation;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,15 +28,17 @@ import com.example.tourismactivation.ui.pageAdapter.HomeFragmentPageAdapter;
 import com.gigamole.navigationtabstrip.NavigationTabStrip;
 import com.google.android.material.imageview.ShapeableImageView;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Calendar;
 
 
-public class HomeFragment extends Fragment implements View.OnClickListener {
+public class HomeFragment extends Fragment implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
     private static final String TAG = "HomeFragment:";
     SharedPreferences pref;
     String name,profilePic;
-    ImageView logoutImageView;
-
+    ImageView optionsImageView;
+    PopupMenu options;
     NavigationTabStrip navTabStrip;
     ShapeableImageView profilePictureImageView;
     TextView welcomeTextView,userNameFragmentTextView;
@@ -58,7 +64,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
     }
-    boolean updated;
+
     HomeFragmentPageAdapter homeFragmentPageAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,7 +82,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         profilePictureImageView = view.findViewById(R.id.profilePictureImageView);
         welcomeTextView = view.findViewById(R.id.welcomeTextView);
         userNameFragmentTextView = view.findViewById(R.id.userNameFragmentTextView);
-        logoutImageView = view.findViewById(R.id.logoutImageView);
+        optionsImageView = view.findViewById(R.id.optionsImageView);
 
         name = pref.getString("userName", "");
         profilePic = pref.getString("userProfilePicture", "");
@@ -91,7 +97,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         homeViewPager.setAdapter(homeFragmentPageAdapter);
         navigationTabStrip.setViewPager(homeViewPager,0);
         profilePictureImageView.setOnClickListener(this);
-        logoutImageView.setOnClickListener(this);
+        optionsImageView.setOnClickListener(this);
 
         return view;
     }
@@ -134,6 +140,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.profilePictureImageView)
@@ -144,12 +151,42 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             startActivity(intent);
             intent = null;
         }
-        else if(v.getId() == R.id.logoutImageView)
-        {
-            userLogout();
+        else if(v.getId() == R.id.optionsImageView) {
+            int lang = pref.getInt("appLanguage", -1);
+
+            options = null;
+            options = new PopupMenu(this.getContext(),v);
+            options.setOnMenuItemClickListener(this);
+            options.inflate(R.menu.home_options_menu);
+            if(lang != -1)
+            {
+                final MenuItem language = options.getMenu().getItem(2).getSubMenu().getItem(lang);
+                language.setCheckable(true);
+                language.setChecked(true);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                options.setForceShowIcon(true);
+            }
+            else
+            {
+                try {
+                    Field popupField = PopupMenu.class.getDeclaredField("mPopup");
+                    popupField.setAccessible(true);
+                    Object o = popupField.get(options);
+                    assert o != null;
+                    o.getClass()
+                            .getDeclaredMethod("setForceShowIcon", boolean.class)
+                            .invoke(o,true);
+                } catch (NoSuchFieldException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            options.show();
         }
 
     }
+
     void userLogout(){
 
         Backendless.UserService.logout(new AsyncCallback<Void>()
@@ -184,4 +221,37 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
 
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.favoritesItem)
+            Toast.makeText(getContext(), "favoritesItem", Toast.LENGTH_SHORT).show();
+        else if(id == R.id.ticketsItem)
+            Toast.makeText(getContext(), "ticketsItem", Toast.LENGTH_SHORT).show();
+
+        else if(id == R.id.languagesItemAR)
+        {
+
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putInt("appLanguage", 1);
+            editor.apply();
+
+            Toast.makeText(getContext(), "AR", Toast.LENGTH_SHORT).show();
+
+        }
+        else if(id == R.id.languagesItemEN)
+        {
+
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putInt("appLanguage", 0);
+            editor.apply();
+
+            Toast.makeText(getContext(), "EN", Toast.LENGTH_SHORT).show();
+        }
+        else if(id == R.id.logoutItem)
+            userLogout();
+
+
+        return true;
+    }
 }
