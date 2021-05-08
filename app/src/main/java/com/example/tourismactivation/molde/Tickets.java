@@ -8,7 +8,7 @@ import com.backendless.persistence.*;
 import java.util.List;
 import java.util.Date;
 
-public class Tickets
+public class Tickets implements Comparable<Tickets>
 {
     private Integer price;
     private String placeName;
@@ -28,6 +28,14 @@ public class Tickets
         this.placeName = placeName;
         ReservationDate = reservationDate;
         this.type = type;
+    }
+
+    public Tickets(Integer price, String placeName, Date reservationDate, String type, String objectId) {
+        this.price = price;
+        this.placeName = placeName;
+        ReservationDate = reservationDate;
+        this.type = type;
+        this.objectId = objectId;
     }
 
     public Integer getPrice()
@@ -159,5 +167,10 @@ public class Tickets
     public static void findAsync( DataQueryBuilder queryBuilder, AsyncCallback<List<Tickets>> callback )
     {
         Backendless.Data.of( Tickets.class ).find( queryBuilder, callback );
+    }
+
+    @Override
+    public int compareTo(Tickets o) {
+        return getReservationDate().compareTo(o.getReservationDate());
     }
 }

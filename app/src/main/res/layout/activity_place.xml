@@ -17,7 +17,7 @@
         android:theme="@style/actionBarTheme">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/placeCollapsingToolbar"
+            android:id="@+id/ticketsCollapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -35,7 +35,7 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/placeToolbar"
+                android:id="@+id/ticketsToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="100sp"
                 app:layout_collapseMode="pin"

@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
@@ -30,7 +29,6 @@ import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class OverviewFragment extends Fragment {
     TextView rateTextView, reviewsCountTextView, descriptionTextView;
@@ -72,7 +70,7 @@ public class OverviewFragment extends Fragment {
         descriptionTextView = view.findViewById(R.id.descriptionTextView);
         reviewsCountTextView = view.findViewById(R.id.reviewsCountTextView);
         averageRatingBar = view.findViewById(R.id.averageRatingBar);
-        placeTagsChipGroup = view.findViewById(R.id.placeTagsChipGroup);
+        placeTagsChipGroup = view.findViewById(R.id.ticketsFilterChipGroup);
         pricesRecyclerView = view.findViewById(R.id.pricesRecyclerView);
 
         layoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL,false);

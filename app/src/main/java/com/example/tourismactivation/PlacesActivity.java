@@ -47,10 +47,10 @@ import java.util.List;
         setContentView(R.layout.activity_places);
         //setting views id's
         placesRecyclerView = findViewById(R.id.placesRecyclerView);
-        placesToolbar = findViewById(R.id.placeToolbar);
-        placesCategoriesChipGroup = findViewById(R.id.placeTagsChipGroup);
+        placesToolbar = findViewById(R.id.ticketsToolbar);
+        placesCategoriesChipGroup = findViewById(R.id.ticketsFilterChipGroup);
         governorateCoverImageView = findViewById(R.id.governorateCoverImageView);
-        collapsingToolbar = findViewById(R.id.placeCollapsingToolbar);
+        collapsingToolbar = findViewById(R.id.ticketsCollapsingToolbar);
 
 
         //getting extras

@@ -39,7 +39,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Popu
     String name,profilePic;
     ImageView optionsImageView;
     PopupMenu options;
-    NavigationTabStrip navTabStrip;
     ShapeableImageView profilePictureImageView;
     TextView welcomeTextView,userNameFragmentTextView;
 
@@ -188,9 +187,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Popu
     }
 
     void userLogout(){
-
-        Backendless.UserService.logout(new AsyncCallback<Void>()
-        {
+        Backendless.UserService.logout(new AsyncCallback<Void>() {
 
 
             @Override
@@ -216,8 +213,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Popu
             }
 
 
-        });
-    }
+        }); }
 
 
 
@@ -225,9 +221,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Popu
     public boolean onMenuItemClick(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.favoritesItem)
-            Toast.makeText(getContext(), "favoritesItem", Toast.LENGTH_SHORT).show();
-        else if(id == R.id.ticketsItem)
-            Toast.makeText(getContext(), "ticketsItem", Toast.LENGTH_SHORT).show();
+        {
+            Intent intent;
+            intent = new Intent(getActivity(), FavoritesActivity.class);
+            startActivity(intent);
+            intent = null;
+        }
+        else if(id == R.id.ticketsItem) {
+            Intent intent;
+            intent = new Intent(getActivity(), TicketsActivity.class);
+            startActivity(intent);
+            intent = null;
+        }
 
         else if(id == R.id.languagesItemAR)
         {

@@ -139,6 +139,13 @@ public class HomeActivity extends AppCompatActivity {
                     intentToMainActivity();
                 }
                 assert response != null;
+
+                if(response.getProperty("updated") ==null)
+                {
+                    //TODO
+                    return;
+                }
+
                 String updated = response.getProperty("updated").toString();
                 if(!updated.equals(pref.getString("updated"," ")))
                 {
@@ -196,6 +203,12 @@ public class HomeActivity extends AppCompatActivity {
 
     void intentToMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    void intentToSettingProfilePictureActivity() {
+        Intent intent = new Intent(this, SettingProfilePictureActivity.class);
         startActivity(intent);
         finish();
     }

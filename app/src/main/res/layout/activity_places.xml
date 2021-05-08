@@ -26,7 +26,7 @@
 
             <HorizontalScrollView
 
-                android:id="@+id/TagsHorizontalScrollView"
+                android:id="@+id/ticketsHorizontalScrollView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25sp"
@@ -34,7 +34,7 @@
                 >
 
                 <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/placeTagsChipGroup"
+                    android:id="@+id/ticketsFilterChipGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:checkedChip="@id/allCategoriesChip"
@@ -132,17 +132,15 @@
     </androidx.core.widget.NestedScrollView>
 
 
-
-
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/placesAppbar"
+        android:id="@+id/ticketsAppbar"
         android:layout_width="match_parent"
         android:layout_height="280sp"
-        android:theme="@style/actionBarTheme"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:theme="@style/actionBarTheme">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/placeCollapsingToolbar"
+            android:id="@+id/ticketsCollapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -161,7 +159,7 @@
 
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/placeToolbar"
+                android:id="@+id/ticketsToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="100sp"
                 app:layout_collapseMode="pin"
@@ -186,7 +184,7 @@
         app:fabSize="normal"
         app:icon="@drawable/ic_add"
         app:iconTint="@color/white"
-        app:layout_anchor="@id/placesAppbar"
+        app:layout_anchor="@id/ticketsAppbar"
 
         app:layout_anchorGravity="end|bottom">
 
