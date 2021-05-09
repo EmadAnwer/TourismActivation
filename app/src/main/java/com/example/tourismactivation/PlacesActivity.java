@@ -23,6 +23,7 @@ import com.example.tourismactivation.recyclerView.PlacesRecyclerViewAdapter;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.paginate.Paginate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,33 +31,36 @@ import java.util.List;
     public class PlacesActivity extends AppCompatActivity implements View.OnClickListener, ChipGroup.OnCheckedChangeListener {
         RecyclerView placesRecyclerView;
         PlacesRecyclerViewAdapter adapter;
-        List<Places> places= new ArrayList<>();
+        DataQueryBuilder queryBuilder;
+        List<Places> places;
         String coverImage,governorate,filter = "";
         SharedPreferences pref;
         int selectedId;
-
+        boolean isLoading ,isLastPage = false;
         // Views
         Toolbar placesToolbar;
         CollapsingToolbarLayout collapsingToolbar;
         ChipGroup placesCategoriesChipGroup;
         ImageView governorateCoverImageView;
+        int count = -5 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_places);
+        places = new ArrayList<>();
         //setting views id's
         placesRecyclerView = findViewById(R.id.placesRecyclerView);
+
         placesToolbar = findViewById(R.id.ticketsToolbar);
         placesCategoriesChipGroup = findViewById(R.id.ticketsFilterChipGroup);
         governorateCoverImageView = findViewById(R.id.governorateCoverImageView);
         collapsingToolbar = findViewById(R.id.ticketsCollapsingToolbar);
 
-
         //getting extras
         pref = getSharedPreferences("governoratePref", Context.MODE_PRIVATE);
-        coverImage = pref.getString("coverImage","error");
-        governorate = pref.getString("governorate","error");
+        coverImage = pref.getString("coverImage", "error");
+        governorate = pref.getString("governorate", "error");
 
         Toast.makeText(this, governorate, Toast.LENGTH_SHORT).show();
 
@@ -66,46 +70,109 @@ import java.util.List;
                 .load(coverImage)
                 .into(governorateCoverImageView);
         collapsingToolbar.setTitle(governorate);
-
-        addPlaces();
-
-
-
         //setting Categories Group Checked Listener
         placesCategoriesChipGroup.setOnCheckedChangeListener(this);
         selectedId = placesCategoriesChipGroup.getCheckedChipId();
 
-                //setting toolbar -> back
+        //setting toolbar -> back
         placesToolbar.setNavigationOnClickListener(this);
         //setting RecyclerView
         placesRecyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         placesRecyclerView.setLayoutManager(layoutManager);
-        adapter = new PlacesRecyclerViewAdapter(places,this);
+        adapter = new PlacesRecyclerViewAdapter(places, this);
         placesRecyclerView.setAdapter(adapter);
+        Paginate.Callbacks callbacks = new Paginate.Callbacks() {
+            @Override
+            public void onLoadMore() {
+                if(count == -5)
+                    getCount();
+                else
+                    getMorePlaces();
+            }
 
+            @Override
+            public boolean isLoading() {
+                // Indicate whether new page loading is in progress or not
+                return isLoading;
+            }
+
+            @Override
+            public boolean hasLoadedAllItems() {
+                if(places == null)
+                    return false;
+
+                return count == places.size() || count == 0;
+            }
+        };
+
+        Paginate.with(placesRecyclerView, callbacks)
+                .setLoadingTriggerThreshold(10)
+                .addLoadingListItem(true)
+                .build();
+
+        /*placesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                                                   @Override
+                                                   public void onScrollStateChanged(@NonNull @NotNull RecyclerView recyclerView, int newState) {
+                                                       super.onScrollStateChanged(recyclerView, newState);
+
+
+                                                       int visibleItemCount = layoutManager.getChildCount();
+                                                       int totalItemCount = layoutManager.getItemCount();
+                                                       int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+                                                       if (!recyclerView.canScrollVertically(1) && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                                                               && firstVisibleItemPosition >= 0
+                                                               && totalItemCount >= PAGE_SIZE) {
+                                                           Toast.makeText(PlacesActivity.this, "end", Toast.LENGTH_SHORT).show();
+
+                                                       }
+                                                   }
+                                               });
+*/
+        /*
+        placesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull @NotNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+
+                if (!isLoading && !isLastPage) {
+                    if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                            && firstVisibleItemPosition >= 0
+                            && totalItemCount >= PAGE_SIZE)
+                    {
+                        isLoading = true;
+                        getMorePlaces();
+                    }
+
+
+                }
+            }
+        });
+
+         */
     }
 
 
-    void addPlaces()
+
+        void getMorePlaces()
     {
-        Toast.makeText(this, "get Governorates", Toast.LENGTH_SHORT).show();
-        DataQueryBuilder queryBuilder = DataQueryBuilder.create();
-        queryBuilder.excludeProperties( "id","category", "description","governorate","placeImage","created", "updated","ownerId","user_id","placeTags","placeReviews","placePrice","placeImage");
-
-        String whereClause = "governorate='"+governorate+"'"+filter;
-
-        queryBuilder.setWhereClause(whereClause);
-        Backendless.Data.of( Places.class ).find( queryBuilder,
+        isLoading = true;
+        queryBuilder.prepareNextPage();
+        Backendless.Data.of( Places.class ).find(queryBuilder,
                 new AsyncCallback<List<Places>>()
                 {
                     @Override
                     public void handleResponse(List<Places> response )
                     {
-                        Toast.makeText(PlacesActivity.this, ""+whereClause, Toast.LENGTH_SHORT).show();
                         places.addAll(response);
                         adapter.notifyDataSetChanged();
-
+                        isLoading = false;
                     }
 
                     @Override
@@ -124,6 +191,80 @@ import java.util.List;
                 });
 
     }
+
+
+
+
+    void getFirstPlaces()
+    {
+        queryBuilder = DataQueryBuilder.create();
+        queryBuilder.excludeProperties( "id","category", "description","governorate","placeImage","created", "updated","ownerId","user_id","placeTags","placeReviews","placePrice","placeImage");
+        String whereClause = "governorate='"+governorate+"'"+filter;
+        queryBuilder.setWhereClause(whereClause);
+        byte PAGE_SIZE = 10;
+        queryBuilder.setPageSize(PAGE_SIZE).setOffset( 0 );
+
+
+        Backendless.Data.of( Places.class ).find(queryBuilder,
+                new AsyncCallback<List<Places>>()
+                {
+                    @Override
+                    public void handleResponse(List<Places> response )
+                    {
+                        places.addAll(response);
+                        adapter.notifyDataSetChanged();
+
+                        isLoading = false;
+                    }
+
+                    @Override
+                    public void handleFault( BackendlessFault fault )
+                    {
+                        Log.i("places Error", "handleFault: "+fault.getCode());
+                        if(fault.getCode().equals("Internal client exception"))
+                            Toast.makeText(PlacesActivity.this, "internet error", Toast.LENGTH_SHORT).show();
+                        else if(fault.getCode().equals("3064"))
+                        {
+                            Toast.makeText(PlacesActivity.this, "user error", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+                });
+
+    }
+
+    void  getCount()
+    {
+        isLoading = true;
+        DataQueryBuilder  qb = DataQueryBuilder.create();
+        String whereClause = "governorate='"+governorate+"'"+filter;
+        qb.setWhereClause(whereClause);
+        Backendless.Data.of( Places.class ).getObjectCount(
+                qb,new AsyncCallback<Integer>() {
+                    @Override
+                    public void handleResponse(Integer response) {
+
+                        count = response;
+                        if(count == 0)
+                        {
+                            places.clear();
+                            adapter.notifyDataSetChanged();
+                            isLoading = false;
+                            return;
+                        }
+                        getFirstPlaces();
+                        Log.i("Places count", "handleResponse: "+response);
+                    }
+
+                    @Override
+                    public void handleFault(BackendlessFault fault) {
+                        Log.i("Places count", "handleResponse: "+fault.toString());
+
+                    }
+                });
+    }
+
 
         @Override
         public void onClick(View v) {
@@ -145,9 +286,8 @@ import java.util.List;
              recheck it again
              return
              */
-            if(checkedId == -1)
+        if(checkedId == -1)
             {
-                Toast.makeText(this, ""+checkedId, Toast.LENGTH_SHORT).show();
                 Chip c = findViewById(selectedId);
                 c.setChecked(true);
                 c = null;
@@ -165,52 +305,45 @@ import java.util.List;
 
                 filter = "";
 
-                Toast.makeText(this, "allCategoriesChip", Toast.LENGTH_SHORT).show();
+
             }
             else if(checkedId == R.id.historicalChip)
             {
                 filter =" and category ='Historical'";
-                Toast.makeText(this, "historicalChip", Toast.LENGTH_SHORT).show();
 
             }
             else if(checkedId == R.id.museumChip)
             {
                 filter =" and category ='Museum'";
 
-                Toast.makeText(this, "museumChip", Toast.LENGTH_SHORT).show();
 
             }
             else if(checkedId == R.id.naturalChip)
             {
                 filter =" and category ='Natural'";
 
-                Toast.makeText(this, "naturalChip", Toast.LENGTH_SHORT).show();
 
             }
             else if(checkedId == R.id.restaurantsChip)
             {
                 filter =" and category ='Restaurants'";
 
-                Toast.makeText(this, "restaurantsChip", Toast.LENGTH_SHORT).show();
 
             }
             else if(checkedId == R.id.localChip)
             {
                 filter =" and category ='Local'";
 
-                Toast.makeText(this, "localChip", Toast.LENGTH_SHORT).show();
 
             }
             else if(checkedId == R.id.shoppingChip)
             {
                 filter =" and category ='Shopping'";
 
-                Toast.makeText(this, "shoppingChip", Toast.LENGTH_SHORT).show();
-
             }
+            count= -5;
             places.clear();
             adapter.notifyDataSetChanged();
-            addPlaces();
 
 
 

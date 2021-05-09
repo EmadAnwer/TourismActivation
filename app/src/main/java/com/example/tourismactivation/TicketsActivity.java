@@ -94,45 +94,6 @@ public class TicketsActivity extends AppCompatActivity implements View.OnClickLi
 
     DataQueryBuilder queryBuilder = DataQueryBuilder.create();
 
-    void getTickets()
-    {
-        queryBuilder.addRelated("placeTickets");
-        String id = Backendless.UserService.loggedInUser();
-        Backendless.Data.of(Users.class).findById(id, queryBuilder, new AsyncCallback<Users>() {
-            @Override
-            public void handleResponse(Users response) {
-                userTickets= response.getPlaceTickets();
-                Collections.sort(userTickets);
-                Log.i("Tickets", "userTickets size: " + userTickets.size());
-                for (int i = 0; i < userTickets.size(); i++) {
-
-                    Toast.makeText(TicketsActivity.this, ""+today.compareTo(userTickets.get(i).getReservationDate()), Toast.LENGTH_SHORT).show();
-                    if(today.compareTo(userTickets.get(i).getReservationDate()) > -1)
-                    {
-                        nextTickets = userTickets.subList(i,userTickets.size());
-                        Log.i("Tickets", "nextTickets size: " + nextTickets.size());
-                        Toast.makeText(TicketsActivity.this, "expiredTickets size "+expiredTickets, Toast.LENGTH_SHORT).show();
-
-                        expiredTickets = userTickets.subList(0,i);
-                        Log.i("Tickets", "expiredTickets size: " + expiredTickets.size());
-                        Toast.makeText(TicketsActivity.this, "expiredTickets size "+expiredTickets, Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-
-                }
-                tickets.clear();
-                tickets.addAll(nextTickets);
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void handleFault(BackendlessFault fault) {
-
-            }
-        });
-
-    }
-
 
     void getNext()
     {

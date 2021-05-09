@@ -69,7 +69,6 @@ public class HomeGovernoratesFragment extends Fragment {
     void getGovernorates()
     {
 
-        Toast.makeText(getContext(), "get Governorates", Toast.LENGTH_SHORT).show();
         DataQueryBuilder queryBuilder = DataQueryBuilder.create();
         queryBuilder.excludeProperties( "id","governoratePlaces", "created", "updated","objectId","ownerId","___class" );
         Backendless.Data.of(Governorates.class).find( queryBuilder,

@@ -15,7 +15,9 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.DataQueryBuilder;
 import com.backendless.persistence.local.UserTokenStorageFactory;
+import com.example.tourismactivation.molde.Places;
 import com.example.tourismactivation.ui.pageAdapter.SectionsPagerAdapter;
 
 import java.util.Calendar;
@@ -57,7 +59,6 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         updated = pref.getBoolean("userProfileUpdated",false);
-        Toast.makeText(this, "onResume"+updated, Toast.LENGTH_SHORT).show();
 
         if(updated)
         {
@@ -91,12 +92,9 @@ public class HomeActivity extends AppCompatActivity {
          */
 
         String userToken = UserTokenStorageFactory.instance().getStorage().get();
-        runOnUiThread(() -> Toast.makeText(HomeActivity.this,"" + userToken, Toast.LENGTH_SHORT).show());
 
 
         if (userToken == null || (userToken.equals(""))) {
-            runOnUiThread(() -> Toast.makeText(HomeActivity.this, "level1", Toast.LENGTH_SHORT).show());
-
             intentToMainActivity();
             return;
         }
@@ -118,7 +116,6 @@ public class HomeActivity extends AppCompatActivity {
         if(currentUserId == null)
         {
 
-            Toast.makeText(HomeActivity.this, "level 2 check no user", Toast.LENGTH_SHORT).show();
             // clearing token
             userLogout();
             intentToMainActivity();
@@ -130,6 +127,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void handleResponse(BackendlessUser response) {
                 Toast.makeText(HomeActivity.this, "level2 user is true", Toast.LENGTH_SHORT).show();
+
 
                 if(response == null)
                 {
@@ -215,7 +213,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-
     void updateHomeSharedPreference(BackendlessUser user) {
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("updated", user.getProperty("updated").toString());
@@ -225,6 +222,7 @@ public class HomeActivity extends AppCompatActivity {
         editor.putInt("userCountryCode", (Integer) user.getProperty("countryCode"));
         editor.putString("userProfilePicture",user.getProperty("profilePicture").toString());
         editor.putBoolean("userProfileUpdated", true);
+
         editor.apply();
     }
 

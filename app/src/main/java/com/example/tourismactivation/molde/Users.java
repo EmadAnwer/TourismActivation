@@ -16,7 +16,7 @@ public class Users {
     private String email;
     private String name;
     private String phone;
-    private List<Users> userFavorites;
+    private List<Places> userFavorites;
     private String blUserLocale;
     private String password;
     private String ownerId;
@@ -83,11 +83,11 @@ public class Users {
         this.phone = phone;
     }
 
-    public List<Users> getUserFavorites() {
+    public List<Places> getUserFavorites() {
         return userFavorites;
     }
 
-    public void setUserFavorites(List<Users> userFavorites) {
+    public void setUserFavorites(List<Places> userFavorites) {
         this.userFavorites = userFavorites;
     }
 

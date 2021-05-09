@@ -389,7 +389,6 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
         String currentUserId = Backendless.UserService.loggedInUser();
         setupProfileSettingsProgressTextView.setText("");
         setupProfileSettingsProgressTextView.append("setting your Image");
-        Toast.makeText(this, "im here", Toast.LENGTH_SHORT).show();
         Backendless.Files.renameFile(oldName, currentUserId+System.currentTimeMillis()+".jpg", new AsyncCallback<String>() {
             @Override
             public void handleResponse(String response) {

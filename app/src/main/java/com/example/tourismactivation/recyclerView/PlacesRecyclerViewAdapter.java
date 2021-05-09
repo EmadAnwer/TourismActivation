@@ -22,14 +22,20 @@ import com.example.tourismactivation.PlacesActivity;
 import com.example.tourismactivation.R;
 import com.example.tourismactivation.molde.Places;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecyclerViewAdapter.ViewHolder> implements View.OnClickListener {
+public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
     private static final String TAG = "PlacesRecyclerVie";
+    private static final byte VIEW_TYPE_LOADING = 0;
+    private static final byte VIEW_TYPE_PLACE = 1;
+
+
     SharedPreferences pref;
     //var
     private final List<Places> placesArrayList;
@@ -43,15 +49,35 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_place,parent,false);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 
-        return new ViewHolder(view);
+        if(viewType == VIEW_TYPE_PLACE)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_place,parent,false);
+
+
+            return new ViewHolder(view);
+        }
+        else
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.loading_layout,parent,false);
+
+            return new LoadingViewHolder(view);
+        }
+
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
+        if(holder instanceof ViewHolder)
+            setPlaceHolder((ViewHolder) holder, position);
+
+
+    }
+
+
+    private void setPlaceHolder(ViewHolder holder, int position) {
         Log.d(TAG, "onCreateViewHolder: called.");
         Glide.with(context)
                 .asBitmap()
@@ -62,6 +88,14 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
         holder.placeTextView.setText(placesArrayList.get(position).getName());
         holder.placeCoverImageView.setOnClickListener(this);
         holder.placeCoverImageView.setTag(placesArrayList.get(position));
+    }
+
+
+
+
+    @Override
+    public int getItemViewType(int position) {
+        return placesArrayList.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_PLACE;
     }
 
     @Override
@@ -100,6 +134,16 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<PlacesRecycl
             placeCoverImageView =itemView.findViewById(R.id.placeCoverImageView);
             placeTextView =itemView.findViewById(R.id.placeTextView);
             placeRatingBar =itemView.findViewById(R.id.placeRatingBar);
+
+        }
+    }
+
+
+    public static class LoadingViewHolder  extends RecyclerView.ViewHolder{
+
+        public LoadingViewHolder(@NonNull View itemView) {
+            super(itemView);
+
 
         }
     }

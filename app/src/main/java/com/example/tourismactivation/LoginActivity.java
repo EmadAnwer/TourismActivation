@@ -17,14 +17,21 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.DataQueryBuilder;
 import com.backendless.persistence.local.UserTokenStorageFactory;
+import com.example.tourismactivation.molde.Places;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements AsyncCallback<BackendlessUser> {
     TextInputLayout loginEmailTextField,loginPasswordTextField;
     SharedPreferences pref;
     Button loginButton;
+    Intent intent;
+    List<Places> Favlist = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +84,6 @@ public class LoginActivity extends AppCompatActivity implements AsyncCallback<Ba
 
         String profilePicture = (String) user.getProperty( "profilePicture" );
         SharedPreferences.Editor editor = pref.edit();
-
         editor.putString("userName", user.getProperty("name").toString());
         editor.putString("userEmail", user.getProperty("email").toString());
         editor.putString("userPhone", user.getProperty("phone").toString());
@@ -85,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncCallback<Ba
 
         Log.i("user Local Data Saved", user.toString());
 
-        Intent intent;
+
         if(profilePicture == null)
         {
             intent = new Intent(this, SettingProfilePictureActivity.class);
@@ -101,12 +107,114 @@ public class LoginActivity extends AppCompatActivity implements AsyncCallback<Ba
             // nullify
         }
         editor.apply();
+
+        getFavoritesCount();
+
+
+
+
+    }
+
+
+    DataQueryBuilder queryBuilder = DataQueryBuilder.create();
+    void getFavorites()
+    {
+        queryBuilder.addProperties("objectId");
+        queryBuilder.setPageSize(100).setOffset( 0 );
+
+        Backendless.Data.of(Places.class).find(queryBuilder, new AsyncCallback<List<Places>>() {
+            @Override
+            public void handleResponse(List<Places> response) {
+                Favlist.addAll(response);
+                Log.i("getFavorites", "size: " +Favlist.size());
+
+                if(Favlist.size() != count)
+                    getNextFavorites();
+                else
+                    setFavoritesToPref();
+
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+
+            }
+        });
+
+
+
+    }
+
+    void getNextFavorites()
+    {
+
+        queryBuilder.prepareNextPage();
+
+        Backendless.Data.of(Places.class).find(queryBuilder, new AsyncCallback<List<Places>>() {
+            @Override
+            public void handleResponse(List<Places> response) {
+                Favlist.addAll(response);
+
+                if(Favlist.size() != count)
+                    getNextFavorites();
+                else
+                    setFavoritesToPref();
+
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+
+            }
+        });
+
+
+
+    }
+    int count;
+
+    void getFavoritesCount()
+    {
+        queryBuilder.setWhereClause("Users[userFavorites].objectId= '"+Backendless.UserService.loggedInUser()+"'");
+        Backendless.Data.of(Places.class).getObjectCount(queryBuilder, new AsyncCallback<Integer>() {
+            @Override
+            public void handleResponse(Integer response) {
+                count = response;
+                Log.i("FavoritesActivity", "count " + response);
+                if(count != 0)
+                    getFavorites();
+
+
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+
+            }
+        });
+
+
+    }
+
+
+    void setFavoritesToPref()
+    {
+
+
+        pref = getSharedPreferences("placesPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear().apply();
+
+        for (Places places : Favlist) {
+            Log.i("place", "setFavoritesToPref: "+places.getObjectId());
+            editor.putBoolean(places.getObjectId(), true);
+        }
+        editor.apply();
+
+
         startActivity(intent);
         intent = null;
         finishAffinity();
-
-
-
 
     }
 

@@ -108,8 +108,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Popu
 
         welcomeTextView.setText(getTimeMessage());
         userNameFragmentTextView.setText(name);
-        Toast.makeText(getActivity(), "im here image", Toast.LENGTH_SHORT).show();
-
 
 
         Glide.with(getActivity())
