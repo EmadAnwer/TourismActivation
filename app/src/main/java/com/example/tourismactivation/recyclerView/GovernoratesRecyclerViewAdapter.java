@@ -73,6 +73,7 @@ public class GovernoratesRecyclerViewAdapter extends RecyclerView.Adapter<Govern
         // pass governorate name and governorate cover within SharedPreferences
         pref = context.getSharedPreferences("governoratePref", MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = pref.edit();
+        editor.putString("governorateObjectId", g.getObjectId());
         editor.putString("coverImage", g.getCoverImage());
         editor.putString("governorate", g.getName());
         editor.apply();

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tourismactivation.R;
 import com.example.tourismactivation.TicketBookingActivity;
+import com.example.tourismactivation.constants;
 import com.example.tourismactivation.molde.Prices;
 import com.example.tourismactivation.molde.Tickets;
 import com.google.zxing.BarcodeFormat;
@@ -30,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.tourismactivation.constants.EN;
 
 public class TicketsRecyclerViewAdapter extends RecyclerView.Adapter<TicketsRecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "TicketsRecyclerVie";
@@ -61,7 +63,11 @@ public class TicketsRecyclerViewAdapter extends RecyclerView.Adapter<TicketsRecy
         holder.ticketTypeNameTextView.setText(ticketsList.get(position).getType());
         holder.ticketDateTextView.setText(formatter.format(ticketsList.get(position).getReservationDate()));
         holder.ticketPriceTextView.setText(ticketsList.get(position).getPrice().toString());
-        holder.ticketPriceTextView.append("LE");
+        if(constants.LANGUAGE == EN)
+            holder.ticketPriceTextView.append(" LE");
+        else
+            holder.ticketPriceTextView.append("ج ");
+
 
         MultiFormatWriter writer = new MultiFormatWriter();
 

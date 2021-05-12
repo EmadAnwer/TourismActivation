@@ -3,14 +3,23 @@ package com.example.tourismactivation.molde;
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.persistence.*;
+import com.example.tourismactivation.constants;
 
 import java.util.List;
 import java.util.Date;
+
+
+import static com.example.tourismactivation.constants.EN;
 
 public class Places
 {
     private String governorate;
     private String user_id;
+    private String name_AR;
+    private String name_EN;
+    private String description_AR;
+    private String description_EN;
+
     private String description;
     private Integer id;
     private String cover_image;
@@ -66,6 +75,11 @@ public class Places
 
     public String getDescription()
     {
+        if(constants.LANGUAGE == EN)
+            this.description = description_EN;
+        else
+            this.description = description_AR;
+
         return description;
     }
 
@@ -114,8 +128,21 @@ public class Places
         this.rating_average = rating_average;
     }
 
+    public String getName_AR() {
+        return name_AR;
+    }
+
+    public String getName_EN() {
+        return name_EN;
+    }
+
     public String getName()
     {
+        if(constants.LANGUAGE == EN)
+            this.name = name_EN;
+        else
+            this.name = name_AR;
+
         return name;
     }
 

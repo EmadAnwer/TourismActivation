@@ -117,7 +117,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Skip"
+        android:text="@string/skip"
         android:textColor="@color/secondaryColor"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

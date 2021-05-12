@@ -22,6 +22,7 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
 
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:title="Giza Pyramids asfasfasf asfasf">
 

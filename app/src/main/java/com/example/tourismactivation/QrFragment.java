@@ -1,64 +1,232 @@
 package com.example.tourismactivation;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.provider.Settings;
+import android.speech.RecognizerIntent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link QrFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class QrFragment extends Fragment {
+import com.backendless.Backendless;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
+import com.budiyev.android.codescanner.CodeScanner;
+import com.budiyev.android.codescanner.CodeScannerView;
+import com.budiyev.android.codescanner.DecodeCallback;
+import com.example.tourismactivation.molde.Places;
+import com.google.zxing.Result;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import org.jetbrains.annotations.NotNull;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+import java.util.Timer;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import static android.content.Context.MODE_PRIVATE;
+
+
+public class QrFragment extends Fragment implements DecodeCallback, View.OnClickListener {
+    int processors = Runtime.getRuntime().availableProcessors();
+    ExecutorService pool = Executors.newFixedThreadPool(processors);
+    SharedPreferences pref;
+    private static final int RESULT_OK = 1;
+    private CodeScanner mCodeScanner;
+    CodeScannerView scannerView;
+    Button button2;
+    boolean firstTime = true,DENIED;
+
+    // but unique for each permission.
+    private static final int CAMERA_PERMISSION_CODE = 11;
 
     public QrFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment QrFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static QrFragment newInstance(String param1, String param2) {
-        QrFragment fragment = new QrFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_qr, container, false);
+        pref = getContext().getSharedPreferences("Permission", MODE_PRIVATE);
+        firstTime = pref.getBoolean("camera",false);
+
+
+        final Activity activity = getActivity();
+        View root = inflater.inflate(R.layout.fragment_qr, container, false);
+        scannerView = root.findViewById(R.id.scanner_view);
+        button2 =root.findViewById(R.id.button2);
+        button2.setOnClickListener(this);
+        checkPermission();
+        assert activity != null;
+
+        return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(mCodeScanner != null)
+            mCodeScanner.startPreview();
+
+        Toast.makeText(getActivity(), "tttttt" + pref.getBoolean("eUpdated",false), Toast.LENGTH_SHORT).show();
+        if(pref.getBoolean("eUpdated",false))
+        {
+            @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean("eUpdated",false);
+            editor.apply();
+            mCodeScanner = new CodeScanner(getActivity(), scannerView);
+            mCodeScanner.setDecodeCallback(this);
+
+        }
+
+    }
+
+    @Override
+    public void onPause() {
+        if(mCodeScanner != null)
+            mCodeScanner.releaseResources();
+        super.onPause();
+    }
+
+
+
+
+
+
+    void checkPermission()
+    {
+        final Activity activity = getActivity();
+
+        assert activity != null;
+        int permission = ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA);
+
+        if (permission != PackageManager.PERMISSION_GRANTED && !firstTime) {
+            @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean("camera",true);
+            editor.apply();
+            makeRequest();
+        }
+        else if (permission == PackageManager.PERMISSION_DENIED)
+        {
+            scannerView.setVisibility(View.GONE);
+            button2.setVisibility(View.VISIBLE);
+            DENIED = true;
+
+        }
+        else {
+            mCodeScanner = new CodeScanner(activity, scannerView);
+            mCodeScanner.setDecodeCallback(this);
+            Toast.makeText(activity, "Permission already granted", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    void makeRequest()
+    {
+        Toast.makeText(getActivity(), "im here", Toast.LENGTH_SHORT).show();
+        final Activity activity = getActivity();
+        assert activity != null;
+        requestPermissions(new String[] {Manifest.permission.CAMERA },CAMERA_PERMISSION_CODE);
+
+    }
+
+    // This function is called when the user accepts or decline the permission.
+    // Request Code is used to check which permission called this function.
+    // This request code is provided when the user is prompt for permission.
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults)
+    {
+        final Activity activity = getActivity();
+
+
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(activity, "you need Camera Permission Granted", Toast.LENGTH_SHORT) .show();
+            }
+
+        }
+
+
+        }
+
+
+    @Override
+    public void onDecoded(@NonNull @NotNull Result result) {
+        final Activity activity = getActivity();
+
+        assert activity != null;
+        activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(activity, result.getText(), Toast.LENGTH_SHORT).show();
+                        Backendless.Data.of(Places.class).findById(result.getText(), new AsyncCallback<Places>() {
+                            @Override
+                            public void handleResponse(Places p) {
+                                pref = getContext().getSharedPreferences("placesPref", MODE_PRIVATE);
+                                @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = pref.edit();
+                                editor.putString("coverImage", p.getCover_image());
+                                editor.putString("placeName", p.getName());
+                                editor.putString("placeID", p.getObjectId());
+                                editor.apply();
+                                // intent to PlacesActivity
+                                Intent intent = new Intent(getContext(), PlaceActivity.class);
+                                getContext().startActivity(intent);
+                                intent = null;
+                            }
+
+                            @Override
+                            public void handleFault(BackendlessFault fault) {
+                                Toast.makeText(activity, "Wrong QR code", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+                    }
+                });
+            }
+
+    @Override
+    public void onClick(View v) {
+        if(DENIED)
+        {
+            @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean("eUpdated",true);
+            editor.apply();
+            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package",getContext().getPackageName(), null));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
+        else
+            makeRequest();
     }
 }

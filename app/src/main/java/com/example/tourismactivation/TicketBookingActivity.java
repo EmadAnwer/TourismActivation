@@ -35,13 +35,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.tourismactivation.constants.EN;
 import static com.google.android.material.datepicker.MaterialDatePicker.todayInUtcMilliseconds;
 
 public class TicketBookingActivity extends AppCompatActivity implements View.OnFocusChangeListener, TextWatcher, MaterialPickerOnPositiveButtonClickListener<Long> {
     TextInputLayout dateTextInputLayout, countTextInputLayout;
     MaterialDatePicker<Long> materialDatePicker;
     SharedPreferences pref;
-    String name, type, id;
+    String nameAR,nameEN, typeAR,typeEN, id;
     Button bookingButton;
     TextView totalTicketsTextView, bookPlaceTextView, bookPlaceTypeTextView, bookPlacePriceTextView,bookingProgressTextView;
     byte count = 1;
@@ -85,19 +86,27 @@ public class TicketBookingActivity extends AppCompatActivity implements View.OnF
 
 
         pref = getSharedPreferences("placesPref", Context.MODE_PRIVATE);
-        name = pref.getString("placeName", "error");
         id = pref.getString("placeID", "error");
+        nameAR = pref.getString("placeNameAR", "error");
+        nameEN = pref.getString("placeNameEN", "error");
+
         Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
         pref = getSharedPreferences("pricePref", Context.MODE_PRIVATE);
         price = (short) pref.getInt("priceCost", 0);
-        type = pref.getString("priceType", "error");
+        typeAR = pref.getString("priceTypeAR", "error");
+        typeEN = pref.getString("priceTypeEN", "error");
 
 
-        bookPlaceTextView.setText(name);
-        bookPlaceTypeTextView.setText(type);
+        if(constants.LANGUAGE == EN)
+        {
+            bookPlaceTextView.setText(nameEN);
+            bookPlaceTypeTextView.setText(typeEN);
+        }else
+        {
+            bookPlaceTextView.setText(nameAR);
+            bookPlaceTypeTextView.setText(typeAR);
+        }
         bookPlacePriceTextView.setText(price.toString());
-
-
         setTotal();
 
     }
@@ -160,7 +169,7 @@ public class TicketBookingActivity extends AppCompatActivity implements View.OnF
         total = (short) (price * count);
         totalTicketsTextView.setText("");
         totalTicketsTextView.setText(total.toString());
-        totalTicketsTextView.append(" LE");
+        totalTicketsTextView.append(getString(R.string.priceType));
     }
 
 
@@ -174,11 +183,12 @@ public class TicketBookingActivity extends AppCompatActivity implements View.OnF
         isValid();
     }
 
-
-    List<Tickets> getTicketsList(short price, String name, Date reservationDate, String type) {
+//public Tickets( price,  placeName_AR,  placeName_EN,  type_EN,  type_AR,  reservationDate) {
+    List<Tickets> getTicketsList(short price, String placeName_AR,String placeName_EN ,String type_EN,String type_AR, Date reservationDate) {
         List<Tickets> ticketsList = new ArrayList<>();
         for (byte i = 0; i < count; i++) {
-            ticketsList.add(new Tickets((int) price, name, reservationDate, type));
+
+            ticketsList.add(new Tickets((int) price,placeName_AR,  placeName_EN,  type_EN,  type_AR , reservationDate));
         }
 
         return ticketsList;
@@ -212,7 +222,7 @@ public class TicketBookingActivity extends AppCompatActivity implements View.OnF
         }
         setupBookingProgressWheel.spin();
         bookingProgressTextView.setText("booking is in process.");
-        ticketsList = getTicketsList(price, name, reservationDate, type);
+        ticketsList = getTicketsList(price, nameAR,nameEN,typeEN,typeAR, reservationDate);
         setTicketsIntoTable(ticketsList);
 
     }

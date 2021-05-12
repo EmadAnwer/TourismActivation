@@ -1,10 +1,112 @@
 <resources>
-    <string name="app_name">Tourism Activation</string>
+    <string name="app_name" translatable="false">Tourism Activation</string>
     <string name="sign_in">Sign In</string>
     <string name="create_an_account">Create an account</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_main2">MainActivity2</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="title_activity_main2" translatable="false">MainActivity2</string>
+    <string name="tab_text_1" translatable="false">Tab 1</string>
+    <string name="tab_text_2" translatable="false">Tab 2</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="qr">QR</string>
+    <string name="favorites">Favorites</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">forgot password ?</string>
+    <string name="there_s_no_favorites">There\'s no Favorites</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="skip">Skip</string>
+    <string name="add_place">add place</string>
+    <string name="all_categories">All Categories</string>
+    <string name="historical">Historical</string>
+    <string name="museum">Museum</string>
+    <string name="natural">Natural</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="local">Local</string>
+    <string name="shopping">Shopping</string>
+    <string name="name">Name</string>
+    <string name="name_helper">type your name like Emad</string>
+    <string name="phone">Phone</string>
+    <string name="save">Save</string>
+    <string name="profile_settings">profile Settings</string>
+    <string name="email_helper">type your email *</string>
+    <string name="password_helper">required be more than 8 letters- numbers</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="setup_your_profile_picture">Setup your profile picture</string>
+    <string name="done">Done</string>
+    <string name="booking_tickets">Book Tickets</string>
+    <string name="place_name">Place Name :</string>
+    <string name="date">Date :</string>
+    <string name="total">Total</string>
+    <string name="price">Price :</string>
+    <string name="type">Type :</string>
+    <string name="count">Count :</string>
+    <string name="max_10">max 10</string>
+    <string name="book">book</string>
+    <string name="tickets">Tickets</string>
+    <string name="next_tickets">Next Tickets</string>
+    <string name="expired_tickets">Expired Tickets</string>
+    <string name="there_s_no_tickets">There\'s no Tickets</string>
+    <string name="discover">Discover</string>
+    <string name="description">Description</string>
+    <string name="prices">Prices</string>
+    <string name="tags">Tags</string>
+    <string name="rate_this_place">Rate this place</string>
+    <string name="tell_others_what_you_think">Tell others what you think</string>
+    <string name="write_your_experience">Write your experience</string>
+    <string name="review">review</string>
+    <string name="experience">experience</string>
+    <string name="quote">“The World is a book, and those who do not travel read only a page.” – Saint Augustine</string>
+    <string name="ticket_type">Ticket Type :</string>
+    <string name="cost">Cost :</string>
+    <string name="logout">Logout</string>
+    <string name="arabic">Arabic</string>
+    <string name="english">English</string>
+    <string name="languages">Languages</string>
+    <string name="wrong_logout">something wrong while logout</string>
+    <string name="internet_error">internet error</string>
+    <string name="user_error">user error</string>
+    <string name="good_morning">Good Morning,</string>
+    <string name="good_afternoon">Good Afternoon,</string>
+    <string name="good_evening">Good Evening,</string>
+    <string name="good_night">Good Night,</string>
+    <string name="hello">Hello,</string>
+    <string name="passwords_not_same">Passwords is not the same</string>
+    <string name="name_is_less_than_3">Name should be more 2 characters</string>
+    <string name="email_is_not_valid">\' is not a valid email</string>
+    <string name="phone_invalid">Phone number is invalid</string>
+    <string name="successfully_registered">You have successfully registered</string>
+    <string name="email_already_exists">this Email Already exists</string>
+    <string name="wrong_email">wrong Email Address</string>
+    <string name="wrong_password">wrong password</string>
+    <string name="ERROR">ERROR</string>
+    <string name="task_cancelled">Task Cancelled</string>
+    <string name="progress_setting_profile">setting up your profile info.</string>
+    <string name="progress_profile_uploaded">profile picture has been uploaded</string>
+    <string name="progress_profile_setting">setting up your profile info.</string>
+    <string name="fault_updating">fault in updating user info</string>
+    <string name="uploading">uploading</string>
+    <string name="priceType"> LE</string>
+
+
+    <string-array
+        name="titles">
+        <item
+            >Governorates</item>
+        <item
+            >Experiences</item>
+        <item
+            >Recommended</item>
+    </string-array>
+
+    <string-array
+        name="placeTitles">
+        <item
+            >Overview</item>
+        <item
+            >Reviews</item>
+        <item
+            >Gallery</item>
+    </string-array>
 </resources>

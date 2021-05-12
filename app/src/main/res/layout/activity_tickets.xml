@@ -22,7 +22,7 @@
             android:fitsSystemWindows="true"
             app:contentScrim="@color/secondaryColor"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            app:title="Tickets">
+            app:title="@string/tickets">
 
 
             <androidx.appcompat.widget.Toolbar
@@ -71,7 +71,7 @@
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:fontFamily="@font/poppins"
-                        android:text="Next Tickets"
+                        android:text="@string/next_tickets"
                         android:textColor="@color/secondaryTextColor"
                         app:chipBackgroundColor="@color/chip_state_layout" />
 
@@ -81,7 +81,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
-                        android:text="Expired Tickets"
+                        android:text="@string/expired_tickets"
                         android:textColor="@color/secondaryTextColor"
                         app:chipBackgroundColor="@color/chip_state_layout" />
 
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
-                android:text="There's no Tickets"
+                android:text="@string/there_s_no_tickets"
                 android:textSize="20sp"
                 android:visibility="gone" />
 

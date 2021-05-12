@@ -22,7 +22,7 @@
             android:fitsSystemWindows="true"
             app:contentScrim="@color/secondaryColor"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            app:title="Favorites">
+            app:title="@string/favorites">
 
 
             <androidx.appcompat.widget.Toolbar
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
-                android:text="There's no Favorites"
+                android:text="@string/there_s_no_favorites"
                 android:textSize="20sp"
                 android:visibility="gone" />
 

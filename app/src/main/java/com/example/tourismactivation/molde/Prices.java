@@ -5,9 +5,12 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.persistence.*;
+import com.example.tourismactivation.constants;
 
 import java.util.List;
 import java.util.Date;
+
+import static com.example.tourismactivation.constants.EN;
 
 public class Prices
 {
@@ -17,6 +20,8 @@ public class Prices
     private String objectId;
     private Date updated;
     private Integer id;
+    private String ticketType_AR;
+    private String ticketType_EN;
     private String ticketType;
     public String getOwnerId()
     {
@@ -60,10 +65,24 @@ public class Prices
 
     public String getTicketType()
     {
+        if(constants.LANGUAGE == EN)
+            this.ticketType = ticketType_EN;
+        else
+            this.ticketType = ticketType_AR;
+
         return ticketType;
     }
 
-    public void setTicketType( String ticketType )
+
+    public String getTicketType_AR() {
+        return ticketType_AR;
+    }
+
+    public String getTicketType_EN() {
+        return ticketType_EN;
+    }
+
+    public void setTicketType(String ticketType )
     {
         this.ticketType = ticketType;
     }

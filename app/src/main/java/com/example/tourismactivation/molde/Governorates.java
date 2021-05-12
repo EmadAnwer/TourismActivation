@@ -3,18 +3,26 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.persistence.*;
+import com.example.tourismactivation.constants;
 
 import java.util.List;
 import java.util.Date;
 
+import static com.example.tourismactivation.constants.AR;
+import static com.example.tourismactivation.constants.EN;
+
 public class Governorates
 {
+
     private String objectId;
     private Date created;
     private Integer id;
     private String coverImage;
     private String ownerId;
     private String name;
+    private String name_AR;
+    private String name_EN;
+
     private Date updated;
     private List<Places> governoratePlaces;
     public String getObjectId()
@@ -63,11 +71,16 @@ public class Governorates
 
     public String getName()
     {
+        if(constants.LANGUAGE == EN)
+            this.name = name_EN;
+        else
+            this.name = name_AR;
         return name;
     }
 
     public void setName( String name )
     {
+
         this.name = name;
     }
 

@@ -1,5 +1,6 @@
 package com.example.tourismactivation;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,6 +33,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Calendar;
 
+import static com.example.tourismactivation.constants.AR;
+import static com.example.tourismactivation.constants.EN;
+
 
 public class HomeFragment extends Fragment implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
     private static final String TAG = "HomeFragment:";
@@ -52,8 +56,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Popu
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //initialize SharedPreferences
         pref = this.getActivity().getSharedPreferences("userData", Context.MODE_PRIVATE);
         //getting user's data from Shared Preference
         name = pref.getString("userName", "");
@@ -83,6 +85,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Popu
         userNameFragmentTextView = view.findViewById(R.id.userNameFragmentTextView);
         optionsImageView = view.findViewById(R.id.optionsImageView);
 
+
+        //initialize SharedPreferences
+        pref = this.getActivity().getSharedPreferences("userData", Context.MODE_PRIVATE);
         name = pref.getString("userName", "");
         profilePic = pref.getString("userProfilePicture", "");
 
@@ -110,7 +115,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Popu
         userNameFragmentTextView.setText(name);
 
 
-        Glide.with(getActivity())
+        Glide.with(this.getActivity())
                 .load(profilePic)
                 .fitCenter()
                 .into(profilePictureImageView);
@@ -123,17 +128,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Popu
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
         if(timeOfDay >= 0 && timeOfDay < 12){
-            return "Good Morning,";
+            return getString(R.string.good_morning);
         }else if(timeOfDay >= 12 && timeOfDay < 16){
-            return "Good Afternoon,";
+            return getString(R.string.good_afternoon);
 
         }else if(timeOfDay >= 16 && timeOfDay < 21){
-            return "Good Evening,";
+            return getString(R.string.good_evening);
         }else if(timeOfDay >= 21 && timeOfDay < 24){
-            return "Good Night,";
+            return getString(R.string.good_night);
         }
 
-        else return "Hello,";
+        else return getString(R.string.hello);
     }
 
 
@@ -149,7 +154,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Popu
             intent = null;
         }
         else if(v.getId() == R.id.optionsImageView) {
-            int lang = pref.getInt("appLanguage", -1);
+            int lang = pref.getInt("appLanguage", 0);
 
             options = null;
             options = new PopupMenu(this.getContext(),v);
@@ -236,20 +241,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Popu
         {
 
             SharedPreferences.Editor editor = pref.edit();
-            editor.putInt("appLanguage", 1);
+            editor.putInt("appLanguage", AR);
             editor.apply();
-
-            Toast.makeText(getContext(), "AR", Toast.LENGTH_SHORT).show();
+            getActivity().recreate();
 
         }
         else if(id == R.id.languagesItemEN)
         {
 
             SharedPreferences.Editor editor = pref.edit();
-            editor.putInt("appLanguage", 0);
+            editor.putInt("appLanguage", EN);
             editor.apply();
-
-            Toast.makeText(getContext(), "EN", Toast.LENGTH_SHORT).show();
+            getActivity().recreate();
         }
         else if(id == R.id.logoutItem)
             userLogout();

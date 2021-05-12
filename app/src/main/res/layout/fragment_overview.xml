@@ -101,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Description"
+                android:text="@string/description"
                 android:textSize="24sp" />
 
             <TextView
@@ -118,12 +118,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="match_parent"
+                    android:id="@+id/pTextView"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10sp"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="Prices"
+                    android:text="@string/prices"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -135,17 +135,17 @@
 
             <LinearLayout
                 android:id="@+id/content"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView19"
+                    android:id="@+id/tTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10sp"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="Tags"
+                    android:text="@string/tags"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 

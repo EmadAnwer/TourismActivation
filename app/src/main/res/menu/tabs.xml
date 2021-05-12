@@ -2,14 +2,14 @@
     <item
         android:id="@+id/tab_home"
         android:icon="@drawable/ic_home"
-        android:title="Home" />
+        android:title="@string/home" />
     <item
         android:id="@+id/tab_alarm"
         android:icon="@drawable/ic_search"
-        android:title="Search" />
+        android:title="@string/search" />
     <item
         android:id="@+id/tab_bread"
         android:icon="@drawable/ic_qr"
-        android:title="QR" />
+        android:title="@string/qr" />
 
 </menu>

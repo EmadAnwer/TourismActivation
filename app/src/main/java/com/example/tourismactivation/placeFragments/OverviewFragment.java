@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OverviewFragment extends Fragment {
-    TextView rateTextView, reviewsCountTextView, descriptionTextView;
+    TextView rateTextView, reviewsCountTextView, descriptionTextView,tTextView,pTextView;
     RecyclerView pricesRecyclerView;
     RatingBar averageRatingBar;
     SharedPreferences pref;
@@ -72,7 +72,8 @@ public class OverviewFragment extends Fragment {
         averageRatingBar = view.findViewById(R.id.averageRatingBar);
         placeTagsChipGroup = view.findViewById(R.id.ticketsFilterChipGroup);
         pricesRecyclerView = view.findViewById(R.id.pricesRecyclerView);
-
+        tTextView = view.findViewById(R.id.tTextView);
+        pTextView = view.findViewById(R.id.pTextView);
         layoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL,false);
         pricesRecyclerView.setLayoutManager(layoutManager);
         if(adapter == null)
@@ -95,7 +96,7 @@ public class OverviewFragment extends Fragment {
     void getPlaceData() {
         queryBuilder.addRelated("placeTags");
         queryBuilder.addRelated("placePrice");
-        queryBuilder.addProperties("reviewsCount", "description", "rating_average");
+        queryBuilder.addProperties("reviewsCount", "description_EN","description_AR", "rating_average");
         Backendless.Data.of(Places.class).findById(id, queryBuilder, new AsyncCallback<Places>() {
 
             @Override
@@ -134,6 +135,12 @@ public class OverviewFragment extends Fragment {
 
     void addTagsChips(List<Tags> tagsList)
     {
+
+        if(tagsList.size() == 0)
+        {
+            tTextView.setVisibility(View.GONE);
+            return;
+        }
         Chip chip ;
 
         for (Tags tag : tagsList) {
@@ -148,6 +155,12 @@ public class OverviewFragment extends Fragment {
 
     void addPrices(List<Prices> pricesList)
     {
+        if(pricesList.size() == 0)
+        {
+            pTextView.setVisibility(View.GONE);
+            return;
+        }
+
         this.pricesList.clear();
         this.pricesList.addAll(pricesList);
         adapter.notifyDataSetChanged();

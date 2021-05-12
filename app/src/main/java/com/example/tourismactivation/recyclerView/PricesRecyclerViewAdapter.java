@@ -21,10 +21,13 @@ import com.bumptech.glide.Glide;
 import com.example.tourismactivation.PlaceActivity;
 import com.example.tourismactivation.R;
 import com.example.tourismactivation.TicketBookingActivity;
+import com.example.tourismactivation.constants;
 import com.example.tourismactivation.molde.Places;
 
 import java.util.List;
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.tourismactivation.constants.EN;
+
 import com.example.tourismactivation.molde.Prices;
 
 
@@ -53,7 +56,12 @@ public class PricesRecyclerViewAdapter extends RecyclerView.Adapter<PricesRecycl
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.ticketTypeTextView.setText(pricesArrayList.get(position).getTicketType());
-        holder.ticketCostTextView.setText(pricesArrayList.get(position).getTicketCost()+"LE");
+        holder.ticketCostTextView.setText(pricesArrayList.get(position).getTicketCost().toString());
+        if(constants.LANGUAGE == EN)
+            holder.ticketCostTextView.append(" LE");
+        else
+            holder.ticketCostTextView.append("ج ");
+
         holder.bookButton.setOnClickListener(this);
         holder.bookButton.setTag(pricesArrayList.get(position));
 
@@ -71,7 +79,9 @@ public class PricesRecyclerViewAdapter extends RecyclerView.Adapter<PricesRecycl
         pref = context.getSharedPreferences("pricePref", MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = pref.edit();
         editor.putInt("priceCost", p.getTicketCost());
-        editor.putString("priceType", p.getTicketType());
+        editor.putString("priceTypeAR", p.getTicketType_AR());
+        editor.putString("priceTypeEN", p.getTicketType_EN());
+
         editor.apply();
 
 

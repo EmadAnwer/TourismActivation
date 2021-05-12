@@ -5,9 +5,12 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.persistence.*;
+import com.example.tourismactivation.constants;
 
 import java.util.List;
 import java.util.Date;
+
+import static com.example.tourismactivation.constants.EN;
 
 public class Tags
 {
@@ -15,6 +18,8 @@ public class Tags
     private String ownerId;
     private Date created;
     private String name;
+    private String name_EN;
+    private String name_AR;
     private String objectId;
     public Date getUpdated()
     {
@@ -33,8 +38,14 @@ public class Tags
 
     public String getName()
     {
+        if(constants.LANGUAGE == EN)
+            this.name = name_EN;
+        else
+            this.name = name_AR;
+
         return name;
     }
+
 
     public void setName( String name )
     {

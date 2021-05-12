@@ -159,10 +159,10 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
             public void handleFault(BackendlessFault fault) {
                 Log.i("places Error", "handleFault: "+fault.getCode());
                 if(fault.getCode().equals("Internal client exception"))
-                    Toast.makeText(FavoritesActivity.this, "internet error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FavoritesActivity.this, getString(R.string.internet_error), Toast.LENGTH_SHORT).show();
                 else if(fault.getCode().equals("3064"))
                 {
-                    Toast.makeText(FavoritesActivity.this, "user error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FavoritesActivity.this, getString(R.string.user_error), Toast.LENGTH_SHORT).show();
 
                 }
             }

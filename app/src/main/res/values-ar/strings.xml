@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home">الرئيسية</string>
+    <string name="search">البحث</string>
+    <string name="qr">فحص الQR</string>
+    <string name="favorites">المفضلة</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="forgot_password">هل نسيت كلمه السر ؟</string>
+    <string name="there_s_no_favorites">لا توجد اماكن في المفضلة</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمه السر</string>
+    <string name="sign_in" >تسجيل الدخول</string>
+    <string name="create_an_account">عمل حساب جديد</string>
+    <string name="skip">تخطي</string>
+    <string name="add_place">إضافة مكان</string>
+    <string name="all_categories">جميع الفئات</string>
+    <string name="historical">تاريخي</string>
+    <string name="museum">متاحف</string>
+    <string name="natural">طبيعة</string>
+    <string name="restaurants">مطاعم</string>
+    <string name="local">شعبي</string>
+    <string name="shopping">أماكن التسوق</string>
+    <string name="name">الأسم</string>
+    <string name="phone">الهاتف</string>
+    <string name="save">حفظ</string>
+    <string name="profile_settings">إعدادات الملف الشخصي</string>
+    <string name="name_helper">*أكتب أسمك</string>
+    <string name="email_helper">*أكتب بريدك الشخصي مثل "Emad@test.c"</string>
+    <string name="password_helper">*يجب ان يكون أكبر من 8 احرف و ارقام</string>
+    <string name="confirm_password">تأكيد كلمة المرور</string>
+    <string name="setup_your_profile_picture">أعداد صورة ملفك الشخصي</string>
+    <string name="done">تم</string>
+    <string name="booking_tickets">حجز التذاكر</string>
+    <string name="place_name">أسم المكان :</string>
+    <string name="date">التاريخ :</string>
+    <string name="total">إجمالي</string>
+    <string name="price">السعر :</string>
+    <string name="type">النوع :</string>
+    <string name="count">الكميه :</string>
+    <string name="max_10">أقصي عدد 10</string>
+    <string name="book">حجز</string>
+    <string name="tickets">التذاكر</string>
+    <string name="next_tickets">التذاكر القادمة</string>
+    <string name="expired_tickets">التذاكر المنتهية</string>
+    <string name="there_s_no_tickets">لا يوجد تذاكر</string>
+    <string name="discover"><font size="18">اكتشف</font></string>
+    <string name="description">الوصـف</string>
+    <string name="prices">السعـر</string>
+    <string name="tags">العلامات</string>
+    <string name="rate_this_place">قيم هذا المكان</string>
+    <string name="tell_others_what_you_think">قل للآخرين ما هو رأيك</string>
+    <string name="write_your_experience">أكتب تجربتك</string>
+    <string name="review">أنشر تقيمك</string>
+    <string name="experience">تجربتك..</string>
+    <string name="quote"><font size="16">“العالم كتاب ، ومن لا يسافر لا يقرأ سوى صفحة“ .- القديس أوغسطين</font></string>
+    <string name="ticket_type">نوع التذكرة :</string>
+    <string name="cost">السعر :</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="arabic">عربي</string>
+    <string name="english">إنجليزي</string>
+    <string name="languages">اللغات</string>
+    <string name="wrong_logout">حدث خطأ اثناء عمليه تسجيل الخروج</string>
+    <string name="internet_error">لا يوجل انترنت</string>
+    <string name="user_error">خطأ في المستخدم</string>
+    <string name="good_morning">صباح الخير</string>
+    <string name="good_afternoon">نهار سعيد</string>
+    <string name="good_evening">مساء الخير</string>
+    <string name="good_night">ليلة سعيدة</string>
+    <string name="hello">أهلا</string>
+    <string name="passwords_not_same">كلمة المرور غير مطابقة</string>
+    <string name="email_is_not_valid">بريد إلكتروني غير صحيح</string>
+    <string name="phone_invalid">رقم هاتف غير صحيح</string>
+    <string name="successfully_registered">تم تسجيل حسابك بنجاح</string>
+    <string name="email_already_exists">هذا الحساب مستخدم من فبل</string>
+    <string name="wrong_email">بريد إلكتروني غير خاطئ </string>
+    <string name="wrong_password">كلمه سر خاطئة</string>
+    <string name="ERROR">خطأ</string>
+    <string name="task_cancelled">تم ايقاف المهمة</string>
+    <string name="progress_setting_profile">إعداد معلومات ملفك الشخصي.</string>
+    <string name="progress_profile_uploaded">تم رفع الصورة الشخصيه</string>
+    <string name="fault_updating">حدث خطأ اثناء عملية رفع الصورة</string>
+    <string name="uploading">جاري التحديث</string>
+    <string name="progress_profile_setting">جاري إعداد معلومات ملفك الشخصي.</string>
+    <string name="name_is_less_than_3">الاسم يجب ان يكون اكثر من 3 اخرف</string>
+    <string name="priceType"> ج</string>
+
+
+    <string-array
+
+        name="titles">
+
+        <item>المحافظات</item>
+        <item>تجارب</item>
+        <item>ترشيحات</item>
+    </string-array>
+
+    <string-array
+        name="placeTitles">
+        <item>نظرة عامة</item>
+        <item>مراجعات</item>
+        <item>صور</item>
+    </string-array>
+</resources>

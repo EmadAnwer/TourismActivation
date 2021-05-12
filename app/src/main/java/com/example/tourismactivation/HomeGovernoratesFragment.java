@@ -70,7 +70,7 @@ public class HomeGovernoratesFragment extends Fragment {
     {
 
         DataQueryBuilder queryBuilder = DataQueryBuilder.create();
-        queryBuilder.excludeProperties( "id","governoratePlaces", "created", "updated","objectId","ownerId","___class" );
+        queryBuilder.excludeProperties( "id","governoratePlaces", "created", "updated","ownerId","___class" );
         Backendless.Data.of(Governorates.class).find( queryBuilder,
                 new AsyncCallback<List<Governorates>>()
                 {
@@ -100,7 +100,6 @@ public class HomeGovernoratesFragment extends Fragment {
 
                         else {
                             Log.i("error", "handleFault: "+fault);
-                            Toast.makeText(getContext(), "error while getting Governorates", Toast.LENGTH_SHORT).show();
                         }
 
                         Log.i("govFrag Error", "handleFault: "+fault.getCode());

@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -17,10 +19,12 @@ import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.DataQueryBuilder;
 import com.backendless.persistence.local.UserTokenStorageFactory;
+import com.bumptech.glide.load.engine.Resource;
 import com.example.tourismactivation.molde.Places;
 import com.example.tourismactivation.ui.pageAdapter.SectionsPagerAdapter;
 
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -30,6 +34,7 @@ import nl.joery.animatedbottombar.AnimatedBottomBar;
 
  */
 public class HomeActivity extends AppCompatActivity {
+
     int processors = Runtime.getRuntime().availableProcessors();
     boolean updated;
     ExecutorService pool = Executors.newFixedThreadPool(processors);
@@ -37,14 +42,34 @@ public class HomeActivity extends AppCompatActivity {
     SectionsPagerAdapter sectionsPagerAdapter;
     ViewPager viewPager;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        constants.getLANGUAGE(this);
+
+        if(constants.LANGUAGE == constants.AR)
+        {
+            Locale locale = new Locale("ar");
+            Locale.setDefault(locale);
+            Resources resources = getResources();
+            Configuration configuration = resources.getConfiguration();
+            configuration.setLocale(locale);
+            resources.updateConfiguration(configuration,resources.getDisplayMetrics());
+        }
+        else
+        {
+            Locale locale = new Locale("en");
+            Locale.setDefault(locale);
+            Resources resources = getResources();
+            Configuration configuration = resources.getConfiguration();
+            configuration.setLocale(locale);
+            resources.updateConfiguration(configuration,resources.getDisplayMetrics());
+        }
+
+
         setContentView(R.layout.activity_home);
         pref = getSharedPreferences("userData", Context.MODE_PRIVATE);
-        Backendless.initApp(this, "30A3F936-C7E6-49FF-8FF6-E4ADF602134B", "1C3A9234-2AAF-436B-93B0-B988B72F942C");
+        Backendless.initApp(this, "31908FE0-A688-43D5-879D-B815B9404108", "2025C2E4-180B-492E-9BC0-2916C99A2851");
 
         pool.execute(this::checkingUserAuthentication);
 
@@ -52,6 +77,7 @@ public class HomeActivity extends AppCompatActivity {
         sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(sectionsPagerAdapter);
+        viewPager.setOffscreenPageLimit(3);
         AnimatedBottomBar animatedBottomBar = findViewById(R.id.bottom_bar);
         animatedBottomBar.setupWithViewPager(viewPager);
     }
@@ -68,7 +94,6 @@ public class HomeActivity extends AppCompatActivity {
             editor.putBoolean("userProfileUpdated", false);
             editor.apply();
         }
-
 
         super.onResume();
 
@@ -126,12 +151,10 @@ public class HomeActivity extends AppCompatActivity {
         Backendless.UserService.findById(currentUserId, new AsyncCallback<BackendlessUser>() {
             @Override
             public void handleResponse(BackendlessUser response) {
-                Toast.makeText(HomeActivity.this, "level2 user is true", Toast.LENGTH_SHORT).show();
 
 
                 if(response == null)
                 {
-                    Toast.makeText(HomeActivity.this, "level2 check", Toast.LENGTH_SHORT).show();
                     // clearing token
                     userLogout();
                     intentToMainActivity();
@@ -190,7 +213,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void handleFault(BackendlessFault fault) {
 
-                Toast.makeText(HomeActivity.this, "something wrong while logout", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this,getString(R.string.wrong_logout), Toast.LENGTH_SHORT).show();
                 // something went wrong and logout failed, to get the error code call fault.getCode()
             }
 

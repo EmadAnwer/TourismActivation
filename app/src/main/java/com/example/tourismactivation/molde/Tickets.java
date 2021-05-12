@@ -4,14 +4,23 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.persistence.*;
+import com.example.tourismactivation.constants;
 
 import java.util.List;
 import java.util.Date;
+
+import static com.example.tourismactivation.constants.EN;
 
 public class Tickets implements Comparable<Tickets>
 {
     private Integer price;
     private String placeName;
+    private String placeName_AR;
+    private String placeName_EN;
+
+    private String type_EN;
+    private String type_AR;
+
     private Date ReservationDate;
     private String ownerId;
     private String type;
@@ -30,13 +39,32 @@ public class Tickets implements Comparable<Tickets>
         this.type = type;
     }
 
-    public Tickets(Integer price, String placeName, Date reservationDate, String type, String objectId) {
-        this.price = price;
-        this.placeName = placeName;
-        ReservationDate = reservationDate;
-        this.type = type;
-        this.objectId = objectId;
+    public String getPlaceName_AR() {
+        return placeName_AR;
     }
+
+    public String getPlaceName_EN() {
+        return placeName_EN;
+    }
+
+    public String getType_EN() {
+        return type_EN;
+    }
+
+    public String getType_AR() {
+        return type_AR;
+    }
+
+    public Tickets(Integer price, String placeName_AR, String placeName_EN, String type_EN, String type_AR, Date reservationDate) {
+        this.price = price;
+        this.placeName_AR = placeName_AR;
+        this.placeName_EN = placeName_EN;
+        this.type_EN = type_EN;
+        this.type_AR = type_AR;
+        ReservationDate = reservationDate;
+    }
+
+
 
     public Integer getPrice()
     {
@@ -50,10 +78,31 @@ public class Tickets implements Comparable<Tickets>
 
     public String getPlaceName()
     {
+        if(constants.LANGUAGE == EN)
+            this.placeName = placeName_EN;
+        else
+            this.placeName = placeName_AR;
+
         return placeName;
     }
 
-    public void setPlaceName( String placeName )
+    public void setPlaceName_AR(String placeName_AR) {
+        this.placeName_AR = placeName_AR;
+    }
+
+    public void setPlaceName_EN(String placeName_EN) {
+        this.placeName_EN = placeName_EN;
+    }
+
+    public void setType_EN(String type_EN) {
+        this.type_EN = type_EN;
+    }
+
+    public void setType_AR(String type_AR) {
+        this.type_AR = type_AR;
+    }
+
+    public void setPlaceName(String placeName )
     {
         this.placeName = placeName;
     }
@@ -75,6 +124,10 @@ public class Tickets implements Comparable<Tickets>
 
     public String getType()
     {
+        if(constants.LANGUAGE == EN)
+            this.type = type_EN;
+        else
+            this.type = type_AR;
         return type;
     }
 

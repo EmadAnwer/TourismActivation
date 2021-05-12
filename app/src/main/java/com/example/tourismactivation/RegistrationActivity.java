@@ -91,7 +91,7 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
                     confirmPasswordTextField.setErrorEnabled(false);
                     confirmPasswordTextField.setErrorEnabled(true);
                 } else
-                    confirmPasswordTextField.setError("Passwords is not the same");
+                    confirmPasswordTextField.setError(getString(R.string.passwords_not_same));
 
 
             }
@@ -122,7 +122,7 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
             }
 
             if (s.length() < 3) {
-                nameTextField.setError("Name should be more 2 characters");
+                nameTextField.setError(getString(R.string.name_is_less_than_3));
                 return;
             }
 
@@ -151,7 +151,7 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
 
             if (!(Patterns.EMAIL_ADDRESS.matcher(s).matches())) {
 
-                emailTextField.setError("'" + s + "' is not a valid email");
+                emailTextField.setError("' " + s + " ' " +getString(R.string.email_is_not_valid));
                 return;
 
             }
@@ -182,7 +182,7 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
 
             if (s.length() < 8) {
 
-                passwordInputLayout.setError("password required be 8 character or more*");
+                passwordInputLayout.setError(getString(R.string.password_helper));
                 return;
 
             }
@@ -210,7 +210,7 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
 
             if (!passwordInputLayout.getEditText().getText().toString().equals(s.toString())) {
 
-                confirmPasswordTextField.setError("Passwords is not the same");
+                confirmPasswordTextField.setError(getString(R.string.passwords_not_same));
                 return;
 
             }
@@ -238,7 +238,7 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
 
             if (!countryCodePicker.isValidFullNumber()) {
 
-                phoneTextField.setError("Phone number is invalid");
+                phoneTextField.setError(getString(R.string.phone_invalid));
                 return;
 
             }
@@ -302,7 +302,7 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
     @Override
     public void handleResponse(BackendlessUser response) {
 
-        Toast.makeText(this, "You have successfully registered", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.successfully_registered), Toast.LENGTH_SHORT).show();
         finish();
 
 
@@ -324,7 +324,7 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
 
     void emailAlreadyExists()
     {
-        emailTextField.setError("this Email Already exists");
+        emailTextField.setError(getString(R.string.email_already_exists));
     }
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {

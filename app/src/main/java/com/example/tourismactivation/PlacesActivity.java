@@ -33,7 +33,7 @@ import java.util.List;
         PlacesRecyclerViewAdapter adapter;
         DataQueryBuilder queryBuilder;
         List<Places> places;
-        String coverImage,governorate,filter = "";
+        String coverImage,governorate,filter = "",governorateObjectId;
         SharedPreferences pref;
         int selectedId;
         boolean isLoading ,isLastPage = false;
@@ -61,6 +61,8 @@ import java.util.List;
         pref = getSharedPreferences("governoratePref", Context.MODE_PRIVATE);
         coverImage = pref.getString("coverImage", "error");
         governorate = pref.getString("governorate", "error");
+        governorateObjectId = pref.getString("governorateObjectId", "error");
+        Log.i("TAG", "governorateObjectId: "+governorateObjectId);
 
         Toast.makeText(this, governorate, Toast.LENGTH_SHORT).show();
 
@@ -180,10 +182,10 @@ import java.util.List;
                     {
                         Log.i("places Error", "handleFault: "+fault.getCode());
                         if(fault.getCode().equals("Internal client exception"))
-                            Toast.makeText(PlacesActivity.this, "internet error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PlacesActivity.this, getString(R.string.internet_error), Toast.LENGTH_SHORT).show();
                         else if(fault.getCode().equals("3064"))
                         {
-                            Toast.makeText(PlacesActivity.this, "user error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PlacesActivity.this, getString(R.string.user_error), Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -199,7 +201,8 @@ import java.util.List;
     {
         queryBuilder = DataQueryBuilder.create();
         queryBuilder.excludeProperties( "id","category", "description","governorate","placeImage","created", "updated","ownerId","user_id","placeTags","placeReviews","placePrice","placeImage");
-        String whereClause = "governorate='"+governorate+"'"+filter;
+        String whereClause = "Governorates[governoratePlaces].objectId= '"+governorateObjectId+"'"+filter;
+        Log.i("TAG", "getFirstPlaces: "+whereClause);
         queryBuilder.setWhereClause(whereClause);
         byte PAGE_SIZE = 10;
         queryBuilder.setPageSize(PAGE_SIZE).setOffset( 0 );
@@ -211,6 +214,7 @@ import java.util.List;
                     @Override
                     public void handleResponse(List<Places> response )
                     {
+                        Log.i("palces", "handleResponse: "+response.size());
                         places.addAll(response);
                         adapter.notifyDataSetChanged();
 
@@ -222,10 +226,10 @@ import java.util.List;
                     {
                         Log.i("places Error", "handleFault: "+fault.getCode());
                         if(fault.getCode().equals("Internal client exception"))
-                            Toast.makeText(PlacesActivity.this, "internet error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PlacesActivity.this, getString(R.string.internet_error), Toast.LENGTH_SHORT).show();
                         else if(fault.getCode().equals("3064"))
                         {
-                            Toast.makeText(PlacesActivity.this, "user error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PlacesActivity.this, getString(R.string.user_error), Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -238,7 +242,7 @@ import java.util.List;
     {
         isLoading = true;
         DataQueryBuilder  qb = DataQueryBuilder.create();
-        String whereClause = "governorate='"+governorate+"'"+filter;
+        String whereClause = "Governorates[governoratePlaces].objectId= '"+governorateObjectId+"'"+filter;
         qb.setWhereClause(whereClause);
         Backendless.Data.of( Places.class ).getObjectCount(
                 qb,new AsyncCallback<Integer>() {

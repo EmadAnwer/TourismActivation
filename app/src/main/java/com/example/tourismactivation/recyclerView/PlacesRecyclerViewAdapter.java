@@ -112,6 +112,8 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = pref.edit();
         editor.putString("coverImage", p.getCover_image());
         editor.putString("placeName", p.getName());
+        editor.putString("placeNameAR", p.getName_AR());
+        editor.putString("placeNameEN", p.getName_EN());
         editor.putString("placeID", p.getObjectId());
         Log.i(TAG, "onClick: "+p.getObjectId());
         editor.apply();

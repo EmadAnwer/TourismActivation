@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncCallback<Ba
         //checking email validation
         if (!(Patterns.EMAIL_ADDRESS.matcher(loginEmailTextField.getEditText().getText().toString()).matches())) {
             loginEmailTextField.setErrorEnabled(true);
-            loginEmailTextField.setError("wrong Email Address");
+            loginEmailTextField.setError(getString(R.string.wrong_email));
             loginButton.setEnabled(true);
 
             return;
@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncCallback<Ba
         //checking email validation
         if (loginPasswordTextField.getEditText().getText().length() < 8) {
             loginPasswordTextField.setErrorEnabled(true);
-            loginPasswordTextField.setError("wrong password");
+            loginPasswordTextField.setError(getString(R.string.wrong_password));
             loginButton.setEnabled(true);
             return;
 
@@ -109,8 +109,6 @@ public class LoginActivity extends AppCompatActivity implements AsyncCallback<Ba
         editor.apply();
 
         getFavoritesCount();
-
-
 
 
     }
@@ -183,6 +181,9 @@ public class LoginActivity extends AppCompatActivity implements AsyncCallback<Ba
                 Log.i("FavoritesActivity", "count " + response);
                 if(count != 0)
                     getFavorites();
+                if(count == 0)
+                    setFavoritesToPref();
+
 
 
             }

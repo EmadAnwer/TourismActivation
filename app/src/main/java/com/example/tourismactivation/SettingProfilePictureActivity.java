@@ -79,9 +79,9 @@ public class SettingProfilePictureActivity extends AppCompatActivity {
             imgProfile.setImageURI(imageUri);
             hasImage = true;
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.ERROR), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.task_cancelled), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -92,13 +92,13 @@ public class SettingProfilePictureActivity extends AppCompatActivity {
 
         if(!hasImage)
         {
-            setUserProfileImage("https://backendlessappcontent.com/30A3F936-C7E6-49FF-8FF6-E4ADF602134B/console/xpklzwwrtkdrxzhxuacjhsmqvgojihawbevk/files/view/users-Images/user.png");
-            setupProfileProgressTextView.append("setting up your profile info.");
+            setUserProfileImage("https://backendlessappcontent.com/31908FE0-A688-43D5-879D-B815B9404108/console/exhfvzgidveiwrwyosvyihgnjipqgglmeibb/files/view/users-Images/user.png");
+            setupProfileProgressTextView.setText(getString(R.string.progress_setting_profile));
             return;
 
 
         }
-        setupProfileProgressTextView.append("uploading");
+        setupProfileProgressTextView.setText(getString(R.string.uploading));
         File imgFile = new File(imageUri.getPath());
         Backendless.Files.upload(imgFile, "users-Images",true, new AsyncCallback<BackendlessFile>() {
 
@@ -106,8 +106,7 @@ public class SettingProfilePictureActivity extends AppCompatActivity {
             public void handleResponse(BackendlessFile response) {
 
                 Log.i("upladed done", "handleResponse: "+response.getFileURL());
-                setupProfileProgressTextView.setText("");
-                setupProfileProgressTextView.append("profile picture has been uploaded");
+                setupProfileProgressTextView.setText(getString(R.string.progress_profile_uploaded));
 
                 oldUrl= response.getFileURL();
                 imageRename("/users-Images/"+imgFile.getName());
@@ -129,8 +128,7 @@ public class SettingProfilePictureActivity extends AppCompatActivity {
         Backendless.Files.renameFile(oldName, currentUserId+".jpg", new AsyncCallback<String>() {
             @Override
             public void handleResponse(String response) {
-                setupProfileProgressTextView.setText("");
-                setupProfileProgressTextView.append("setting up your profile info.");
+                setupProfileProgressTextView.setText(getString(R.string.progress_profile_setting));
 
                 Log.i("file rename", "handleResponse: "+response);
                 setUserProfileImage(response);
@@ -151,8 +149,7 @@ public class SettingProfilePictureActivity extends AppCompatActivity {
         {
             public void handleResponse( BackendlessUser user )
             {
-                setupProfileProgressTextView.setText("");
-                setupProfileProgressTextView.append("done");
+                setupProfileProgressTextView.setText(getString(R.string.done));
 
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putString("userProfilePicture",user.getProperty("profilePicture").toString());
@@ -165,7 +162,7 @@ public class SettingProfilePictureActivity extends AppCompatActivity {
 
             public void handleFault( BackendlessFault fault )
             {
-                Toast.makeText(SettingProfilePictureActivity.this, "fault in updating user info", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SettingProfilePictureActivity.this,getString(R.string.fault_updating), Toast.LENGTH_SHORT).show();
                 // user update failed, to get the error code call fault.getCode()
             }
 
