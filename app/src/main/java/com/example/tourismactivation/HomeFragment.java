@@ -239,20 +239,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Popu
 
         else if(id == R.id.languagesItemAR)
         {
-
             SharedPreferences.Editor editor = pref.edit();
             editor.putInt("appLanguage", AR);
             editor.apply();
-            getActivity().recreate();
+            getActivity().finish();
+
+            startActivity(this.getActivity().getIntent());
 
         }
         else if(id == R.id.languagesItemEN)
         {
-
             SharedPreferences.Editor editor = pref.edit();
             editor.putInt("appLanguage", EN);
             editor.apply();
-            getActivity().recreate();
+            getActivity().finish();
+            startActivity(this.getActivity().getIntent());
         }
         else if(id == R.id.logoutItem)
             userLogout();

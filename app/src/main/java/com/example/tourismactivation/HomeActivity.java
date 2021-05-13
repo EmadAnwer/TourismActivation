@@ -46,26 +46,21 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         constants.getLANGUAGE(this);
-
+        Locale locale;
         if(constants.LANGUAGE == constants.AR)
         {
-            Locale locale = new Locale("ar");
-            Locale.setDefault(locale);
-            Resources resources = getResources();
-            Configuration configuration = resources.getConfiguration();
-            configuration.setLocale(locale);
-            resources.updateConfiguration(configuration,resources.getDisplayMetrics());
+            locale = new Locale("ar");
+
         }
         else
         {
-            Locale locale = new Locale("en");
-            Locale.setDefault(locale);
-            Resources resources = getResources();
-            Configuration configuration = resources.getConfiguration();
-            configuration.setLocale(locale);
-            resources.updateConfiguration(configuration,resources.getDisplayMetrics());
+            locale = new Locale("en");
         }
-
+        Locale.setDefault(locale);
+        Resources resources = getResources();
+        Configuration configuration = resources.getConfiguration();
+        configuration.setLocale(locale);
+        resources.updateConfiguration(configuration,resources.getDisplayMetrics());
 
         setContentView(R.layout.activity_home);
         pref = getSharedPreferences("userData", Context.MODE_PRIVATE);

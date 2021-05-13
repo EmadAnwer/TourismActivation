@@ -133,6 +133,7 @@
 
 
     <com.google.android.material.appbar.AppBarLayout
+        android:layoutDirection="ltr"
         android:id="@+id/ticketsAppbar"
         android:layout_width="match_parent"
         android:layout_height="280sp"

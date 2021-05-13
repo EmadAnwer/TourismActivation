@@ -93,14 +93,20 @@ public class QrFragment extends Fragment implements DecodeCallback, View.OnClick
         if(mCodeScanner != null)
             mCodeScanner.startPreview();
 
-        Toast.makeText(getActivity(), "tttttt" + pref.getBoolean("eUpdated",false), Toast.LENGTH_SHORT).show();
         if(pref.getBoolean("eUpdated",false))
         {
             @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = pref.edit();
             editor.putBoolean("eUpdated",false);
             editor.apply();
-            mCodeScanner = new CodeScanner(getActivity(), scannerView);
-            mCodeScanner.setDecodeCallback(this);
+            int permission = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA);
+
+            if (permission == PackageManager.PERMISSION_GRANTED)
+            {
+                getActivity().finish();
+                startActivity(this.getActivity().getIntent());
+            }
+
+
 
         }
 
@@ -141,14 +147,12 @@ public class QrFragment extends Fragment implements DecodeCallback, View.OnClick
         else {
             mCodeScanner = new CodeScanner(activity, scannerView);
             mCodeScanner.setDecodeCallback(this);
-            Toast.makeText(activity, "Permission already granted", Toast.LENGTH_SHORT).show();
         }
     }
 
 
     void makeRequest()
     {
-        Toast.makeText(getActivity(), "im here", Toast.LENGTH_SHORT).show();
         final Activity activity = getActivity();
         assert activity != null;
         requestPermissions(new String[] {Manifest.permission.CAMERA },CAMERA_PERMISSION_CODE);
@@ -170,7 +174,6 @@ public class QrFragment extends Fragment implements DecodeCallback, View.OnClick
 
         if (requestCode == CAMERA_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(activity, "you need Camera Permission Granted", Toast.LENGTH_SHORT) .show();
             }
 
         }
@@ -187,7 +190,6 @@ public class QrFragment extends Fragment implements DecodeCallback, View.OnClick
         activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(activity, result.getText(), Toast.LENGTH_SHORT).show();
                         Backendless.Data.of(Places.class).findById(result.getText(), new AsyncCallback<Places>() {
                             @Override
                             public void handleResponse(Places p) {

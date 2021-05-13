@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".PlaceActivity">
+    tools:context=".RecommendedActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layoutDirection="ltr"
         app:elevation="0dp"
-        android:id="@+id/placeAppbar"
+        android:id="@+id/recommendedAppbar"
         android:layout_width="match_parent"
         android:layout_height="450sp"
         android:background="@drawable/place_toolbar"
@@ -18,7 +18,7 @@
         android:theme="@style/actionBarTheme">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/ticketsCollapsingToolbar"
+            android:id="@+id/recommendedCollapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -28,7 +28,7 @@
             app:title="Giza Pyramids asfasfasf asfasf">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/place_ImageView"
+                android:id="@+id/recommended_ImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -38,34 +38,13 @@
 
             <androidx.appcompat.widget.Toolbar
 
-                android:id="@+id/ticketsToolbar"
+                android:id="@+id/recommendedToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="100sp"
                 app:layout_collapseMode="pin"
                 app:navigationIcon="@drawable/back_arrow">
 
             </androidx.appcompat.widget.Toolbar>
-
-            <xyz.hanks.library.bang.SmallBangView
-                android:id="@+id/imageViewAnimation"
-                android:layout_width="60sp"
-                android:layout_height="60sp"
-                android:layout_gravity="bottom|top|end"
-                android:layout_marginRight="15sp"
-                android:layout_marginBottom="15sp"
-                android:onClick="addToFavorite"
-                app:layout_constraintBottom_toBottomOf="@+id/textView16"
-                app:layout_constraintEnd_toStartOf="@+id/guideline29"
-                app:layout_constraintTop_toTopOf="@+id/textView16">
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="45sp"
-                    android:layout_height="45sp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/heart_selector" />
-
-            </xyz.hanks.library.bang.SmallBangView>
 
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -85,7 +64,7 @@
             android:orientation="vertical">
 
             <com.gigamole.navigationtabstrip.NavigationTabStrip
-                android:id="@+id/placeNavTabStrip"
+                android:id="@+id/recommendedNavTabStrip"
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
                 app:nts_active_color="@color/secondaryColor"
@@ -95,17 +74,18 @@
                 app:nts_factor="2.5"
                 app:nts_gravity="bottom"
                 app:nts_size="12sp"
-                app:nts_titles="@array/placeTitles"
+                app:nts_titles="@array/recommendedTitles"
                 app:nts_type="line"
                 app:nts_typeface="font/poppins.ttf"
                 app:nts_weight="3dp" />
 
             <androidx.viewpager.widget.ViewPager
 
-                android:id="@+id/placeViewPager"
+                android:id="@+id/recommendedViewPager"
 
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_margin="15sp">
 
             </androidx.viewpager.widget.ViewPager>
         </LinearLayout>

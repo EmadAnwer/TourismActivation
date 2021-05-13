@@ -14,7 +14,7 @@
         android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/countryCodePicker"
+        app:layout_constraintBottom_toTopOf="@+id/createAnAccountButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

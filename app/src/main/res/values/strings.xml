@@ -88,25 +88,24 @@
     <string name="fault_updating">fault in updating user info</string>
     <string name="uploading">uploading</string>
     <string name="priceType"> LE</string>
+    <string name="enable_camera_permission">Enable Camera Permission</string>
+    <string name="passwordisTrue">password is True</string>
 
 
-    <string-array
-        name="titles">
-        <item
-            >Governorates</item>
-        <item
-            >Experiences</item>
-        <item
-            >Recommended</item>
+    <string-array name="titles">
+        <item>Governorates</item>
+        <item>Experiences</item>
+        <item>Recommended</item>
     </string-array>
 
-    <string-array
-        name="placeTitles">
-        <item
-            >Overview</item>
-        <item
-            >Reviews</item>
-        <item
-            >Gallery</item>
+    <string-array name="placeTitles">
+        <item>Overview</item>
+        <item>Reviews</item>
+        <item>Gallery</item>
+    </string-array>
+
+    <string-array name="recommendedTitles">
+        <item>Overview</item>
+        <item>Places</item>
     </string-array>
 </resources>

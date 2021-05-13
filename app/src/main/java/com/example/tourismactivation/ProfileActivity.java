@@ -134,7 +134,7 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
 
 
             if (s.length() < 3) {
-                nameSettingsTextField.setError("Name should be more 2 characters");
+                nameSettingsTextField.setError(getString(R.string.name_is_less_than_3));
                 return;
             }
             nameSettingsTextField.setErrorEnabled(false);
@@ -154,7 +154,7 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
 
             if (!(Patterns.EMAIL_ADDRESS.matcher(s).matches())) {
 
-                emailSettingsTextField.setError("'" + s + "' is not a valid email");
+                emailSettingsTextField.setError("' " + s + " ' " +getString(R.string.email_is_not_valid));
                 return;
 
             }
@@ -179,7 +179,7 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
 
             if (s.length() < 8) {
 
-                loginPasswordSettingsTextField.setError("password required be 8 character or more*");
+                loginPasswordSettingsTextField.setError(getString(R.string.password_helper));
                 return;
 
             }
@@ -198,7 +198,7 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
         else if (selectedTextInputField.getId() == phoneSettingsTextField.getEditText().getId()) {
 
             if (!countrySettingsCodePicker.isValidFullNumber()) {
-                phoneSettingsTextField.setError("Phone number is invalid");
+                phoneSettingsTextField.setError(getString(R.string.phone_invalid));
                 return;
 
             }
@@ -218,7 +218,7 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
 
             if (!countrySettingsCodePicker.isValidFullNumber()) {
 
-                phoneSettingsTextField.setError("Phone number is invalid");
+                phoneSettingsTextField.setError(getString(R.string.phone_invalid));
                 return;
 
             }
@@ -240,9 +240,9 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
             saveButton.setEnabled(isChanged());
 
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.error_task_cancelled) , Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.task_cancelled), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -274,24 +274,24 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
     boolean checkingAllFieldsValidation() {
         if (nameSettingsTextField.getEditText().getText().length() < 3)
         {
-            nameSettingsTextField.setError("Name should be more 2 characters");
+            nameSettingsTextField.setError(getString(R.string.name_is_less_than_3));
             return false;
         }
         if (!(Patterns.EMAIL_ADDRESS.matcher(emailSettingsTextField.getEditText().getText().toString()).matches()))
         {
-            emailSettingsTextField.setError("invalid is not a valid email");
+            emailSettingsTextField.setError(getString(R.string.email_is_not_valid));
             return false;
         }
 
         if (loginPasswordSettingsTextField.getEditText().getText().length() < 8)
         {
-            loginPasswordSettingsTextField.setError("password required be 8 character or more*");
+            loginPasswordSettingsTextField.setError(getString(R.string.password_helper));
             return false;
         }
 
         if (!countrySettingsCodePicker.isValidFullNumber())
         {
-            phoneSettingsTextField.setError("Phone number is invalid");
+            phoneSettingsTextField.setError(getString(R.string.phone_invalid));
             return false;
         }
 
@@ -307,14 +307,14 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
         }
         saveButton.setEnabled(false);
         setupProfileSettingsProgressWheel.spin();
-        setupProfileSettingsProgressTextView.append("updating User Data");
+        setupProfileSettingsProgressTextView.append(getString(R.string.uploading));
 
         String password =  loginPasswordSettingsTextField.getEditText().getText().toString();
 
         Backendless.UserService.login(email, password, new AsyncCallback<BackendlessUser>() {
             @Override
             public void handleResponse(BackendlessUser user) {
-                setupProfileSettingsProgressTextView.append("password is True");
+                setupProfileSettingsProgressTextView.setText(getString(R.string.passwordisTrue));
 
                 if(profileImageChanged)
                 {
@@ -329,7 +329,7 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
                         @Override
                         public void handleResponse(BackendlessUser response) {
                             updateHomeSharedPreference(response);
-                            Toast.makeText(ProfileActivity.this, "user Updated", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProfileActivity.this, getString(R.string.done), Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
@@ -346,7 +346,7 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
             public void handleFault(BackendlessFault fault) {
                 setupProfileSettingsProgressWheel.stopSpinning();
                 setupProfileSettingsProgressTextView.setText("");
-                loginPasswordSettingsTextField.setError("wrong password");
+                loginPasswordSettingsTextField.setError(getString(R.string.wrong_password));
                 saveButton.setEnabled(true);
             }
         },true);
@@ -358,16 +358,14 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
 
     void settingProfileImg() {
         imgFile = new File(imageUri.getPath());
-        setupProfileSettingsProgressTextView.setText("");
-        setupProfileSettingsProgressTextView.append("uploading image");
+        setupProfileSettingsProgressTextView.setText(getString(R.string.uploading));
 
         Backendless.Files.upload(imgFile, "users-Images",true, new AsyncCallback<BackendlessFile>() {
             @Override
             public void handleResponse(BackendlessFile response) {
                 Log.i("unlaced done", "handleResponse: "+response.getFileURL());
 
-                setupProfileSettingsProgressTextView.setText("");
-                setupProfileSettingsProgressTextView.append("profile picture has been uploaded");
+                setupProfileSettingsProgressTextView.setText(getString(R.string.progress_profile_uploaded));
 
                 imageRename(response.getFileURL().substring(response.getFileURL().indexOf("/users-Images/")));
 
@@ -387,8 +385,7 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
 
     void imageRename(String oldName) {
         String currentUserId = Backendless.UserService.loggedInUser();
-        setupProfileSettingsProgressTextView.setText("");
-        setupProfileSettingsProgressTextView.append("setting your Image");
+        setupProfileSettingsProgressTextView.setText(getString(R.string.progress_setting_profile));
         Backendless.Files.renameFile(oldName, currentUserId+System.currentTimeMillis()+".jpg", new AsyncCallback<String>() {
             @Override
             public void handleResponse(String response) {
@@ -412,7 +409,6 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
         Backendless.Files.remove(path, new AsyncCallback<Integer>() {
             @Override
             public void handleResponse(Integer response) {
-                Toast.makeText(ProfileActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -433,7 +429,6 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
         {
             public void handleResponse( BackendlessUser user )
             {
-                Toast.makeText(ProfileActivity.this, "image u", Toast.LENGTH_SHORT).show();
                 updateHomeSharedPreference(user);
             }
 
@@ -448,9 +443,7 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
 
 
     void updateHomeSharedPreference(BackendlessUser user) {
-        setupProfileSettingsProgressTextView.setText("");
-        setupProfileSettingsProgressTextView.append("User info has been updated successfully");
-
+        setupProfileSettingsProgressTextView.setText(getString(R.string.progress_profile_uploaded));
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("updated", user.getProperty("updated").toString());
         editor.putString("userName", user.getProperty("name").toString());

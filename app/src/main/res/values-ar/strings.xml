@@ -83,6 +83,8 @@
     <string name="progress_profile_setting">جاري إعداد معلومات ملفك الشخصي.</string>
     <string name="name_is_less_than_3">الاسم يجب ان يكون اكثر من 3 اخرف</string>
     <string name="priceType"> ج</string>
+    <string name="enable_camera_permission">قم بتفعيل أذن استخدام الكاميرا</string>
+    <string name="passwordisTrue"> كلمة المرور صحيحه</string>
 
 
     <string-array
@@ -99,5 +101,10 @@
         <item>نظرة عامة</item>
         <item>مراجعات</item>
         <item>صور</item>
+    </string-array>
+
+    <string-array name="recommendedTitles">
+        <item>نظرة عامة</item>
+        <item>الأماكن</item>
     </string-array>
 </resources>

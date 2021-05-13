@@ -113,51 +113,6 @@ import java.util.List;
                 .addLoadingListItem(true)
                 .build();
 
-        /*placesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                                                   @Override
-                                                   public void onScrollStateChanged(@NonNull @NotNull RecyclerView recyclerView, int newState) {
-                                                       super.onScrollStateChanged(recyclerView, newState);
-
-
-                                                       int visibleItemCount = layoutManager.getChildCount();
-                                                       int totalItemCount = layoutManager.getItemCount();
-                                                       int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-
-                                                       if (!recyclerView.canScrollVertically(1) && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount
-                                                               && firstVisibleItemPosition >= 0
-                                                               && totalItemCount >= PAGE_SIZE) {
-                                                           Toast.makeText(PlacesActivity.this, "end", Toast.LENGTH_SHORT).show();
-
-                                                       }
-                                                   }
-                                               });
-*/
-        /*
-        placesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull @NotNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                int visibleItemCount = layoutManager.getChildCount();
-                int totalItemCount = layoutManager.getItemCount();
-                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-
-
-                if (!isLoading && !isLastPage) {
-                    if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
-                            && firstVisibleItemPosition >= 0
-                            && totalItemCount >= PAGE_SIZE)
-                    {
-                        isLoading = true;
-                        getMorePlaces();
-                    }
-
-
-                }
-            }
-        });
-
-         */
     }
 
 
@@ -217,7 +172,6 @@ import java.util.List;
                         Log.i("palces", "handleResponse: "+response.size());
                         places.addAll(response);
                         adapter.notifyDataSetChanged();
-
                         isLoading = false;
                     }
 
@@ -274,7 +228,6 @@ import java.util.List;
         public void onClick(View v) {
             //clear and nullify
             places.clear();
-            places = null;
             coverImage = null ;
             governorate = null;
             filter = null;
