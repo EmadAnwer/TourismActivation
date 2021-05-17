@@ -402,13 +402,14 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
 
     }
     void deleteOldImage() {
-        if(profilePic.equals("https://backendlessappcontent.com/30A3F936-C7E6-49FF-8FF6-E4ADF602134B/console/xpklzwwrtkdrxzhxuacjhsmqvgojihawbevk/files/view/users-Images/user.png"))
+        if(profilePic.equals("https://backendlessappcontent.com/31908FE0-A688-43D5-879D-B815B9404108/console/exhfvzgidveiwrwyosvyihgnjipqgglmeibb/files/view/users-Images/user.png"))
         {
             return;
         }
         Backendless.Files.remove(path, new AsyncCallback<Integer>() {
             @Override
             public void handleResponse(Integer response) {
+                Log.i("delete", "handleResponse: "+"deleted");
             }
 
             @Override
@@ -429,6 +430,7 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
         {
             public void handleResponse( BackendlessUser user )
             {
+                deleteOldImage();
                 updateHomeSharedPreference(user);
             }
 
@@ -453,7 +455,6 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
         editor.putString("userProfilePicture",user.getProperty("profilePicture").toString());
         editor.putBoolean("userProfileUpdated", true);
         editor.apply();
-        deleteOldImage();
         onBackPressed();
     }
 }

@@ -90,6 +90,10 @@
     <string name="priceType"> LE</string>
     <string name="enable_camera_permission">Enable Camera Permission</string>
     <string name="passwordisTrue">password is True</string>
+    <string name="DeletePost">Delete Post</string>
+    <string name="DeletePostDialog">Are you sure you want to delete this Post?</string>
+    <string name="delete">Delete</string>
+    <string name="yesDelete">yes</string>
 
 
     <string-array name="titles">

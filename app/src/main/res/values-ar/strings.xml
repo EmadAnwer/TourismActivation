@@ -85,6 +85,10 @@
     <string name="priceType"> ج</string>
     <string name="enable_camera_permission">قم بتفعيل أذن استخدام الكاميرا</string>
     <string name="passwordisTrue"> كلمة المرور صحيحه</string>
+    <string name="DeletePost">حذف المنشور</string>
+    <string name="DeletePostDialog">هل أنت متأكد أنك تريد حذف هذا المنشور ؟</string>
+    <string name="delete">حذف</string>
+    <string name="yesDelete">نعم</string>
 
 
     <string-array

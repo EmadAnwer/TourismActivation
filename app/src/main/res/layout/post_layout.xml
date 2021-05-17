@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/deletePostTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="@string/delete"
+        android:textColor="#D54949"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/postUserProfilePictureImageView"
+        app:layout_constraintEnd_toStartOf="@+id/guideline52"
+        app:layout_constraintTop_toTopOf="@+id/postUserProfilePictureImageView" />
+
+    <xyz.hanks.library.bang.SmallBangView
+        android:id="@+id/postLoveImageViewAnimation"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:layout_gravity="bottom|top|end"
+        android:layout_marginTop="8dp"
+        android:onClick="addToFavorite"
+        app:layout_constraintStart_toStartOf="@+id/guideline49"
+        app:layout_constraintTop_toBottomOf="@+id/postImageView">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_gravity="center"
+            android:src="@drawable/black_heart_selector" />
+
+    </xyz.hanks.library.bang.SmallBangView>
+
+    <TextView
+        android:id="@+id/postTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="2 min ago"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/postUserNameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/postUserNameTextView" />
+
+    <TextView
+        android:id="@+id/likesCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:fontFamily="@font/poppins"
+        android:text="1"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/postLoveImageViewAnimation"
+        app:layout_constraintStart_toEndOf="@+id/postLoveImageViewAnimation"
+        app:layout_constraintTop_toTopOf="@+id/postLoveImageViewAnimation" />
+
+    <TextView
+        android:id="@+id/postUserNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Emad Anwer"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/postUserProfilePictureImageView"
+        app:layout_constraintTop_toTopOf="@+id/postUserProfilePictureImageView" />
+
+    <TextView
+        android:id="@+id/postContentTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="this is awesome app "
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline52"
+        app:layout_constraintStart_toStartOf="@+id/guideline49"
+        app:layout_constraintTop_toBottomOf="@+id/postUserProfilePictureImageView" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/postUserProfilePictureImageView"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline51"
+        app:shapeAppearanceOverlay="@style/Circular"
+        app:strokeColor="@color/secondaryColor"
+        app:strokeWidth="1sp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline49"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".03" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline52"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".97" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline51"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".05" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/postImageView"
+        android:layout_width="0dp"
+        android:layout_height="200sp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postContentTextView"
+        app:shapeAppearanceOverlay="@style/recommended_cornered"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postLoveImageViewAnimation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
