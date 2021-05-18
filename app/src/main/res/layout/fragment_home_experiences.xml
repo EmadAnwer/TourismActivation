@@ -47,7 +47,7 @@
                 app:passwordToggleEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/nameTextInputField"
+                    android:id="@+id/ExperiencePostEditText"
                     android:layout_width="match_parent"
                     android:layout_height="80sp"
                     android:inputType="textPersonName"
@@ -69,6 +69,14 @@
                     android:textAllCaps="false"
                     android:textSize="16sp"
                     app:cornerRadius="10sp" />
+
+                <ImageView
+                    android:id="@+id/newPostImageView"
+                    android:layout_width="100sp"
+                    android:layout_height="100sp"
+                    android:layout_gravity="center"
+                    android:visibility="visible"
+                    tools:src="@tools:sample/avatars" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
