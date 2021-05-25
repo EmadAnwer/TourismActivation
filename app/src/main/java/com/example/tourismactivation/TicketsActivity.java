@@ -26,6 +26,7 @@ import com.example.tourismactivation.recyclerView.PlacesRecyclerViewAdapter;
 import com.example.tourismactivation.recyclerView.TicketsRecyclerViewAdapter;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.paginate.Paginate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

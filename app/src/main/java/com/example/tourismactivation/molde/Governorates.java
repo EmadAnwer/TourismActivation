@@ -78,6 +78,13 @@ public class Governorates
         return name;
     }
 
+    public String getName_EN()
+    {
+        this.name = name_EN;
+
+        return name;
+    }
+
     public void setName( String name )
     {
 

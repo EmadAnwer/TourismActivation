@@ -1,64 +1,288 @@
 package com.example.tourismactivation;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SearchFragment extends Fragment {
+import com.backendless.Backendless;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.DataQueryBuilder;
+import com.example.tourismactivation.molde.Governorates;
+import com.example.tourismactivation.molde.Tags;
+import com.example.tourismactivation.recyclerView.GovernoratesRecyclerViewAdapter;
+import com.example.tourismactivation.recyclerView.GovernoratesSearchRecyclerViewAdapter;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.imageview.ShapeableImageView;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.util.ArrayList;
+import java.util.List;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
+public class SearchFragment extends Fragment implements View.OnClickListener {
+    RecyclerView searchGovernoratesRecyclerView;
+    ChipGroup searchTagChipGroup,searchCategoryChipGroup;
+    GovernoratesSearchRecyclerViewAdapter adapter;
+    Button searchButton;
+    List<Governorates> governorates= new ArrayList<>();
+    SharedPreferences pref;
+    Chip chip;
+    DataQueryBuilder  queryBuilder = DataQueryBuilder.create();
+
+
 
     public SearchFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        pref = this.getActivity().getSharedPreferences("search", Context.MODE_PRIVATE);
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
+        searchTagChipGroup = view.findViewById(R.id.searchTagChipGroup);
+        searchCategoryChipGroup = view.findViewById(R.id.searchCategoryChipGroup);
+        searchButton = view.findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(this);
+
+        chip = view.findViewById(R.id.searchAllCategoriesChip);
+        chip.setOnClickListener(this);
+
+        chip = view.findViewById(R.id.historicalChip);
+        chip.setOnClickListener(this);
+        chip.setTag("Historical");
+        chip = view.findViewById(R.id.museumChip);
+        chip.setOnClickListener(this);
+        chip.setTag("Museum");
+        chip = view.findViewById(R.id.naturalChip);
+        chip.setOnClickListener(this);
+        chip.setTag("Natural");
+        chip = view.findViewById(R.id.restaurantsChip);
+        chip.setOnClickListener(this);
+        chip.setTag("Restaurants");
+        chip = view.findViewById(R.id.localChip);
+        chip.setOnClickListener(this);
+        chip.setTag("Local");
+        chip = view.findViewById(R.id.shoppingChip);
+        chip.setOnClickListener(this);
+        chip.setTag("Shopping");
+
+        chip = view.findViewById(R.id.allTagsChip);
+        chip.setTag("tag");
+        chip.setOnClickListener(this);
+
+
+
+        //setting governorateRecyclerView
+        searchGovernoratesRecyclerView = view.findViewById(R.id.searchGovernoratesRecyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
+        searchGovernoratesRecyclerView.setLayoutManager(layoutManager);
+        adapter = new GovernoratesSearchRecyclerViewAdapter(governorates,view.getContext());
+        searchGovernoratesRecyclerView.setAdapter(adapter);
+
+        if(governorates.size() == 0)
+            getGovernorate();
+
+        if(governorates.size() == 0)
+            getTags();
+
+        return view;
+    }
+
+
+    void getGovernorate()
+    {
+        queryBuilder.setPageSize(100);
+
+        Backendless.Data.of(Governorates.class).find(queryBuilder,new AsyncCallback<List<Governorates>>() {
+            @Override
+            public void handleResponse(List<Governorates> response) {
+                governorates.addAll(response);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+
+            }
+        });
+    }
+
+    void getTags()
+    {
+        queryBuilder.setPageSize(100);
+
+        Backendless.Data.of(Tags.class).find(queryBuilder,new AsyncCallback<List<Tags>>() {
+            @Override
+            public void handleResponse(List<Tags> response) {
+                addTagsChips(response);
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+
+            }
+        });
+    }
+
+
+    void addTagsChips(List<Tags> tagsList)
+    {
+
+        Chip chip ;
+
+        for (Tags tag : tagsList) {
+            chip = (Chip) getLayoutInflater().inflate(R.layout.tag,searchTagChipGroup,false);
+            chip.setText(tag.getName());
+            chip.setTag("tag");
+            chip.setOnClickListener(this);
+            searchTagChipGroup.addView(chip);
+
+        }
+
+
+    }
+
+
+
+    @Override
+    public void onClick(View v) {
+
+
+
+        if (v.getId() == R.id.searchButton)
+        {
+            StringBuilder whereCase = new StringBuilder();
+            if(adapter.getGovernorates().size() != 0)
+            {
+                whereCase.append("(");
+                for (String adapterGovernorate : adapter.getGovernorates()) {
+                    whereCase.append("governorate = '").append(adapterGovernorate).append("'").append("or ");
+                }
+                whereCase.delete(whereCase.length()-3,whereCase.length());
+                whereCase.append(")");
+
+            }
+
+            Chip c ;
+
+            if(searchTagChipGroup.getCheckedChipIds().get(0) != R.id.allTagsChip)
+            {
+                if(whereCase.length() != 0)
+                    whereCase.append(" and (");
+                else
+                    whereCase.append("(");
+
+
+                for (Integer checkedChipId : searchTagChipGroup.getCheckedChipIds()) {
+                    c = getActivity().findViewById(checkedChipId);
+                    whereCase.append("placeTags.name_EN = '").append(c.getText().toString()).append("'").append(" or ");
+                }
+
+                whereCase.delete(whereCase.length()-3,whereCase.length());
+                whereCase.append(")");
+            }
+
+
+            if(searchCategoryChipGroup.getCheckedChipIds().get(0) != R.id.searchAllCategoriesChip)
+            {
+                if(whereCase.length() != 0)
+                    whereCase.append(" and (");
+                else
+                    whereCase.append("(");
+
+
+                for (Integer checkedChipId : searchCategoryChipGroup.getCheckedChipIds()) {
+                    c = getActivity().findViewById(checkedChipId);
+                    whereCase.append("category = '").append(c.getTag().toString()).append("'").append(" or ");
+                }
+
+                whereCase.delete(whereCase.length()-3,whereCase.length());
+                whereCase.append(")");
+            }
+
+            @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = pref.edit();
+            editor.putString("whereCase",whereCase.toString());
+            editor.apply();
+
+            //go back to MainActivity
+            Intent intent;
+            intent = new Intent(getActivity(), ResultsActivity.class);
+            startActivity(intent);
+            intent = null;
+
+
+            Log.i("TAG", "onClick: "+whereCase.toString());
+        }
+        else
+        {
+            Chip c = (Chip) v;
+            if(c.getTag() == null)
+            {
+                Chip all = getActivity().findViewById(R.id.searchAllCategoriesChip) ;
+
+                if(c.getId() == R.id.searchAllCategoriesChip)
+                {
+                    if(all.isChecked())
+                    {
+                        searchCategoryChipGroup.clearCheck();
+
+                        all.setChecked(true);
+                    }
+
+                }
+                else
+                {
+                    all.setChecked(searchCategoryChipGroup.getCheckedChipIds().size() == 0);
+                }
+
+
+            }
+            else
+            {
+                Chip all = getActivity().findViewById(R.id.allTagsChip) ;
+
+                if(c.getId() == R.id.allTagsChip)
+                {
+                    if(all.isChecked())
+                    {
+                        searchTagChipGroup.clearCheck();
+
+                        all.setChecked(true);
+                    }
+
+                }
+                else
+                {
+                    all.setChecked(searchTagChipGroup.getCheckedChipIds().size() == 0);
+                }
+            }
+        }
+
     }
 }

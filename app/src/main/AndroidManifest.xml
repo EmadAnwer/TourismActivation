@@ -18,14 +18,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TourismActivation"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RecommendedActivity"></activity>
+        <activity android:name=".ResultsActivity"></activity>
+        <activity android:name=".ZoomImageActivity" />
+        <activity android:name=".RecommendedActivity" />
         <activity android:name=".FavoritesActivity" />
         <activity android:name=".TicketsActivity" />
         <activity android:name=".TicketBookingActivity" />
-        <activity android:name=".ProfileActivity" />
+        <activity
+            android:name=".ProfileActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".SettingProfilePictureActivity" />
         <activity android:name=".PlaceActivity" />
-        <activity android:name=".HomeActivity">
+        <activity
+            android:name=".HomeActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

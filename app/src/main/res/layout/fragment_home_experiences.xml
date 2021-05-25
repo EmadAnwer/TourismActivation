@@ -7,85 +7,93 @@
     android:layout_height="match_parent"
     tools:context=".HomeExperiencesFragment">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/postsSwipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="1dp">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ExperiencePostTextField"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Experience"
-                app:boxBackgroundColor="@android:color/transparent"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomEnd="15sp"
-                app:boxCornerRadiusBottomStart="15sp"
-                app:boxCornerRadiusTopEnd="15sp"
-                app:boxCornerRadiusTopStart="15sp"
-                app:boxStrokeColor="@color/secondaryColor"
-                app:boxStrokeWidth="2sp"
-                app:boxStrokeWidthFocused="2sp"
-                app:counterEnabled="true"
-                app:counterMaxLength="250"
-                app:counterTextColor="@color/secondaryColor"
-                app:endIconDrawable="@drawable/ic_image"
-                app:endIconMode="custom"
+                android:orientation="vertical">
 
-                app:endIconTint="@color/secondaryColor"
-                app:endIconTintMode="screen"
-                app:errorEnabled="false"
-                app:helperText='write your experience about Egypt'
-                app:passwordToggleEnabled="false">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ExperiencePostEditText"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ExperiencePostTextField"
                     android:layout_width="match_parent"
-                    android:layout_height="80sp"
-                    android:inputType="textPersonName"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="16dp"
-                    android:requiresFadingEdge="horizontal|vertical"
-                    android:textColorHighlight="@color/primaryDarkColor"
-                    android:textSize="18sp" />
-
-                <Button
-                    android:id="@+id/postExperienceButton"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="10sp"
-                    android:enabled="true"
-                    android:padding="10sp"
-                    android:text="post"
-                    android:textAllCaps="false"
-                    android:textSize="16sp"
-                    app:cornerRadius="10sp" />
+                    android:hint="@string/experience"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="15sp"
+                    app:boxCornerRadiusBottomStart="15sp"
+                    app:boxCornerRadiusTopEnd="15sp"
+                    app:boxCornerRadiusTopStart="15sp"
+                    app:boxStrokeColor="@color/secondaryColor"
+                    app:boxStrokeWidth="2sp"
+                    app:boxStrokeWidthFocused="2sp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="250"
+                    app:counterTextColor="@color/secondaryColor"
+                    app:endIconDrawable="@drawable/ic_image"
+                    app:endIconMode="custom"
 
-                <ImageView
-                    android:id="@+id/newPostImageView"
-                    android:layout_width="100sp"
-                    android:layout_height="100sp"
-                    android:layout_gravity="center"
-                    android:visibility="visible"
-                    tools:src="@tools:sample/avatars" />
+                    app:endIconTint="@color/secondaryColor"
+                    app:endIconTintMode="screen"
+                    app:errorEnabled="false"
+                    app:helperText="@string/writeYourExperience"
+                    app:passwordToggleEnabled="false">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ExperiencePostEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="80sp"
+                        android:inputType="textPersonName"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
+                        android:requiresFadingEdge="horizontal|vertical"
+                        android:textColorHighlight="@color/primaryDarkColor"
+                        android:textSize="18sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/postsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                    <Button
+                        android:id="@+id/postExperienceButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="10sp"
+                        android:enabled="false"
+                        android:padding="10sp"
+                        android:text="@string/post"
+                        android:textAllCaps="false"
+                        android:textSize="16sp"
+                        app:cornerRadius="10sp" />
 
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+                    <ImageView
+                        android:id="@+id/newPostImageView"
+                        android:layout_width="100sp"
+                        android:layout_height="100sp"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        tools:src="@tools:sample/avatars" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/postsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

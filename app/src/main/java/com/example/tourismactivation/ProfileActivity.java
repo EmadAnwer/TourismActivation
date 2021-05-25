@@ -34,6 +34,8 @@ import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.io.File;
 
+import static com.example.tourismactivation.constants.AR;
+
 public class ProfileActivity extends AppCompatActivity implements TextWatcher, View.OnFocusChangeListener {
     SharedPreferences pref;
     String name,profilePic,email,phone;
@@ -66,6 +68,8 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
         imgProfileSettings = findViewById(R.id.imgProfileSettings);
         saveButton = findViewById(R.id.saveButton);
         countrySettingsCodePicker.registerCarrierNumberEditText(phoneSettingsTextField.getEditText());
+        if(constants.LANGUAGE == AR)
+            countrySettingsCodePicker.changeDefaultLanguage(CountryCodePicker.Language.ARABIC);
         setupProfileSettingsProgressWheel = findViewById(R.id.setupProfileSettingsProgressWheel);
         setupProfileSettingsProgressWheel.stopSpinning();
         setupProfileSettingsProgressTextView = findViewById(R.id.setupProfileSettingsProgressTextView);

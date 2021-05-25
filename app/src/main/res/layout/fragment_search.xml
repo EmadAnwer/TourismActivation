@@ -7,17 +7,210 @@
     android:layout_height="match_parent"
     tools:context=".SearchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <TextView
-        android:id="@+id/textView11"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline57"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="F Search"
-        android:textSize="30sp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".05" />
+
+    <TextView
+        android:id="@+id/tTextView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/advanced_search"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline57" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchGovernoratesRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="250sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tTextView4" />
+
+    <TextView
+        android:id="@+id/tTextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/categories"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchGovernoratesRecyclerView" />
+
+    <HorizontalScrollView
+
+        android:id="@+id/searchCategoryHorizontalScrollView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tTextView3">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/searchCategoryChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            app:checkedChip="@id/searchAllCategoriesChip">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/searchAllCategoriesChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:fontFamily="@font/poppins"
+                android:text="@string/all_categories"
+                android:textColor="@color/secondaryTextColor"
+                app:chipBackgroundColor="@color/chip_state_layout" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/historicalChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="@string/historical"
+                android:textColor="@color/secondaryTextColor"
+                app:chipBackgroundColor="@color/chip_state_layout" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/museumChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="@string/museum"
+                android:textColor="@color/secondaryTextColor"
+                app:chipBackgroundColor="@color/chip_state_layout" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/naturalChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="@string/natural"
+                android:textColor="@color/secondaryTextColor"
+                app:chipBackgroundColor="@color/chip_state_layout" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/restaurantsChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="@string/restaurants"
+
+                android:textColor="@color/secondaryTextColor"
+                app:chipBackgroundColor="@color/chip_state_layout" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/localChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="@string/local"
+                android:textColor="@color/secondaryTextColor"
+                app:chipBackgroundColor="@color/chip_state_layout" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/shoppingChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="@string/shopping"
+                android:textColor="@color/secondaryTextColor"
+                app:chipBackgroundColor="@color/chip_state_layout" />
+        </com.google.android.material.chip.ChipGroup>
+
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/tTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/tags"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchCategoryHorizontalScrollView" />
+
+    <HorizontalScrollView
+
+        android:id="@+id/searchTagHorizontalScrollView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tTextView2">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/searchTagChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedChip="@id/allTagsChip"
+            app:singleSelection="false">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/allTagsChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:fontFamily="@font/poppins"
+                android:text="@string/all_tags"
+                android:textColor="@color/secondaryTextColor"
+                app:chipBackgroundColor="@color/chip_state_layout" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </HorizontalScrollView>
+
+    <Button
+        android:id="@+id/searchButton"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTintMode="add"
+        android:insetTop="0sp"
+        android:insetBottom="0sp"
+        android:text="Search"
+        android:textAllCaps="false"
+        android:textColor="@color/secondaryColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:cornerRadius="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/searchTagHorizontalScrollView"
+        app:rippleColor="#FFFFFF"
+        app:strokeColor="@color/secondaryColor"
+        app:strokeWidth="1sp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

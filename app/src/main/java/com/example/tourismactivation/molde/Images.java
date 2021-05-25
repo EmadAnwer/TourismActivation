@@ -12,12 +12,16 @@ public class Images
 {
     private String src;
     private Integer id;
-    private String user_id;
+    private String user_name;
     private Date created;
     private String objectId;
     private Date updated;
     private String ownerId;
     private Integer place_id;
+
+    public Images() {
+    }
+
     public String getSrc()
     {
         return src;
@@ -42,14 +46,14 @@ public class Images
         this.id = id;
     }
 
-    public String getUser_id()
+    public String getUser_name()
     {
-        return user_id;
+        return user_name;
     }
 
-    public void setUser_id( String user_id )
+    public void setUser_name( String user_name )
     {
-        this.user_id = user_id;
+        this.user_name = user_name;
     }
 
     public Date getCreated()

@@ -7,132 +7,153 @@
     android:layout_height="match_parent"
     tools:context=".placeFragments.ReviewsFragment">
 
-    <Button
-        android:id="@+id/button6"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:backgroundTintMode="add"
-        android:insetTop="0sp"
-        android:insetBottom="0sp"
-        android:padding="10sp"
-        android:text="@string/review"
-        android:textAllCaps="false"
-        android:textColor="@color/secondaryColor"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:cornerRadius="30sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline33"
-        app:layout_constraintTop_toBottomOf="@+id/loginEmailTextField"
-        app:rippleColor="#FFFFFF"
-        app:strokeColor="@color/secondaryColor"
-        app:strokeWidth="1sp" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/loginEmailTextField"
-        android:layout_width="0dp"
-        android:layout_height="100sp"
-        android:layout_marginTop="8dp"
-
-        android:hint="@string/experience"
-        app:boxBackgroundColor="@android:color/transparent"
-        app:boxBackgroundMode="outline"
-        app:boxCornerRadiusBottomEnd="15sp"
-        app:boxCornerRadiusBottomStart="15sp"
-        app:boxCornerRadiusTopEnd="15sp"
-        app:boxCornerRadiusTopStart="15sp"
-        app:boxStrokeColor="@color/secondaryColor"
-        app:boxStrokeWidth="5sp"
-        app:boxStrokeWidthFocused="5sp"
-        app:counterEnabled="false"
-        app:counterTextColor="@color/secondaryColor"
-        app:endIconMode="clear_text"
-        app:endIconTint="@color/secondaryColor"
-        app:endIconTintMode="multiply"
-        app:layout_constraintEnd_toStartOf="@+id/guideline33"
-        app:layout_constraintStart_toStartOf="@+id/guideline25"
-        app:layout_constraintTop_toBottomOf="@+id/textView22"
-        app:passwordToggleEnabled="false">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nameTextInputField"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="start"
-            android:inputType="textPersonName|textMultiLine"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:requiresFadingEdge="horizontal|vertical"
-            android:supportsRtl="true"
-            android:textAlignment="viewStart"
-            android:textDirection="locale"
-            android:textSize="18sp"
-            tools:ignore="RtlEnabled" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="@string/rate_this_place"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/guideline25"
-        app:layout_constraintTop_toTopOf="@+id/guideline26" />
-
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="@string/tell_others_what_you_think"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/guideline25"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:max="5"
-        android:numStars="5"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/reviewsSwipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline26"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".07" />
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/textView22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="@string/write_your_experience"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/guideline25"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".05" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline33"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".95" />
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="@string/rate_this_place"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="@+id/guideline25"
+                        app:layout_constraintTop_toTopOf="@+id/guideline26" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent=".07" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent=".05" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline33"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent=".95" />
+
+                    <TextView
+                        android:id="@+id/textView22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="@string/write_your_experience"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/guideline25"
+                        app:layout_constraintTop_toBottomOf="@+id/reviewsRatingBar" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/reviewsPostTextField"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/experience"
+                        app:boxBackgroundColor="@android:color/transparent"
+                        app:boxBackgroundMode="outline"
+                        app:boxCornerRadiusBottomEnd="15sp"
+                        app:boxCornerRadiusBottomStart="15sp"
+                        app:boxCornerRadiusTopEnd="15sp"
+                        app:boxCornerRadiusTopStart="15sp"
+                        app:boxStrokeColor="@color/secondaryColor"
+                        app:boxStrokeWidth="2sp"
+                        app:boxStrokeWidthFocused="2sp"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="250"
+                        app:counterTextColor="@color/secondaryColor"
+                        app:endIconTint="@color/secondaryColor"
+                        app:endIconTintMode="screen"
+                        app:errorEnabled="false"
+                        app:helperText="@string/writeYourExperience"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline33"
+                        app:layout_constraintStart_toStartOf="@+id/guideline25"
+                        app:layout_constraintTop_toBottomOf="@+id/textView22"
+                        app:passwordToggleEnabled="false">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="80sp"
+                            android:inputType="textPersonName"
+                            android:paddingTop="16dp"
+                            android:paddingBottom="16dp"
+                            android:requiresFadingEdge="horizontal|vertical"
+                            android:textColorHighlight="@color/primaryDarkColor"
+                            android:textSize="18sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/reviewsButton"
+                        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:backgroundTintMode="add"
+                        android:insetTop="0sp"
+                        android:insetBottom="0sp"
+                        android:padding="10sp"
+                        android:text="@string/review"
+                        android:textAllCaps="false"
+                        android:textColor="@color/secondaryColor"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="30sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline33"
+                        app:layout_constraintTop_toBottomOf="@+id/reviewsPostTextField"
+                        app:rippleColor="#FFFFFF"
+                        app:strokeColor="@color/secondaryColor"
+                        app:strokeWidth="1sp" />
+
+                    <RatingBar
+                        android:id="@+id/reviewsRatingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline33"
+                        app:layout_constraintStart_toStartOf="@+id/guideline25"
+                        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/reviewsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

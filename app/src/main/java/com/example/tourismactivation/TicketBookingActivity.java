@@ -221,7 +221,7 @@ public class TicketBookingActivity extends AppCompatActivity implements View.OnF
             inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
         setupBookingProgressWheel.spin();
-        bookingProgressTextView.setText("booking is in process.");
+        bookingProgressTextView.setText(R.string.bookingInprocess);
         ticketsList = getTicketsList(price, nameAR,nameEN,typeEN,typeAR, reservationDate);
         setTicketsIntoTable(ticketsList);
 
@@ -281,7 +281,7 @@ public class TicketBookingActivity extends AppCompatActivity implements View.OnF
     {
         if(placeRelationsSets && userRelationsSets)
         {
-            Toast.makeText(this, "Booking done successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,getString(R.string.BookingDone) , Toast.LENGTH_SHORT).show();
             onBackPressed();
             //TODO clean
         }

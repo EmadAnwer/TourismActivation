@@ -23,6 +23,9 @@ import com.hbb20.CountryCodePicker;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static com.example.tourismactivation.constants.AR;
+import static com.example.tourismactivation.constants.EN;
+
 
 public class RegistrationActivity extends AppCompatActivity implements TextWatcher, View.OnFocusChangeListener, AsyncCallback<BackendlessUser> {
     SharedPreferences pref;
@@ -68,6 +71,8 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
         // setting CountryCodePicker
         countryCodePicker.registerCarrierNumberEditText(phoneTextField.getEditText());
 
+        if(constants.LANGUAGE == AR)
+            countryCodePicker.changeDefaultLanguage(CountryCodePicker.Language.ARABIC);
     }
 
     // back to Home

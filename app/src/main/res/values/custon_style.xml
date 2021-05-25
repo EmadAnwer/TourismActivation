@@ -8,6 +8,10 @@
         <item name="cornerSize">20sp</item>
     </style>
 
+    <style name="Images_cornered">
+        <item name="cornerSize">50sp</item>
+    </style>
+
     <style name="corneredPlace">
         <item name="cornerSize">30sp</item>
     </style>
