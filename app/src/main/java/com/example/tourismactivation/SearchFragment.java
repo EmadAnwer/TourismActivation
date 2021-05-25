@@ -242,7 +242,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         else
         {
             Chip c = (Chip) v;
-            if(c.getTag() == null)
+            if(c.getTag() != "tag")
             {
                 Chip all = getActivity().findViewById(R.id.searchAllCategoriesChip) ;
 
@@ -251,7 +251,6 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                     if(all.isChecked())
                     {
                         searchCategoryChipGroup.clearCheck();
-
                         all.setChecked(true);
                     }
 
@@ -272,7 +271,6 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                     if(all.isChecked())
                     {
                         searchTagChipGroup.clearCheck();
-
                         all.setChecked(true);
                     }
 

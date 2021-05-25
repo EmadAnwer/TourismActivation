@@ -200,7 +200,7 @@
         android:backgroundTintMode="add"
         android:insetTop="0sp"
         android:insetBottom="0sp"
-        android:text="Search"
+        android:text="@string/searching"
         android:textAllCaps="false"
         android:textColor="@color/secondaryColor"
         android:textSize="18sp"

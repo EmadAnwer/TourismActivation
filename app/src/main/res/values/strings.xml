@@ -129,6 +129,8 @@
     <string name="there_is_no_results">there is no Results</string>
     <string name="all_tags">All Tags</string>
     <string name="categories">Categories</string>
+    <string name="searching">Search</string>
+    <string name="results">Results</string>
     <!-- uCrop string resource end -->
 
 

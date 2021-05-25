@@ -23,7 +23,7 @@
             android:fitsSystemWindows="true"
             app:contentScrim="@color/secondaryColor"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            app:title="Results">
+            app:title="@string/results">
 
 
             <androidx.appcompat.widget.Toolbar

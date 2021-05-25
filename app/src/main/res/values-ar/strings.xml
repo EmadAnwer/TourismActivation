@@ -124,6 +124,8 @@
     <string name="there_is_no_results">لا توجد نتائج</string>
     <string name="all_tags">كل العلامات</string>
     <string name="categories">فئات</string>
+    <string name="searching">بحث</string>
+    <string name="results">النتائج</string>
     <!-- uCrop string resource end -->
 
     <string-array

@@ -181,11 +181,12 @@
         android:baselineAlignBottom="false"
         android:clickable="true"
         android:text="@string/add_place"
+        android:visibility="gone"
         app:fabSize="normal"
         app:icon="@drawable/ic_add"
         app:iconTint="@color/white"
-        app:layout_anchor="@id/ticketsAppbar"
 
+        app:layout_anchor="@id/ticketsAppbar"
         app:layout_anchorGravity="end|bottom">
 
     </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
