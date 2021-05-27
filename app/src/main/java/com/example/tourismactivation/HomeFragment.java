@@ -211,7 +211,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Popu
                 {
 
                     // something went wrong and logout failed, to get the error code call fault.getCode()
-                    Toast.makeText(getActivity(), "something wrong while logout"+fault.getCode(), Toast.LENGTH_SHORT).show();
                 }
             }
 

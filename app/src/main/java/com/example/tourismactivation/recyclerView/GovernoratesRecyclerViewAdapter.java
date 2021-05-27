@@ -68,7 +68,6 @@ public class GovernoratesRecyclerViewAdapter extends RecyclerView.Adapter<Govern
     @Override
     public void onClick(View v) {
         Governorates g = (Governorates) v.getTag();
-        Toast.makeText(context, g.getName(), Toast.LENGTH_SHORT).show();
 
         // pass governorate name and governorate cover within SharedPreferences
         pref = context.getSharedPreferences("governoratePref", MODE_PRIVATE);

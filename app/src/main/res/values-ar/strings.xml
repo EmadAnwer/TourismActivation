@@ -126,6 +126,8 @@
     <string name="categories">فئات</string>
     <string name="searching">بحث</string>
     <string name="results">النتائج</string>
+    <string name="Invalid_email_password">البريد الإلكتروني أو كلمة السر خاطئة</string>
+    <string name="WrongQR">رمز الاستجابة السريعة خاطئ</string>
     <!-- uCrop string resource end -->
 
     <string-array

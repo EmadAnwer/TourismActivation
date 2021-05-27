@@ -90,7 +90,6 @@ public class TicketBookingActivity extends AppCompatActivity implements View.OnF
         nameAR = pref.getString("placeNameAR", "error");
         nameEN = pref.getString("placeNameEN", "error");
 
-        Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
         pref = getSharedPreferences("pricePref", Context.MODE_PRIVATE);
         price = (short) pref.getInt("priceCost", 0);
         typeAR = pref.getString("priceTypeAR", "error");
@@ -161,7 +160,6 @@ public class TicketBookingActivity extends AppCompatActivity implements View.OnF
         isValid();
         setTotal();
 
-        Toast.makeText(this, "Count :" + count, Toast.LENGTH_SHORT).show();
 
     }
 

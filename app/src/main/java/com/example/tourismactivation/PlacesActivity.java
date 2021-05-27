@@ -64,7 +64,6 @@ import java.util.List;
         governorateObjectId = pref.getString("governorateObjectId", "error");
         Log.i("TAG", "governorateObjectId: "+governorateObjectId);
 
-        Toast.makeText(this, governorate, Toast.LENGTH_SHORT).show();
 
         //setting cover and governorate name
         Glide.with(this)

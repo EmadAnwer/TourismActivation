@@ -131,6 +131,8 @@
     <string name="categories">Categories</string>
     <string name="searching">Search</string>
     <string name="results">Results</string>
+    <string name="Invalid_email_password">Invalid email or password</string>
+    <string name="WrongQR">Wrong QR code</string>
     <!-- uCrop string resource end -->
 
 

@@ -207,7 +207,7 @@ public class QrFragment extends Fragment implements DecodeCallback, View.OnClick
 
                             @Override
                             public void handleFault(BackendlessFault fault) {
-                                Toast.makeText(activity, "Wrong QR code", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity, getString(R.string.WrongQR), Toast.LENGTH_SHORT).show();
                             }
                         });
 

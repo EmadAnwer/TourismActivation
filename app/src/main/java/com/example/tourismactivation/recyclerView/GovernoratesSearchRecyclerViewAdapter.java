@@ -87,7 +87,6 @@ public class GovernoratesSearchRecyclerViewAdapter extends RecyclerView.Adapter<
 
         }
 
-        Toast.makeText(context, ""+governorates.toString(), Toast.LENGTH_SHORT).show();
 
 
 

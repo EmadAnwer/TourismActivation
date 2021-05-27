@@ -106,7 +106,6 @@ public class PlacesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     @Override
     public void onClick(View v) {
         Places p = (Places) v.getTag();
-        Toast.makeText(context, p.getName(), Toast.LENGTH_SHORT).show();
         // pass governorate name and governorate cover within SharedPreferences
         pref = context.getSharedPreferences("placesPref", MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = pref.edit();

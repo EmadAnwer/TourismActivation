@@ -68,7 +68,6 @@ public class RecommendedRecyclerViewAdapter extends RecyclerView.Adapter<Recomme
     @Override
     public void onClick(View v) {
         Recommended g = (Recommended) v.getTag();
-        Toast.makeText(context, g.getName(), Toast.LENGTH_SHORT).show();
 
         // pass Recommended name and Recommended cover within SharedPreferences
         pref = context.getSharedPreferences("recommendedPref", MODE_PRIVATE);

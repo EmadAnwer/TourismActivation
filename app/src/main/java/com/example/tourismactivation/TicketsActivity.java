@@ -65,9 +65,6 @@ public class TicketsActivity extends AppCompatActivity implements View.OnClickLi
         oneDayBeforeToday= cal.getTime();
 
 
-        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-
-
         //setting view's id's
         ticketsToolbar = findViewById(R.id.ticketsToolbar);
         noTicketsTextView = findViewById(R.id.noTicketsTextView);

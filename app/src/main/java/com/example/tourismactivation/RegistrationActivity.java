@@ -321,9 +321,6 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
             emailAlreadyExists();
             mails.add(emailTextField.getEditText().getText().toString());
         }
-       else
-           Toast.makeText(this, "Error"+fault.getCode(), Toast.LENGTH_SHORT).show();
-
 
     }
 

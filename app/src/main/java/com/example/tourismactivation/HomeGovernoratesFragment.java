@@ -129,7 +129,6 @@ public class HomeGovernoratesFragment extends Fragment {
                             }
                             else if(fault.getCode().equals("3064") )
                             {
-                                Toast.makeText(getContext(), "error while getting Governorates", Toast.LENGTH_SHORT).show();
 
                             }
 
@@ -175,7 +174,6 @@ public class HomeGovernoratesFragment extends Fragment {
                         }
                         else if(fault.getCode().equals("3064") )
                         {
-                            Toast.makeText(getContext(), "error while getting Governorates", Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -224,7 +222,6 @@ public class HomeGovernoratesFragment extends Fragment {
                         }
                         else if(fault.getCode().equals("3064") )
                         {
-                            Toast.makeText(getContext(), "error while getting Governorates", Toast.LENGTH_SHORT).show();
 
                         }
 

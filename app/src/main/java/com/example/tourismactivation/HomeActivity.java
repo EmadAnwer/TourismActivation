@@ -167,8 +167,6 @@ public class HomeActivity extends AppCompatActivity {
                 {
 
 
-                    Toast.makeText(HomeActivity.this, "updated", Toast.LENGTH_SHORT).show();
-
                     pool.execute(() -> updateHomeSharedPreference(response));
                 }
 

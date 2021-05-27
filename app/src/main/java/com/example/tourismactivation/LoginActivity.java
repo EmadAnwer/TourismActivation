@@ -224,11 +224,9 @@ public class LoginActivity extends AppCompatActivity implements AsyncCallback<Ba
         if(fault.getCode().equals("3003"))
         {
             loginButton.setEnabled(true);
-            Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,getString( R.string.Invalid_email_password), Toast.LENGTH_SHORT).show();
 
         }
-        else
-            Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show();
 
     }
 
