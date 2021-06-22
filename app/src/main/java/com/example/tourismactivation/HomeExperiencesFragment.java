@@ -214,7 +214,7 @@ public class HomeExperiencesFragment extends Fragment implements Response.Listen
     void firstPageRequest()
     {
 
-        String url = "https://api.backendless.com/31908FE0-A688-43D5-879D-B815B9404108/2025C2E4-180B-492E-9BC0-2916C99A2851/services/Posts/All?currentUserId=" + Backendless.UserService.loggedInUser()+"&pageSize=10&offset=0";
+        String url = "https://api.backendless.com/3CD92F0D-FF48-0269-FFEB-9320DA4B8900/37DD6CA7-2A9B-4ABD-BEB7-E5BFA2F0938A/services/Posts/All?currentUserId=" + Backendless.UserService.loggedInUser()+"&pageSize=10&offset=0";
         JsonArrayRequest request = new JsonArrayRequest(url, this, this);
         request.setRetryPolicy(retryPolicy);
         queue.add(request);
@@ -224,7 +224,7 @@ public class HomeExperiencesFragment extends Fragment implements Response.Listen
     void nextPageRequest(short pageSize)
     {
 
-        String url = "https://api.backendless.com/31908FE0-A688-43D5-879D-B815B9404108/2025C2E4-180B-492E-9BC0-2916C99A2851/services/Posts/All?currentUserId=" + Backendless.UserService.loggedInUser()+"&pageSize=+"+pageSize+"&offset="+posts.size();
+        String url = "https://api.backendless.com/3CD92F0D-FF48-0269-FFEB-9320DA4B8900/37DD6CA7-2A9B-4ABD-BEB7-E5BFA2F0938A/services/Posts/All?currentUserId=" + Backendless.UserService.loggedInUser()+"&pageSize=+"+pageSize+"&offset="+posts.size();
         JsonArrayRequest request = new JsonArrayRequest(url, this, this);
         request.setRetryPolicy(retryPolicy);
         queue.add(request);

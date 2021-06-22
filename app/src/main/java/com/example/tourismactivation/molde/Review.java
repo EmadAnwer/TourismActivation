@@ -7,8 +7,8 @@ public class Review
 {
     static final String BACKENDLESS_HOST = "https://api.backendless.com";
     static final String SERVICE_NAME = "Review";
-    static final String APP_ID = "31908FE0-A688-43D5-879D-B815B9404108";
-    static final String API_KEY = "2025C2E4-180B-492E-9BC0-2916C99A2851";
+    static final String APP_ID = "3CD92F0D-FF48-0269-FFEB-9320DA4B8900";
+    static final String API_KEY = "37DD6CA7-2A9B-4ABD-BEB7-E5BFA2F0938A";
 
     private static final Review ourInstance = new Review();
 

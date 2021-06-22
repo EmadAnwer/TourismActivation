@@ -406,7 +406,7 @@ public class ProfileActivity extends AppCompatActivity implements TextWatcher, V
 
     }
     void deleteOldImage() {
-        if(profilePic.equals("https://backendlessappcontent.com/31908FE0-A688-43D5-879D-B815B9404108/console/exhfvzgidveiwrwyosvyihgnjipqgglmeibb/files/view/users-Images/user.png"))
+        if(profilePic.equals("https://backendlessappcontent.com/3CD92F0D-FF48-0269-FFEB-9320DA4B8900/console/qjoqzisvpysmvundaeammwpeaxlwtqgdpzvz/files/view/users-Images/user.png"))
         {
             return;
         }

@@ -92,7 +92,7 @@ public class SettingProfilePictureActivity extends AppCompatActivity {
 
         if(!hasImage)
         {
-            setUserProfileImage("https://backendlessappcontent.com/31908FE0-A688-43D5-879D-B815B9404108/console/exhfvzgidveiwrwyosvyihgnjipqgglmeibb/files/view/users-Images/user.png");
+            setUserProfileImage("https://backendlessappcontent.com/3CD92F0D-FF48-0269-FFEB-9320DA4B8900/console/qjoqzisvpysmvundaeammwpeaxlwtqgdpzvz/files/view/users-Images/user.png");
             setupProfileProgressTextView.setText(getString(R.string.progress_setting_profile));
             return;
 
