@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FavoritesActivity extends AppCompatActivity implements View.OnClickListener {
+
     SharedPreferences pref;
     RecyclerView favoritesRecyclerView;
     TextView noFavoritesTextView;
