@@ -3,6 +3,7 @@ package com.example.tourismactivation;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -36,7 +37,7 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
     Button createAnAccountButton;
     ArrayList<String> mails = new ArrayList<>();
 
-
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +54,7 @@ public class RegistrationActivity extends AppCompatActivity implements TextWatch
         createAnAccountButton = findViewById(R.id.createAnAccountButton);
 
         //set OnFocusChangeListener
-        Objects.requireNonNull(nameTextField.getEditText()).setOnFocusChangeListener(this);
+        nameTextField.getEditText().setOnFocusChangeListener(this);
         Objects.requireNonNull(emailTextField.getEditText()).setOnFocusChangeListener(this);
         Objects.requireNonNull(passwordInputLayout.getEditText()).setOnFocusChangeListener(this);
         Objects.requireNonNull(confirmPasswordTextField.getEditText()).setOnFocusChangeListener(this);

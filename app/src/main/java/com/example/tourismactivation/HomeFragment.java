@@ -36,10 +36,11 @@ import java.util.Calendar;
 import static com.example.tourismactivation.constants.AR;
 import static com.example.tourismactivation.constants.EN;
 
-
+//Hello
 public class HomeFragment extends Fragment implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
     private static final String TAG = "HomeFragment:";
     SharedPreferences pref;
+
     String name,profilePic;
     ImageView optionsImageView;
     PopupMenu options;
